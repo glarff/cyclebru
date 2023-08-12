@@ -26,8 +26,8 @@ export default async function OG() {
         }}
       >
         <img
-          src={new URL("../public/logo.png", import.meta.url).toString()}
-          alt="Precedent Logo"
+          src={new URL("../public/logo1.png", import.meta.url).toString()}
+          alt="CycleBru Logo"
           tw="w-20 h-20 mb-4 opacity-95"
         />
         <h1
@@ -42,7 +42,7 @@ export default async function OG() {
             letterSpacing: "-0.02em",
           }}
         >
-          Precedent
+          CycleBru
         </h1>
       </div>
     ),

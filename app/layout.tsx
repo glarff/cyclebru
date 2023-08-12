@@ -7,14 +7,14 @@ import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
 
 export const metadata = {
-  title: "Precedent - Building blocks for your Next.js project",
+  title: "CycleBru - Your Free Cycling Coach for Home Trainer Workouts",
   description:
-    "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
+    "CycleBru is the all-in-one online cycling coach. It includes a visual guide for workout sessions, custom workout creation, training planning, and more.",
   twitter: {
     card: "summary_large_image",
     title: "Precedent - Building blocks for your Next.js project",
     description:
-      "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
+      "CycleBru is the all-in-one online cycling coach. It includes a visual guide for workout sessions, custom workout creation, training planning, and more.",
     creator: "@steventey",
   },
   metadataBase: new URL("https://precedent.dev"),
@@ -29,7 +29,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={cx(sfPro.variable, inter.variable)}>
-        <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
+        <div className="fixed h-screen w-full bg-gradient-to-br from-rose-200 via-white to-pink-100" />
         <Suspense fallback="...">
           {/* @ts-expect-error Server Component */}
           <Nav />

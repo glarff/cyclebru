@@ -21,17 +21,16 @@ const DemoModal = ({
         <div className="flex flex-col items-center justify-center space-y-3 bg-white px-4 py-6 pt-8 text-center md:px-16">
           <a href="https://precedent.dev">
             <Image
-              src="/logo.png"
-              alt="Precedent Logo"
-              className="h-10 w-10 rounded-full"
-              width={20}
-              height={20}
+              src="/logo1.png"
+              alt="CycleBru Logo"
+              className="h-15 w-25"
+              width={200}
+              height={100}
             />
           </a>
-          <h3 className="font-display text-2xl font-bold">Precedent</h3>
+          <h3 className="font-display text-2xl font-bold">CycleBru</h3>
           <p className="text-sm text-gray-500">
-            Precedent is an opinionated collection of components, hooks, and
-            utilities for your Next.js project.
+            CycleBru is an open source web application built using Next.js, React.js, Tailwind CSS and Vercel.
           </p>
         </div>
       </div>
