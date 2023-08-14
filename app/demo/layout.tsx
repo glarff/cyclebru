@@ -11,7 +11,7 @@ export default function DemoLayout({
   }) {
     return (
       <section>
-        <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
+        <main className="flex min-h-screen w-full flex-col">
           {children}
         </main>
       </section>

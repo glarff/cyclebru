@@ -21,7 +21,7 @@ export default function Page() {
                         </h1>
 
                         <Link
-                            className="rounded-full border border-black bg-indigo-800 h-10 ml-8 mt-5 px-6 py-2 text-md text-white transition-colors hover:bg-white hover:text-black"
+                            className="border border-black bg-indigo-800 h-10 ml-8 mt-5 px-6 py-2 text-md text-white transition-colors hover:bg-white hover:text-black"
                             href="/demo"
                             target="_blank"
                             rel="noopener noreferrer"
