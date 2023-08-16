@@ -17,25 +17,42 @@ import {
 
 export default function Page() {
 
-    const [mainTimer, setMainTimer] = useState("1:02:30");
+    const [mainTimer, setMainTimer] = useState("1:03:00");
     const [segmentTimer, setSegmentTimer] = useState(":30");
     const [segmentTitle, setSegmentTitle] = useState("Get on the bike");
     const [segmentTip, setSegmentTip] = useState("Get on the bike and get ready to go.");
     const [panelColor, setPanelColor] = useState(getPanelColor(1));
+    const [buttonText, setButtonText] = useState("Start");
+
+    const totalTime = calculateTotalTime(w1);
+    w1.timeLeft = totalTime;
+    let currentSegment = 0;
+
+    const buttonClickAction = () => {
+
+        if(w1.paused) {
+            w1.paused = false;
+            setButtonText("Pause");
+            startTimer();
+        }
+        else {
+            w1.paused = true;
+            setButtonText("Resume");
+        }
+    }
 
     const startTimer = () => {
 
         // Calculate total time and time left after semgment 1
-        const totalTime = calculateTotalTime(w1);
+        // const totalTime = calculateTotalTime(w1);
         let timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
-        w1.timeLeft = totalTime;
     
         w1.paused = false;
         const currentTimeAsMs = Date.now();
         const adjustedTimeAsMs = currentTimeAsMs + totalTime;
         const finishTime = new Date(adjustedTimeAsMs);
 
-        let currentSegment = 0;
+
     
         // Start loop - iterate every .1 seconds
         let x = setInterval(function () {
@@ -124,9 +141,9 @@ export default function Page() {
                         <BigTitle text="Workout: Pyramid Intervals" />
                         <button
                             className="border border-black bg-indigo-800 h-10 ml-8 mt-5 px-6 py-2 text-md text-white transition-colors hover:bg-white hover:text-black"
-                            onClick={() => startTimer()}
+                            onClick={() => buttonClickAction()}
                             >
-                            <p>Start</p>
+                            <p>{buttonText}</p>
                         </button>
                     </div>
 
