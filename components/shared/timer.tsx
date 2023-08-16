@@ -6,18 +6,19 @@ import { NumberLiteralType } from "typescript";
 export default function Timer({
   title,
   description,
-  miliseconds,
+  timerTxt,
+  panelColor,
 }: {
   title: string;
   description: string;
-  miliseconds: number;
+  timerTxt: string;
+  panelColor: string;
 }) {
-  const timerDivs = getTimeDivisions(miliseconds);
   
   return (
     <div>
-      <div className={`relative col-span-1 h-28 overflow-hidden rounded-xl border border-gray-200 bg-stone-900 text-neutral-200 shadow-md`}>
-        <div className="flex h-28 text-5xl items-center justify-center">{formatForTimer(timerDivs.hrs, timerDivs.mins, timerDivs.secs)}</div>
+      <div className={`relative col-span-1 h-28 overflow-hidden rounded-xl border border-gray-200 ${panelColor} text-neutral-200 shadow-md`}>
+        <div className="flex h-28 text-5xl items-center justify-center">{timerTxt}</div>
       </div>
       <div className="text-right text-lg py-2">{title}</div>
     </div>
