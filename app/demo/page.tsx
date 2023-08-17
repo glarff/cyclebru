@@ -17,16 +17,28 @@ import {
 
 export default function Page() {
 
-    const [mainTimer, setMainTimer] = useState("1:03:00");
-    const [segmentTimer, setSegmentTimer] = useState(":30");
-    const [segmentTitle, setSegmentTitle] = useState("Get on the bike");
-    const [segmentTip, setSegmentTip] = useState("Get on the bike and get ready to go.");
-    const [panelColor, setPanelColor] = useState(getPanelColor(1));
+    const [workoutTitle, setWorkoutTitle] = useState(w1.title);
+    const [segmentTitle, setSegmentTitle] = useState(w1.segments[0].title);
+    const [segmentTip, setSegmentTip] = useState(w1.segments[0].tip);
+    const [panelColor, setPanelColor] = useState(getPanelColor(w1.segments[0].intensity));
     const [buttonText, setButtonText] = useState("Start");
 
     const totalTime = calculateTotalTime(w1);
     w1.timeLeft = totalTime;
     let currentSegment = 0;
+    let timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
+
+    // Initial population of elements
+    const x1 = getTimeDivisions(totalTime);
+    const x2 = formatForTimer(x1.hrs, x1.mins, x1.secs);
+    const x3 = getTimeDivisions2(w1.segments[0].duration);
+    const x4 = formatForTimer(0, x3.mins, x3.secs);
+    
+    // Main Title
+    const [mainTimer, setMainTimer] = useState(x2);
+    const [segmentTimer, setSegmentTimer] = useState(x4);
+
+
 
     const buttonClickAction = () => {
 
@@ -44,16 +56,11 @@ export default function Page() {
     const startTimer = () => {
 
         // Calculate total time and time left after semgment 1
-        // const totalTime = calculateTotalTime(w1);
-        let timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
-    
         w1.paused = false;
         const currentTimeAsMs = Date.now();
-        const adjustedTimeAsMs = currentTimeAsMs + totalTime;
+        const adjustedTimeAsMs = currentTimeAsMs + w1.timeLeft;
         const finishTime = new Date(adjustedTimeAsMs);
 
-
-    
         // Start loop - iterate every .1 seconds
         let x = setInterval(function () {
     
@@ -138,7 +145,7 @@ export default function Page() {
 
                 <div>
                     <div className="flex flex-nowrap">
-                        <BigTitle text="Workout: Pyramid Intervals" />
+                        <MediumTitle text={workoutTitle} />
                         <button
                             className="border border-black bg-indigo-800 h-10 ml-8 mt-5 px-6 py-2 text-md text-white transition-colors hover:bg-white hover:text-black"
                             onClick={() => buttonClickAction()}
@@ -154,7 +161,7 @@ export default function Page() {
                         panelColor = {panelColor}
                     />
 
-                    <MediumTitle text = {`Current Segment: ${segmentTitle}`} />
+                    <MediumTitle text = {segmentTitle} />
 
                     <Timer 
                         title = "Time Remaining in Segment"
@@ -372,6 +379,29 @@ const newWorkout = (ttl:string, dsc:string, tps:string, segs:Segment[], tml:numb
 
 /* ============================== Statc Data =============================== */
 
+    // =========================== Wu-Ti warm up =========================== //
+
+    const warmUp1s1 = newSegment("Get on the bike", 30000, 1, "Get on the bike " +
+        "and get ready to go.");
+
+    const warmUp1s2 = newSegment("Warm Up: Z1", 300000, 1, "Spend the first 5 " +
+    "minutes of your session in Z1. Gradually increase cadence to 90+.");
+
+    const warmUp1s3 = newSegment("Warm Up: Z2-Z3", 300000, 2, "Spend the next " +
+    "5 minutes progressing through Z2. End at a low Z3.");
+
+    const warmUp1s4 = newSegment("Warm Up: Max Spin / Easy Spin", 120000, 2,
+    "Now increase the cadence to your maximum, hold for 5 seconds, " +
+    "followed by 25 seconds easy spin. Repeat maximum cadence / easy " +
+    "spin 3 more times.");
+
+    const warmUp1s5 = newSegment("Warm Up: Easy Spin", 120000, 1, "Finish with " +
+    " 2 minute easy spin before starting main content of session.");
+
+    const warmUp1 = [warmUp1s1, warmUp1s2, warmUp1s3, warmUp1s4, warmUp1s5];
+
+    // ===================================================================== //
+
     // ========================== 20 min warm up =========================== //
     const warmUp2s1 = newSegment("Get on the bike", 30000, 1, "Get on the bike " +
         "and get ready to go.");
@@ -412,6 +442,22 @@ const newWorkout = (ttl:string, dsc:string, tps:string, segs:Segment[], tml:numb
 
     // ===================================================================== //
 
+    // ========================== Tempo Intervals ========================== //
+     
+    // Segments 
+    const w2s1 = newSegment("HRZ 3", 600000, 3, "Maintain a smooth pedal stroke, especially during the HRZ3 effort.");
+
+    const w2s2 = newSegment("Easy Spin", 300000, 1, "Don't stomp on the pedals when you get tired.");
+ 
+    const w2s3 = newSegment("Easy Spin", 600000, 1, "Place the tempo effors evenly and avoid major fluctuations in heart rate.");
+ 
+     // Workout
+     const w1 = newWorkout("Tempo Intervals", "Tempo Intervals Description",
+         "w2 Tip 1\nw2 Tip 2\nw2 Tip 3", warmUp1.concat([w2s1, w2s2, w2s1, w2s2,
+             w2s1, w2s3]), 0, true);
+
+    // ===================================================================== //
+
     // ======================= Sweet-Spot Intervals ======================== //
 
     // Segments 
@@ -430,7 +476,7 @@ const newWorkout = (ttl:string, dsc:string, tps:string, segs:Segment[], tml:numb
         "stroke. Reduce resistance and keep your legs turning over.");
 
     // Workout
-    const w1 = newWorkout("Sweet-Spot Intervals", "Use a medium " +
+    const xxw1 = newWorkout("Sweet-Spot Intervals", "Use a medium " +
         "resistance/gear that allows you to maintain 90+ rpm during the " +
         "efforts. Efforts should be in Sweet-Spot HRZ high 3 - low 4 / PZ " +
         "88-93% FTP. Just spin easy against minimal resistance for the " +
