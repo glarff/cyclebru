@@ -24,22 +24,22 @@ export default function Page() {
     const [buttonText, setButtonText] = useState("Start");
 
     const totalTime = calculateTotalTime(w1);
-    w1.timeLeft = totalTime;
-    let currentSegment = 0;
-    let timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
 
     // Initial population of elements
     const x1 = getTimeDivisions(totalTime);
     const x2 = formatForTimer(x1.hrs, x1.mins, x1.secs);
-    const x3 = getTimeDivisions2(w1.segments[0].duration);
+    const x3 = getTimeDivisions(w1.segments[0].duration);
     const x4 = formatForTimer(0, x3.mins, x3.secs);
     
     // Main Title
     const [mainTimer, setMainTimer] = useState(x2);
     const [segmentTimer, setSegmentTimer] = useState(x4);
 
+    w1.timeLeft = totalTime;
+    let currentSegment = 0;
+    let timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
 
-
+    // Click handling for start/pause/resume button
     const buttonClickAction = () => {
 
         if(w1.paused) {
@@ -72,7 +72,7 @@ export default function Page() {
             const distance2 = distance - timeRemainingAfterCurrentSegment;
     
             const mainTimerDivs = getTimeDivisions(distance);
-            const segTimerDivs = getTimeDivisions2(distance2);
+            const segTimerDivs = getTimeDivisions(distance2);
     
             const mainTimerHours = mainTimerDivs.hrs;
             const mainTimerMinutes = mainTimerDivs.mins;
@@ -94,11 +94,6 @@ export default function Page() {
                 setSegmentTimer(formatForTimer(0, segTimerMinutes,
                     segTimerSeconds));
             }
-    
-            // Set component backgrounds based on intensity
-            //if (currentSegment < w1.segments.length) {
-            //    changeBorder(w1.segments[currentSegment].intensity);
-            //}
     
             if (w1.paused) {
                 clearInterval(x);
@@ -184,14 +179,17 @@ export default function Page() {
 
 /* =========================== HELPER FUNCTIONS ============================ */
 
+/*
+   Get Panel Color
+   Inputs: a value (1-5) indicating intensity
+   Returns: Tailwind CSS classes to use for panel style
+*/
 const getPanelColor = (intensity:number) => {
-
     if (intensity < 2) { return "bg-gradient-to-br from-green-900 via-emarald-700 to-teal-900"; } // 1 - dark green   
-    else if (intensity < 3) { return "bg-gradient-to-br from-lime-900 via-lime-800 to-lime-900"; } // 2 - lime green   
+    else if (intensity < 3) { return "bg-gradient-to-br from-emerald-600 via-emerald-800 to-green-600"; } // 2 - lime green   
     else if (intensity < 4) { return "bg-gradient-to-br from-orange-900 via-amber-700 to-yellow-900"; }  // 3 - dark orange
     else if (intensity < 5) { return "bg-gradient-to-br from-rose-900 via-rose-800 to-pink-900"; }  // 4 - salmon
     else { return "bg-gradient-to-br from-red-900 via-rose-700 to-red-900"; }  // 5 - firebrick
-
 }
 
 /*
@@ -200,40 +198,30 @@ const getPanelColor = (intensity:number) => {
    Returns: an object with properties containing the hours, minutes,
       and seconds divisions of the provided value.
 */
-
 const getTimeDivisions = (ms:number) => {
-
-    const divs = { 
+    return { 
       hrs: Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
       mins: Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60)),
       secs: Math.floor((ms % (1000 * 60)) / 1000)
     };
-  
-    return divs;
-  }
-  
-  const addZeroPadding = (num:number) => {
+}
+
+/*
+   Add Zero Padding
+   Inputs: a number between 0 and 60
+   Returns: a string with the number and a preding zero if less than 10
+*/
+const addZeroPadding = (num:number) => {
     if (num < 10) return "0" + num;
     return num;
-  }
-  
-  /*
-    Get Time Divisions 2
-    Inputs: a value in miliseconds
-    Returns: an object with properties containing the minutes and seconds 
-       divisions of the provided value.
-  */
-  const getTimeDivisions2 = (ms:number) => {
-  
-    const divs = { 
-      mins: Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60)),
-      secs: Math.floor((ms % (1000 * 60)) / 1000)
-    };
-  
-    return divs;
-  }
-  
-  const formatForTimer = (hrs:number, mins: number, secs:number) => {
+}
+
+/*
+    Format For Timer
+    Inputs: 3 numbers indicating hours, numbers, and minutes of a timer
+    Returns: a string to be displayed on the timer
+*/
+const formatForTimer = (hrs:number, mins: number, secs:number) => {
   
     let timerStr = "";
   
@@ -258,8 +246,23 @@ const getTimeDivisions = (ms:number) => {
     timerStr += addZeroPadding(secs);
   
     return timerStr;
-  
-  }
+}
+
+/*
+    Calculate Total Time
+    Input: a workout object
+    Returns: a number indicating total time (in ms) of workout
+*/
+const calculateTotalTime = (wk:Workout) => {
+ 
+    let ttl = 0;
+ 
+    for ( let i = 0; i < wk.segments.length; i++) {
+       ttl += wk.segments[i].duration;
+    }
+ 
+    return ttl;
+}
 
 /*
    Update Upcoming Segments
@@ -402,46 +405,6 @@ const newWorkout = (ttl:string, dsc:string, tps:string, segs:Segment[], tml:numb
 
     // ===================================================================== //
 
-    // ========================== 20 min warm up =========================== //
-    const warmUp2s1 = newSegment("Get on the bike", 30000, 1, "Get on the bike " +
-        "and get ready to go.");
-
-    const warmUp2s2 = newSegment("90 RPM", 300000, 1, "Smooth pedaling - clear " +
-        "your mind and mentally prepare for the upcoming session.");
-
-    const warmUp2s3 = newSegment("95 RPM", 120000, 1, "Smooth pedaling - clear " +
-        "your mind and mentally prepare for the upcoming session.");
-
-    const warmUp2s4 = newSegment("100 RPM", 120000, 2, "Smooth pedaling - clear " +
-        "your mind and mentally prepare for the upcoming session.");
-
-    const warmUp2s5 = newSegment("105 RPM", 120000, 2, "Smooth pedaling - clear " +
-        "your mind and mentally prepare for the upcoming session.");
-
-    const warmUp2s6 = newSegment("110 RPM", 90000, 3, "Smooth pedaling - clear " +
-        "your mind and mentally prepare for the upcoming session.");
-
-    const warmUp2s7 = newSegment("120-130 RPM", 30000, 4, "Smooth pedaling - " +
-        "clear your mind and mentally prepare for the upcoming session.");
-
-    const warmUp2s8 = newSegment("90 RPM", 120000, 1, "Smooth pedaling - clear " +
-        "your mind and mentally prepare for the upcoming session.");
-
-    const warmUp2s9 = newSegment("MAX", 6000, 5, "Smooth pedaling - clear your " +
-        "mind and mentally prepare for the upcoming session.");
-
-    const warmUp2s10 = newSegment("90 RPM", 60000, 1, "Smooth pedaling - clear " +
-        "your mind and mentally prepare for the upcoming session.");
-
-    const warmUp2s11 = newSegment("90 RPM", 192000, 1, "Smooth pedaling - clear " +
-        "your mind and mentally prepare for the upcoming session.");
-
-    const warmUp2 = [warmUp2s1, warmUp2s2, warmUp2s3, warmUp2s4, warmUp2s5,
-        warmUp2s6, warmUp2s7, warmUp2s8, warmUp2s9, warmUp2s10, warmUp2s9,
-        warmUp2s10, warmUp2s9, warmUp2s11];
-
-    // ===================================================================== //
-
     // ========================== Tempo Intervals ========================== //
      
     // Segments 
@@ -457,99 +420,3 @@ const newWorkout = (ttl:string, dsc:string, tps:string, segs:Segment[], tml:numb
              w2s1, w2s3]), 0, true);
 
     // ===================================================================== //
-
-    // ======================= Sweet-Spot Intervals ======================== //
-
-    // Segments 
-    const w3s1 = newSegment("Sweet-Spot", 300000, 4, "Maintain a smooth pedal " +
-        "stroke. Don't stromp on the pedals when you get tired. Pace your " +
-        "effort evenly and avoid major fluctuations in heart rate.");
-
-    const w3s2 = newSegment("Recovery", 60000, 1, "Maintain a smooth pedal " +
-        "stroke. Reduce resistance and keep your legs turning over.");
-
-    const w3s3 = newSegment("Sweet-Spot", 180000, 4, "Maintain a smooth pedal " +
-        "stroke. Don't stromp on the pedals when you get tired. Pace your " +
-        "effort evenly and avoid major fluctuations in heart rate.");
-
-    const w3s4 = newSegment("Cool Down", 600000, 1, "Maintain a smooth pedal " +
-        "stroke. Reduce resistance and keep your legs turning over.");
-
-    // Workout
-    const xxw1 = newWorkout("Sweet-Spot Intervals", "Use a medium " +
-        "resistance/gear that allows you to maintain 90+ rpm during the " +
-        "efforts. Efforts should be in Sweet-Spot HRZ high 3 - low 4 / PZ " +
-        "88-93% FTP. Just spin easy against minimal resistance for the " +
-        "recoveries.", "Pace the efforts evenly aiming to finish each " +
-        "strongly. Start at the lower end of the zone and build through. " +
-        "Maintain an even pedal stroke, don’t stamp on the pedals. " +
-        "Hold your upper body still, don’t rock and keep your grip on your " +
-        "bars relaxed.", warmUp2.concat([w3s1, w3s2, w3s1, w3s2, w3s3, w3s2,
-            w3s3, w3s2, w3s3, w3s2, w3s3, w3s2, w3s3, w3s2, w3s4]), 0, true);
-
-    // ===================================================================== //
-
-        // ======================= Testing ======================== //
-
-    // Segments 
-    const tsts1 = newSegment("Z1", 30000, 1, "Maintain a smooth pedal " +
-        "stroke. Don't stromp on the pedals when you get tired. Pace your " +
-        "effort evenly and avoid major fluctuations in heart rate.");
-
-    const tsts2 = newSegment("Z2", 30000, 2, "Maintain a smooth pedal " +
-        "stroke. Reduce resistance and keep your legs turning over.");
-
-    const tsts3 = newSegment("Z3", 30000, 3, "Maintain a smooth pedal " +
-        "stroke. Don't stromp on the pedals when you get tired. Pace your " +
-        "effort evenly and avoid major fluctuations in heart rate.");
-
-    const tst4 = newSegment("Z4", 30000, 4, "Maintain a smooth pedal " +
-        "stroke. Reduce resistance and keep your legs turning over.");
-
-    const tst5 = newSegment("Z5", 30000, 5, "Maintain a smooth pedal " +
-        "stroke. Reduce resistance and keep your legs turning over.");
-
-    // Workout
-    const xw1 = newWorkout("Sweet-Spot Intervals", "Use a medium " +
-        "resistance/gear that allows you to maintain 90+ rpm during the " +
-        "efforts. Efforts should be in Sweet-Spot HRZ high 3 - low 4 / PZ " +
-        "88-93% FTP. Just spin easy against minimal resistance for the " +
-        "recoveries.", "Pace the efforts evenly aiming to finish each " +
-        "strongly. Start at the lower end of the zone and build through. " +
-        "Maintain an even pedal stroke, don’t stamp on the pedals. " +
-        "Hold your upper body still, don’t rock and keep your grip on your " +
-        "bars relaxed.", [tsts1, tsts2, tsts3, tst4, tst5, tsts1, tsts2, tsts3, tst4, tst5, tsts1, tsts2, tsts3, tst4, tst5, w3s2,
-            w3s3, w3s2, w3s3, w3s2, w3s3, w3s2, w3s3, w3s2, w3s4], 0, true);
-
-    // ===================================================================== //
-
-
-const calculateTotalTime = (wk:Workout) => {
- 
-    let ttl = 0;
- 
-    for ( let i = 0; i < wk.segments.length; i++) {
-       ttl += wk.segments[i].duration;
-    }
- 
-    return ttl;
- }
-
- const execute = () => {
-
-
-
-    // Set the date/time we're counting down to
-    //const currentTimeAsMs = Date.now();
-    //const adjustedTimeAsMs = currentTimeAsMs + totalTime;
-    //const finishTime = new Date(adjustedTimeAsMs);
-
-    //let currentSegment = 0;
-    //let elapsedDuration = 0;
-
-    // Shift down in upcoming segments
-    //updateUpcomingSegments(w1, totalTime, 0);
-
-    
-    //startTimer();
-}
