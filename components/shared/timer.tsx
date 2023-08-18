@@ -20,7 +20,7 @@ export default function Timer({
       <div className={`relative col-span-1 h-28 overflow-hidden rounded-xl border border-gray-200 ${panelColor} text-neutral-200 shadow-md`}>
         <div className="flex h-28 text-5xl items-center justify-center">{timerTxt}</div>
       </div>
-      <div className="text-right text-lg py-2">{title}</div>
+      <div className="text-right text-md uppercase py-2">{title}</div>
     </div>
   );
 }

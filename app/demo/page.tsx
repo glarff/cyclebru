@@ -39,6 +39,49 @@ export default function Page() {
     let currentSegment = 0;
     let timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
 
+    // Segment Window population
+    const [segWin1Txt, setWin1Txt] = useState(w1.segments[0].title);
+    const [segWin2Txt, setWin2Txt] = useState(w1.segments.length > 1 ? w1.segments[1].title : "");
+    const [segWin3Txt, setWin3Txt] = useState(w1.segments.length > 2 ? w1.segments[2].title : "");
+    const [segWin4Txt, setWin4Txt] = useState(w1.segments.length > 3 ? w1.segments[3].title : "");
+    const [segWin5Txt, setWin5Txt] = useState(w1.segments.length > 4 ? w1.segments[4].title : "");
+
+    const [segWin1Intensity, setWin1Intensity] = useState(w1.segments[0].intensity);
+    const [segWin2Intensity, setWin2Intensity] = useState(w1.segments.length > 1 ? w1.segments[1].intensity : 1);
+    const [segWin3Intensity, setWin3Intensity] = useState(w1.segments.length > 2 ? w1.segments[2].intensity : 1);
+    const [segWin4Intensity, setWin4Intensity] = useState(w1.segments.length > 3 ? w1.segments[3].intensity : 1);
+    const [segWin5Intensity, setWin5Intensity] = useState(w1.segments.length > 4 ? w1.segments[4].intensity : 1);
+
+    // Initial population of next segments list
+    let elapsedDuration = 0;
+
+    // Use 5 if there are more than 5 segments, otherwise use the length
+    const [segWin1Window, setWin1Window] = useState(calculateSegmentWindow(totalTime, 0, w1.segments[0].duration));
+    const [segWin2Window, setWin2Window] = useState(w1.segments.length > 1 ?
+        calculateSegmentWindow(
+            totalTime, 
+            w1.segments[0].duration, 
+            w1.segments[1].duration
+        ) :"");
+    const [segWin3Window, setWin3Window] = useState(w1.segments.length > 2 ?
+        calculateSegmentWindow(
+            totalTime, 
+            w1.segments[0].duration + w1.segments[1].duration, 
+            w1.segments[2].duration
+        ) :"");
+    const [segWin4Window, setWin4Window] = useState(w1.segments.length > 3 ?
+        calculateSegmentWindow(
+            totalTime, 
+            w1.segments[0].duration + w1.segments[1].duration + w1.segments[2].duration, 
+            w1.segments[3].duration
+        ) :"");
+    const [segWin5Window, setWin5Window] = useState(w1.segments.length > 4 ?
+        calculateSegmentWindow(
+            totalTime, 
+            w1.segments[0].duration + w1.segments[1].duration + w1.segments[2].duration + w1.segments[3].duration, 
+            w1.segments[4].duration
+    ) :"");
+        
     // Click handling for start/pause/resume button
     const buttonClickAction = () => {
 
@@ -74,25 +117,14 @@ export default function Page() {
             const mainTimerDivs = getTimeDivisions(distance);
             const segTimerDivs = getTimeDivisions(distance2);
     
-            const mainTimerHours = mainTimerDivs.hrs;
-            const mainTimerMinutes = mainTimerDivs.mins;
-            const mainTimerSeconds = mainTimerDivs.secs;
-    
-            const segTimerMinutes = segTimerDivs.mins;
-            const segTimerSeconds = segTimerDivs.secs;
-    
             // Display the main timer
-            setMainTimer(formatForTimer(mainTimerHours, mainTimerMinutes,
-                mainTimerSeconds));
+            setMainTimer(formatForTimer(mainTimerDivs.hrs, mainTimerDivs.mins, mainTimerDivs.secs));
     
             // Display segment timer - use00 if negative
-            if (segTimerSeconds < 0) {
+            if (segTimerDivs.secs < 0) {
                 setSegmentTimer(formatForTimer(0, 0, 0));
-            }
-    
-            else {
-                setSegmentTimer(formatForTimer(0, segTimerMinutes,
-                    segTimerSeconds));
+            } else {
+                setSegmentTimer(formatForTimer(segTimerDivs.hrs, segTimerDivs.mins, segTimerDivs.secs));
             }
     
             if (w1.paused) {
@@ -168,6 +200,24 @@ export default function Page() {
                     <Tip text = {segmentTip} panelColor = {panelColor}/>
                 </div>
 
+                <UpcomingSegments
+                    segwin1txt={segWin1Txt}
+                    segwin2txt={segWin2Txt}
+                    segwin3txt={segWin3Txt} 
+                    segwin4txt={segWin4Txt} 
+                    segwin5txt={segWin5Txt} 
+                    segwin1intensity={segWin1Intensity}
+                    segwin2intensity={segWin2Intensity}
+                    segwin3intensity={segWin3Intensity} 
+                    segwin4intensity={segWin4Intensity} 
+                    segwin5intensity={segWin5Intensity} 
+                    segwin1window={segWin1Window}
+                    segwin2window={segWin2Window}
+                    segwin3window={segWin3Window} 
+                    segwin4window={segWin4Window} 
+                    segwin5window={segWin5Window} 
+                />
+
             </div>  
         </div>
     )
@@ -186,7 +236,7 @@ export default function Page() {
 */
 const getPanelColor = (intensity:number) => {
     if (intensity < 2) { return "bg-gradient-to-br from-green-900 via-emarald-700 to-teal-900"; } // 1 - dark green   
-    else if (intensity < 3) { return "bg-gradient-to-br from-emerald-600 via-emerald-800 to-green-600"; } // 2 - lime green   
+    else if (intensity < 3) { return "bg-gradient-to-br from-emerald-600 via-emerald-700 to-green-600"; } // 2 - lime green   
     else if (intensity < 4) { return "bg-gradient-to-br from-orange-900 via-amber-700 to-yellow-900"; }  // 3 - dark orange
     else if (intensity < 5) { return "bg-gradient-to-br from-rose-900 via-rose-800 to-pink-900"; }  // 4 - salmon
     else { return "bg-gradient-to-br from-red-900 via-rose-700 to-red-900"; }  // 5 - firebrick
@@ -263,6 +313,71 @@ const calculateTotalTime = (wk:Workout) => {
  
     return ttl;
 }
+
+/*
+   Calculate Next Segment Times
+   Inputs: Total time, start time of segment, duration of segment 
+   Returns: An object containing the hrs, mins, and secs 
+      broken up into properties for the start and end times of the
+      provided segment.
+*/
+const calculateNextSegmentTimes = (ttl:number, strt:number, dur:number) => {
+
+    const strtDivs = getTimeDivisions(ttl - strt);
+    const endDivs = getTimeDivisions(ttl - (strt + dur));
+
+    return {
+        hrs1: strtDivs.hrs,
+        mins1: strtDivs.mins,
+        secs1: strtDivs.secs,
+        hrs2: endDivs.hrs,
+        mins2: endDivs.mins,
+        secs2: endDivs.secs
+     };
+ }
+
+/*
+   Calculate Next Segment Window
+   Inputs: Total time of workout, elapsedDuration, and duration of the segment 
+   Returns: A formatted string showing the timing of the segment window
+*/
+const calculateSegmentWindow = (ttl:number, strt:number, dur:number) => {
+
+    const win = calculateNextSegmentTimes(ttl,strt,dur);
+    let segWin = "";
+ 
+    // Window Start Time
+    if (win.hrs1 > 0) {
+       segWin += win.hrs1;
+       segWin += ":";
+       segWin += addZeroPadding(win.mins1);
+    }
+ 
+    else {
+       segWin += win.mins1;
+    }
+ 
+    segWin += ":";
+    segWin += addZeroPadding(win.secs1)
+ 
+    segWin += " - ";
+ 
+    // Window End Time
+    if (win.hrs2 > 0) {
+       segWin += win.hrs2;
+       segWin += ":";
+       segWin += addZeroPadding(win.mins2);
+    }
+ 
+    else {
+       segWin += win.mins2;
+    }
+ 
+    segWin += ":";
+    segWin += addZeroPadding(win.secs2)
+ 
+    return segWin;
+ }
 
 /*
    Update Upcoming Segments
