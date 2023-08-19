@@ -40,46 +40,51 @@ export default function Page() {
     let timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
 
     // Segment Window population
-    const [segWin1Txt, setWin1Txt] = useState(w1.segments[0].title);
-    const [segWin2Txt, setWin2Txt] = useState(w1.segments.length > 1 ? w1.segments[1].title : "");
-    const [segWin3Txt, setWin3Txt] = useState(w1.segments.length > 2 ? w1.segments[2].title : "");
-    const [segWin4Txt, setWin4Txt] = useState(w1.segments.length > 3 ? w1.segments[3].title : "");
-    const [segWin5Txt, setWin5Txt] = useState(w1.segments.length > 4 ? w1.segments[4].title : "");
+    const [segWin1Txt, setWin1Txt] = useState(w1.segments[1].title);
+    const [segWin2Txt, setWin2Txt] = useState(w1.segments.length > 1 ? w1.segments[2].title : "");
+    const [segWin3Txt, setWin3Txt] = useState(w1.segments.length > 2 ? w1.segments[3].title : "");
+    const [segWin4Txt, setWin4Txt] = useState(w1.segments.length > 3 ? w1.segments[4].title : "");
+    const [segWin5Txt, setWin5Txt] = useState(w1.segments.length > 4 ? w1.segments[5].title : "");
 
-    const [segWin1Intensity, setWin1Intensity] = useState(w1.segments[0].intensity);
-    const [segWin2Intensity, setWin2Intensity] = useState(w1.segments.length > 1 ? w1.segments[1].intensity : 1);
-    const [segWin3Intensity, setWin3Intensity] = useState(w1.segments.length > 2 ? w1.segments[2].intensity : 1);
-    const [segWin4Intensity, setWin4Intensity] = useState(w1.segments.length > 3 ? w1.segments[3].intensity : 1);
-    const [segWin5Intensity, setWin5Intensity] = useState(w1.segments.length > 4 ? w1.segments[4].intensity : 1);
+    const [segWin1Intensity, setWin1Intensity] = useState(w1.segments[1].intensity);
+    const [segWin2Intensity, setWin2Intensity] = useState(w1.segments.length > 1 ? w1.segments[2].intensity : 1);
+    const [segWin3Intensity, setWin3Intensity] = useState(w1.segments.length > 2 ? w1.segments[3].intensity : 1);
+    const [segWin4Intensity, setWin4Intensity] = useState(w1.segments.length > 3 ? w1.segments[4].intensity : 1);
+    const [segWin5Intensity, setWin5Intensity] = useState(w1.segments.length > 4 ? w1.segments[5].intensity : 1);
 
     // Initial population of next segments list
     let elapsedDuration = 0;
 
     // Use 5 if there are more than 5 segments, otherwise use the length
-    const [segWin1Window, setWin1Window] = useState(calculateSegmentWindow(totalTime, 0, w1.segments[0].duration));
-    const [segWin2Window, setWin2Window] = useState(w1.segments.length > 1 ?
+    const [segWin1Window, setWin1Window] = useState(
         calculateSegmentWindow(
             totalTime, 
             w1.segments[0].duration, 
             w1.segments[1].duration
-        ) :"");
-    const [segWin3Window, setWin3Window] = useState(w1.segments.length > 2 ?
+        ));
+    const [segWin2Window, setWin2Window] = useState(w1.segments.length > 1 ?
         calculateSegmentWindow(
             totalTime, 
             w1.segments[0].duration + w1.segments[1].duration, 
             w1.segments[2].duration
         ) :"");
-    const [segWin4Window, setWin4Window] = useState(w1.segments.length > 3 ?
+    const [segWin3Window, setWin3Window] = useState(w1.segments.length > 2 ?
         calculateSegmentWindow(
             totalTime, 
             w1.segments[0].duration + w1.segments[1].duration + w1.segments[2].duration, 
             w1.segments[3].duration
         ) :"");
+    const [segWin4Window, setWin4Window] = useState(w1.segments.length > 3 ?
+        calculateSegmentWindow(
+            totalTime, 
+            w1.segments[0].duration + w1.segments[1].duration + w1.segments[2].duration + w1.segments[3].duration,
+            w1.segments[4].duration
+        ) :"");
     const [segWin5Window, setWin5Window] = useState(w1.segments.length > 4 ?
         calculateSegmentWindow(
             totalTime, 
-            w1.segments[0].duration + w1.segments[1].duration + w1.segments[2].duration + w1.segments[3].duration, 
-            w1.segments[4].duration
+            w1.segments[0].duration + w1.segments[1].duration + w1.segments[2].duration + w1.segments[3].duration + w1.segments[4].duration, 
+            w1.segments[5].duration
     ) :"");
         
     // Click handling for start/pause/resume button
@@ -94,6 +99,65 @@ export default function Page() {
             w1.paused = true;
             setButtonText("Resume");
         }
+    }
+
+    /*
+        Update Upcoming Segments
+        Inputs: workout object, current segment
+        Action: updates the upcoming segments graphic
+    */
+    const updateUpcomingSegments = (wk:Workout, ttl:number, seg:number) => {
+    
+        // If there's more than 4 segments remaining, shift the elements 2-5 up
+        if (wk.segments.length - seg >= 6) {
+    
+            setWin1Txt(segWin2Txt);
+            setWin2Txt(segWin3Txt);
+            setWin3Txt(segWin4Txt);
+            setWin4Txt(segWin5Txt);
+            setWin1Intensity(segWin2Intensity);
+            setWin2Intensity(segWin3Intensity);
+            setWin3Intensity(segWin4Intensity);
+            setWin4Intensity(segWin5Intensity);
+            setWin1Window(segWin2Window);
+            setWin2Window(segWin3Window);
+            setWin3Window(segWin4Window);
+            setWin4Window(segWin5Window);
+    
+            // Calculate 5th segment
+            elapsedDuration = 0;
+            for (let i = 0; i < seg + 5; i++) {
+                elapsedDuration += wk.segments[i].duration;
+            }
+        
+            let nextSegmentWindow = "";
+            nextSegmentWindow = calculateSegmentWindow(ttl, elapsedDuration, 
+                wk.segments[seg + 5].duration);
+        
+            setWin5Window(nextSegmentWindow);
+            setWin5Txt(wk.segments[seg + 5].title);
+            setWin5Intensity(wk.segments[seg + 5].intensity);
+        }
+    
+        // if <5 segments remaining, blank out the last one and shift up
+        else {     
+            setWin1Txt(segWin2Txt);
+            setWin2Txt(segWin3Txt);
+            setWin3Txt(segWin4Txt);
+            setWin4Txt(segWin5Txt);
+            setWin1Intensity(segWin2Intensity);
+            setWin2Intensity(segWin3Intensity);
+            setWin3Intensity(segWin4Intensity);
+            setWin4Intensity(segWin5Intensity);
+            setWin1Window(segWin2Window);
+            setWin2Window(segWin3Window);
+            setWin3Window(segWin4Window);
+            setWin4Window(segWin5Window);
+            setWin5Txt("");
+            setWin5Intensity(0);
+            setWin5Window("");
+        }
+    
     }
 
     const startTimer = () => {
@@ -159,7 +223,7 @@ export default function Page() {
                 setPanelColor(getPanelColor(w1.segments[currentSegment].intensity));
     
                 // Update the next segments list
-            //    updateUpcomingSegments(w1, totalTime, currentSegment);
+                updateUpcomingSegments(w1, totalTime, currentSegment);
             }
     
         }, 100);
@@ -378,91 +442,7 @@ const calculateSegmentWindow = (ttl:number, strt:number, dur:number) => {
  
     return segWin;
  }
-
-/*
-   Update Upcoming Segments
-   Inputs: workout object, current segment
-   Action: updates the upcoming segments graphic
-*/
-
-/*
-const updateUpcomingSegments = (wk:Workout, ttl:string, seg:number) => {
-
-    let segmentsRemaining = (wk.segments.length - seg - 1);
  
-    // If there's more than 4 segments remaining, shift the elements 2-5 up
-    if (wk.segments.length - seg >= 6) {
-
-        setSegment1Window()
- 
-       for (let i = 0; i < 4; i++) {
- 
-          // Update Segment Window
-          let text1 = "upcomingSegment" + (i+1) + "window";
-          let text2 = "upcomingSegment" + (i+2) + "window";
-
-          changeText(text1, getText(text2));
- 
-          // Update Segment Title
-          text1 = text1.replace("window", "title");
-          text2 = text2.replace("window", "title");
-          changeText(text1, getText(text2));
- 
-          // Update Segment Intensity
-          text1 = text1.replace("title", "intensity");
-          text2 = text2.replace("title", "intensity");
-          changeText(text1, getText(text2));
-          changeColor(text1, getColor(text2));
- 
-       }
- 
-       // Calculate 5th segment
-       elapsedDuration = 0;
-       for (i = 0; i < seg + 5; i++) {
-          elapsedDuration += wk.segments[i].duration;
-       }
- 
-       nextSegmentWindow = "";
-       nextSegmentWindow = calculateSegmentWindow(ttl, elapsedDuration, 
-          wk.segments[seg + 5].duration);
- 
-       // Update 5th segment components
-       text1 = "upcomingSegment5"
-       changeText(text1 + "window", nextSegmentWindow);
-       changeText(text1 + "title", wk.segments[seg + 5].title);
-       changeText(text1 + "intensity", wk.segments[seg + 5].intensity);
-       changeColor(text1 + "intensity", 
-          getColorByIntensity(wk.segments[seg + 5].intensity));
-       
-    }
- 
-    // if <5 segments remaining, blank out the last one and shift up
-    else {  
- 
-       for (i = 0; i < 4; i++) {
- 
-          changeText("upcomingSegment" + (i+1) + "window", 
-             getText("upcomingSegment" + (i+2) + "window"));
- 
-          changeText("upcomingSegment" + (i+1) + "title", 
-             getText("upcomingSegment" + (i+2) + "title"));
- 
-          changeText("upcomingSegment" + (i+1) + "intensity", 
-             getText("upcomingSegment" + (i+2) + "intensity"));
- 
-          changeColor("upcomingSegment" + (i+1) + "intensity", 
-             getColor("upcomingSegment" + (i+2) + "intensity"));
-       }
- 
-       changeText("upcomingSegment5window", "");
-       changeText("upcomingSegment5title", "");
-       changeText("upcomingSegment5intensity", "");
-       changeColor("upcomingSegment5intensity", "black");
-       
-    }
- 
- }
- */
 
 /* ========================================================================= */
 
