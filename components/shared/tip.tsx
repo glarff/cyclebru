@@ -13,7 +13,7 @@ export default function Tip({
   return (
     <div>
       <div
-        className={`relative col-span-1 mt-6 overflow-hidden rounded-xl border border-2 text-neutral-200 shadow-md`}
+        className={`relative col-span-1 mt-6 overflow-hidden rounded-xl border-4 ${panelColor} text-neutral-200 shadow-md bg-black`}
       >
         <div className="font-sf flex max-w-xl items-center justify-center px-16 py-8 text-center text-3xl">
           {text}

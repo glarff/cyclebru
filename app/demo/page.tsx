@@ -285,18 +285,22 @@ export default function Page() {
 
   return (
     <div>
-      <div className="h-100vh z-10 w-full px-5 xl:px-0">
+      <div className="h-100vh z-10 w-full px-5 xl:px-0 min-w-full">
         <div>
           <div>
             <div className="absolute">
               <MediumTitle text={segmentTitle} />
-              <Timer timerTxt={segmentTimer} panelColor={panelColor} />
+              <Timer timerTxt={segmentTimer} panelColor={`transparent text-${panelColor}`} />
             </div>
 
             <div className="absolute bottom-16">
-              <div className="flex flex-nowrap divide-x">
-                <MediumTitle text={workoutTitle} />
-                <Timer timerTxt={mainTimer} panelColor={panelColor} />
+              <div className="inline-flex items-center flex-nowrap divide-x align-middle">
+                <div className="max-w-sm">
+                    <MediumTitle text={workoutTitle} />
+                </div>
+                <div className="inline-block align-middle">
+                    <Timer timerTxt={mainTimer} panelColor={`transparent text-${panelColor}`} />
+                </div>
               </div>
             </div>
           </div>
@@ -331,7 +335,7 @@ export default function Page() {
             />
           </div>
           <div className="w-42 absolute bottom-16 right-16 opacity-80">
-            <Tip text={segmentTip} panelColor={panelColor} />
+            <Tip text={segmentTip} panelColor={`border-${panelColor}`} />
           </div>
         </div>
       </div>
@@ -352,19 +356,19 @@ export default function Page() {
 */
 const getPanelColor = (intensity: number) => {
   if (intensity < 2) {
-    return "transparent text-green-200";
+    return "green-200";
   } // 1 - dark green
   else if (intensity < 3) {
-    return "transparent text-lime-200";
+    return "lime-200";
   } // 2 - lime green
   else if (intensity < 4) {
-    return "transparent text-orange-200";
+    return "orange-200";
   } // 3 - dark orange
   else if (intensity < 5) {
-    return "transparent text-rose-200";
+    return "rose-200";
   } // 4 - salmon
   else {
-    return "transparent text-red-400";
+    return "red-400";
   } // 5 - firebrick
 };
 
@@ -718,7 +722,7 @@ const PRE1106 = newSegment(
   getTipByType("Productivity"),
 );
 
-const xw1 = newWorkout(
+const w1 = newWorkout(
   "Pyramid Intervals 1",
   "Description",
   "tips",
@@ -756,7 +760,7 @@ const tst4 = newSegment("Threshold", 10 * 1000, 4, getTipByType("Biking"));
 
 const tst5 = newSegment("Full Sprint", 10 * 1000, 5, getTipByType("Biking"));
 
-const w1 = newWorkout(
+const tstw1 = newWorkout(
   "testing",
   "testing",
   "testing",
