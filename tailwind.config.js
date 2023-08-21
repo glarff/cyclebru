@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'cyclists': 'url(https://ichef.bbci.co.uk/images/ic/832xn/p077x4jh.jpg)'
+        cyclists: "url(https://ichef.bbci.co.uk/images/ic/832xn/p077x4jh.jpg)",
       },
       fontFamily: {
         display: ["var(--font-sf)", "system-ui", "sans-serif"],

@@ -1,6 +1,6 @@
 ## Introduction
 
-CycleBru is a cycling trainer visual assistant, for indoor cycling training. 
+CycleBru is a cycling trainer visual assistant, for indoor cycling training.
 
 ### Frameworks
 

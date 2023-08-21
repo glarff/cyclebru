@@ -30,7 +30,8 @@ const DemoModal = ({
           </a>
           <h3 className="font-display text-2xl font-bold">CycleBru</h3>
           <p className="text-sm text-gray-500">
-            CycleBru is an open source web application built using Next.js, React.js, Tailwind CSS and Vercel.
+            CycleBru is an open source web application built using Next.js,
+            React.js, Tailwind CSS and Vercel.
           </p>
         </div>
       </div>

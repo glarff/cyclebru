@@ -1,20 +1,10 @@
 "use client";
 
-import BigTitle from "@/components/shared/bigtitle";
 import MediumTitle from "@/components/shared/mediumtitle";
 import Timer from "@/components/shared/timer";
 import Tip from "@/components/shared/tip";
 import UpcomingSegments from "@/components/shared/upcomingsegments";
-import Link from "next/link";
-import Balancer from "react-wrap-balancer";
-import Image from "next/image";
-import {
-  useState,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useMemo,
-} from "react";
+import { useState, useEffect } from "react";
 
 import { Pause, Play } from "lucide-react";
 
@@ -27,10 +17,8 @@ export default function Page() {
   );
   const [showPlayButton, setShowPlayButton] = useState("block");
   const [showPauseButton, setShowPauseButton] = useState("hidden");
-
   const totalTime = calculateTotalTime(w1);
 
-  // Initial population of elements
   const x1 = getTimeDivisions(totalTime);
   const x2 = formatForTimer(x1.hrs, x1.mins, x1.secs);
   const x3 = getTimeDivisions(w1.segments[0].duration);
@@ -45,33 +33,31 @@ export default function Page() {
   let timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
 
   // Segment Window population
-  const [segWin1Txt, setWin1Txt] = useState(w1.segments[1].title);
-  const [segWin2Txt, setWin2Txt] = useState(
+  let [segWin1Txt, setWin1Txt] = useState(w1.segments[1].title);
+  let [segWin2Txt, setWin2Txt] = useState(
     w1.segments.length > 1 ? w1.segments[2].title : "",
   );
-  const [segWin3Txt, setWin3Txt] = useState(
+  let [segWin3Txt, setWin3Txt] = useState(
     w1.segments.length > 2 ? w1.segments[3].title : "",
   );
-  const [segWin4Txt, setWin4Txt] = useState(
+  let [segWin4Txt, setWin4Txt] = useState(
     w1.segments.length > 3 ? w1.segments[4].title : "",
   );
-  const [segWin5Txt, setWin5Txt] = useState(
+  let [segWin5Txt, setWin5Txt] = useState(
     w1.segments.length > 4 ? w1.segments[5].title : "",
   );
 
-  const [segWin1Intensity, setWin1Intensity] = useState(
-    w1.segments[1].intensity,
-  );
-  const [segWin2Intensity, setWin2Intensity] = useState(
+  let [segWin1Intensity, setWin1Intensity] = useState(w1.segments[1].intensity);
+  let [segWin2Intensity, setWin2Intensity] = useState(
     w1.segments.length > 1 ? w1.segments[2].intensity : 1,
   );
-  const [segWin3Intensity, setWin3Intensity] = useState(
+  let [segWin3Intensity, setWin3Intensity] = useState(
     w1.segments.length > 2 ? w1.segments[3].intensity : 1,
   );
-  const [segWin4Intensity, setWin4Intensity] = useState(
+  let [segWin4Intensity, setWin4Intensity] = useState(
     w1.segments.length > 3 ? w1.segments[4].intensity : 1,
   );
-  const [segWin5Intensity, setWin5Intensity] = useState(
+  let [segWin5Intensity, setWin5Intensity] = useState(
     w1.segments.length > 4 ? w1.segments[5].intensity : 1,
   );
 
@@ -79,14 +65,14 @@ export default function Page() {
   let elapsedDuration = 0;
 
   // Use 5 if there are more than 5 segments, otherwise use the length
-  const [segWin1Window, setWin1Window] = useState(
+  let [segWin1Window, setWin1Window] = useState(
     calculateSegmentWindow(
       totalTime,
       w1.segments[0].duration,
       w1.segments[1].duration,
     ),
   );
-  const [segWin2Window, setWin2Window] = useState(
+  let [segWin2Window, setWin2Window] = useState(
     w1.segments.length > 1
       ? calculateSegmentWindow(
           totalTime,
@@ -95,7 +81,7 @@ export default function Page() {
         )
       : "",
   );
-  const [segWin3Window, setWin3Window] = useState(
+  let [segWin3Window, setWin3Window] = useState(
     w1.segments.length > 2
       ? calculateSegmentWindow(
           totalTime,
@@ -106,7 +92,7 @@ export default function Page() {
         )
       : "",
   );
-  const [segWin4Window, setWin4Window] = useState(
+  let [segWin4Window, setWin4Window] = useState(
     w1.segments.length > 3
       ? calculateSegmentWindow(
           totalTime,
@@ -118,7 +104,7 @@ export default function Page() {
         )
       : "",
   );
-  const [segWin5Window, setWin5Window] = useState(
+  let [segWin5Window, setWin5Window] = useState(
     w1.segments.length > 4
       ? calculateSegmentWindow(
           totalTime,
@@ -146,6 +132,38 @@ export default function Page() {
     }
   };
 
+  const shiftUpcomingSegments = () => {
+    segWin1Txt = segWin2Txt;
+    segWin2Txt = segWin3Txt;
+    segWin3Txt = segWin4Txt;
+    segWin4Txt = segWin5Txt;
+
+    setWin1Txt(segWin1Txt);
+    setWin2Txt(segWin2Txt);
+    setWin3Txt(segWin3Txt);
+    setWin4Txt(segWin4Txt);
+
+    segWin1Intensity = segWin2Intensity;
+    segWin2Intensity = segWin3Intensity;
+    segWin3Intensity = segWin4Intensity;
+    segWin4Intensity = segWin5Intensity;
+
+    setWin1Intensity(segWin1Intensity);
+    setWin2Intensity(segWin2Intensity);
+    setWin3Intensity(segWin3Intensity);
+    setWin4Intensity(segWin4Intensity);
+
+    segWin1Window = segWin2Window;
+    segWin2Window = segWin3Window;
+    segWin3Window = segWin4Window;
+    segWin4Window = segWin5Window;
+
+    setWin1Window(segWin1Window);
+    setWin2Window(segWin2Window);
+    setWin3Window(segWin3Window);
+    setWin4Window(segWin4Window);
+  };
+
   /*
         Update Upcoming Segments
         Inputs: workout object, current segment
@@ -154,18 +172,7 @@ export default function Page() {
   const updateUpcomingSegments = (wk: Workout, ttl: number, seg: number) => {
     // If there's more than 4 segments remaining, shift the elements 2-5 up
     if (wk.segments.length - seg >= 6) {
-      setWin1Txt(segWin2Txt);
-      setWin2Txt(segWin3Txt);
-      setWin3Txt(segWin4Txt);
-      setWin4Txt(segWin5Txt);
-      setWin1Intensity(segWin2Intensity);
-      setWin2Intensity(segWin3Intensity);
-      setWin3Intensity(segWin4Intensity);
-      setWin4Intensity(segWin5Intensity);
-      setWin1Window(segWin2Window);
-      setWin2Window(segWin3Window);
-      setWin3Window(segWin4Window);
-      setWin4Window(segWin5Window);
+      shiftUpcomingSegments();
 
       // Calculate 5th segment
       elapsedDuration = 0;
@@ -180,28 +187,23 @@ export default function Page() {
         wk.segments[seg + 5].duration,
       );
 
-      setWin5Window(nextSegmentWindow);
-      setWin5Txt(wk.segments[seg + 5].title);
-      setWin5Intensity(wk.segments[seg + 5].intensity);
+      segWin5Window = nextSegmentWindow;
+      setWin5Window(segWin5Window);
+      segWin5Txt = wk.segments[seg + 5].title;
+      setWin5Txt(segWin5Txt);
+      segWin5Intensity = wk.segments[seg + 5].intensity;
+      setWin5Intensity(segWin5Intensity);
     }
 
     // if <5 segments remaining, blank out the last one and shift up
     else {
-      setWin1Txt(segWin2Txt);
-      setWin2Txt(segWin3Txt);
-      setWin3Txt(segWin4Txt);
-      setWin4Txt(segWin5Txt);
-      setWin1Intensity(segWin2Intensity);
-      setWin2Intensity(segWin3Intensity);
-      setWin3Intensity(segWin4Intensity);
-      setWin4Intensity(segWin5Intensity);
-      setWin1Window(segWin2Window);
-      setWin2Window(segWin3Window);
-      setWin3Window(segWin4Window);
-      setWin4Window(segWin5Window);
-      setWin5Txt("");
-      setWin5Intensity(0);
-      setWin5Window("");
+      shiftUpcomingSegments();
+      segWin5Window = "";
+      setWin5Window(segWin5Window);
+      segWin5Txt = "";
+      setWin5Txt(segWin5Txt);
+      segWin5Intensity = 0;
+      setWin5Intensity(segWin5Intensity);
     }
   };
 
@@ -362,7 +364,7 @@ const getPanelColor = (intensity: number) => {
     return "transparent text-rose-200";
   } // 4 - salmon
   else {
-    return "transparent text-red-200";
+    return "transparent text-red-400";
   } // 5 - firebrick
 };
 
@@ -716,7 +718,7 @@ const PRE1106 = newSegment(
   getTipByType("Productivity"),
 );
 
-const w1 = newWorkout(
+const xw1 = newWorkout(
   "Pyramid Intervals 1",
   "Description",
   "tips",
@@ -740,6 +742,25 @@ const w1 = newWorkout(
     PRE1101,
     PRE1106,
   ]),
+  0,
+  true,
+);
+
+const tst1 = newSegment("Easy", 10 * 1000, 1, "testing");
+
+const tst2 = newSegment("Ramp Up", 10 * 1000, 2, getTipByType("Biking"));
+
+const tst3 = newSegment("Tempo", 10 * 1000, 3, getTipByType("Biking"));
+
+const tst4 = newSegment("Threshold", 10 * 1000, 4, getTipByType("Biking"));
+
+const tst5 = newSegment("Full Sprint", 10 * 1000, 5, getTipByType("Biking"));
+
+const w1 = newWorkout(
+  "testing",
+  "testing",
+  "testing",
+  [tst1, tst2, tst3, tst4, tst5, tst1, tst2, tst3, tst4, tst5, tst1],
   0,
   true,
 );

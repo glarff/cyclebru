@@ -14,12 +14,12 @@ export default function ComponentGrid() {
       <DemoModal />
       <button
         onClick={() => setShowDemoModal(true)}
-        className="flex w-38 items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100"
+        className="w-38 flex items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100"
       >
         <p className="text-gray-600">About CycleBru</p>
       </button>
       <Tooltip content="To use CycleBru, you need an open area, a cycling trainer or stationary machine bike, and a screen set up somewhere you can view while pedaling.">
-        <div className="flex w-38 cursor-default items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100">
+        <div className="w-38 flex cursor-default items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100">
           <p className="text-gray-600">What do I need?</p>
         </div>
       </Tooltip>
@@ -51,12 +51,13 @@ export default function ComponentGrid() {
       >
         <button
           onClick={() => setOpenPopover(!openPopover)}
-          className="flex w-38 items-center justify-between rounded-md border border-gray-300 px-4 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100"
+          className="w-38 flex items-center justify-between rounded-md border border-gray-300 px-4 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100"
         >
           <p className="text-gray-600">Stock Workouts</p>
           <ChevronDown
-            className={`h-4 w-4 text-gray-600 transition-all ${openPopover ? "rotate-180" : ""
-              }`}
+            className={`h-4 w-4 text-gray-600 transition-all ${
+              openPopover ? "rotate-180" : ""
+            }`}
           />
         </button>
       </Popover>

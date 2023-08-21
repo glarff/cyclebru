@@ -38,7 +38,9 @@ export default function SegmentInfo({
 }
 
 const getPanelColor = (intensity: number) => {
-  if (intensity < 2) {
+  if (intensity < 1) {
+    return "invisible";
+  } else if (intensity < 2) {
     return "bg-gradient-to-br from-green-900 via-emarald-700 to-teal-900";
   } // 1 - dark green
   else if (intensity < 3) {
