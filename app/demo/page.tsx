@@ -285,12 +285,12 @@ export default function Page() {
 
   return (
     <div>
-      <div className="h-100vh z-10 w-full px-5 xl:px-0 min-w-full">
+      <div className="h-100vh z-10 w-full px-5 xl:px-0">
         <div>
           <div>
             <div className="absolute">
               <MediumTitle text={segmentTitle} />
-              <Timer timerTxt={segmentTimer} panelColor={`transparent text-${panelColor}`} />
+              <Timer timerTxt={segmentTimer} panelColor={panelColor} />
             </div>
 
             <div className="absolute bottom-16">
@@ -299,7 +299,7 @@ export default function Page() {
                     <MediumTitle text={workoutTitle} />
                 </div>
                 <div className="inline-block align-middle">
-                    <Timer timerTxt={mainTimer} panelColor={`transparent text-${panelColor}`} />
+                    <Timer timerTxt={mainTimer} panelColor={panelColor} />
                 </div>
               </div>
             </div>
@@ -335,7 +335,7 @@ export default function Page() {
             />
           </div>
           <div className="w-42 absolute bottom-16 right-16 opacity-80">
-            <Tip text={segmentTip} panelColor={`border-${panelColor}`} />
+            <Tip text={segmentTip} panelColor={panelColor} />
           </div>
         </div>
       </div>
@@ -356,19 +356,19 @@ export default function Page() {
 */
 const getPanelColor = (intensity: number) => {
   if (intensity < 2) {
-    return "green-200";
+    return "transparent text-green-200";
   } // 1 - dark green
   else if (intensity < 3) {
-    return "lime-200";
+    return "transparent text-lime-200";
   } // 2 - lime green
   else if (intensity < 4) {
-    return "orange-200";
+    return "transparent text-orange-200";
   } // 3 - dark orange
   else if (intensity < 5) {
-    return "rose-200";
+    return "transparent text-rose-200";
   } // 4 - salmon
   else {
-    return "red-400";
+    return "transparent text-red-400";
   } // 5 - firebrick
 };
 
@@ -446,7 +446,7 @@ const calculateTotalTime = (wk: Workout) => {
    Inputs: Total time, start time of segment, duration of segment 
    Returns: An object containing the hrs, mins, and secs 
       broken up into properties for the start and end times of the
-      provided segment
+      provided segment.
 */
 const calculateNextSegmentTimes = (ttl: number, strt: number, dur: number) => {
   const strtDivs = getTimeDivisions(ttl - strt);
