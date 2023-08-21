@@ -8,8 +8,7 @@ export default function MediumTitle({
   return (
     <div>
         <h1
-            className="mx-12 animate-fade-up font-orbitron text-4xl font-bold tracking-[-0.02em] 
-            text-transparent opacity-0 drop-shadow-sm md:text-4xl md:leading-[5rem] uppercase text-fuchsia-100"
+            className="mx-12 font-orbitron text-4xl font-bold uppercase text-fuchsia-100 my-6"
             style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
             {text}

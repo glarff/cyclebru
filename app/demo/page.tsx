@@ -542,7 +542,8 @@ const getTipByType = (typ:string) => {
 
  // ========================== 20 min warm up =========================== //
 
-const warmUp2s2 = newSegment("90 RPM", 300000, 1, getTipByType("Biking"));
+const warmUp2s2 = newSegment("90 RPM", 300000, 1, "Smooth pedaling - clear your " +
+"mind and mentally prepare for the upcoming session.");
 
 const warmUp2s3 = newSegment("95 RPM", 120000, 1, getTipByType("Biking"));
 
