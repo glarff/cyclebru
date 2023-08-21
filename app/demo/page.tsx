@@ -7,6 +7,7 @@ import Tip from "@/components/shared/tip";
 import UpcomingSegments from "@/components/shared/upcomingsegments";
 import Link from "next/link"
 import Balancer from "react-wrap-balancer";
+import Image from "next/image";
 import {
     useState,
     Dispatch,
@@ -15,13 +16,16 @@ import {
     useMemo,
   } from "react";
 
+  import { Pause, Play } from "lucide-react";
+
 export default function Page() {
 
     const [workoutTitle, setWorkoutTitle] = useState(w1.title);
     const [segmentTitle, setSegmentTitle] = useState(w1.segments[0].title);
     const [segmentTip, setSegmentTip] = useState(w1.segments[0].tip);
     const [panelColor, setPanelColor] = useState(getPanelColor(w1.segments[0].intensity));
-    const [buttonText, setButtonText] = useState("Start");
+    const [showPlayButton, setShowPlayButton] = useState("block");
+    const [showPauseButton, setShowPauseButton] = useState("hidden");
 
     const totalTime = calculateTotalTime(w1);
 
@@ -92,12 +96,14 @@ export default function Page() {
 
         if(w1.paused) {
             w1.paused = false;
-            setButtonText("Pause");
+            setShowPauseButton("block");
+            setShowPlayButton("hidden");
             startTimer();
         }
         else {
             w1.paused = true;
-            setButtonText("Resume");
+            setShowPauseButton("hidden");
+            setShowPlayButton("block");
         }
     }
 
@@ -163,7 +169,6 @@ export default function Page() {
     const startTimer = () => {
 
         // Calculate total time and time left after semgment 1
-        w1.paused = false;
         const currentTimeAsMs = Date.now();
         const adjustedTimeAsMs = currentTimeAsMs + w1.timeLeft;
         const finishTime = new Date(adjustedTimeAsMs);
@@ -230,59 +235,72 @@ export default function Page() {
     }
 
     return (
-        <div className="z-10 w-full px-5 xl:px-0">
-
-            <div className="flex flex-nowrap">
-
+        <div>
+            <div className="z-10 w-full px-5 xl:px-0 h-100vh">
                 <div>
-                    <div className="flex flex-nowrap">
-                        <MediumTitle text={workoutTitle} />
+                    <div>
+                        <div className="absolute">
+                            <MediumTitle text = {segmentTitle} />
+                            <Timer 
+                                title = "Time Remaining in Segment"
+                                description = "Total time remaining in the current segment"
+                                timerTxt = {segmentTimer}
+                                panelColor = {panelColor}
+                            />
+                        </div>
+                        
+
+                        <div className="absolute bottom-16">
+                            <div className="flex flex-nowrap divide-x">
+                                <MediumTitle text={workoutTitle} />
+                                <Timer 
+                                    title = "Time Remaining in Workout"
+                                    description = "Total time remaining in the workout session"
+                                    timerTxt = {mainTimer}
+                                    panelColor = {panelColor}
+                                />
+                                
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div className="flex h-screen justify-center items-center align-middle">
                         <button
-                            className="border border-black bg-indigo-800 h-10 ml-8 mt-5 px-6 py-2 text-md text-white transition-colors hover:bg-white hover:text-black"
+                            className="mb-52 px-4 py-4 text-4xl text-stone-200 transition-colors hover:bg-white hover:text-black z-10"
                             onClick={() => buttonClickAction()}
                             >
-                            <p>{buttonText}</p>
+                            <Play className = {`${showPlayButton}`} size={96} />
+                            <Pause className = {`${showPauseButton}`} size={96} />
                         </button>
                     </div>
 
-                    <Timer 
-                        title = "Time Remaining in Workout"
-                        description = "Total time remaining in the workout session"
-                        timerTxt = {mainTimer}
-                        panelColor = {panelColor}
-                    />
-
-                    <MediumTitle text = {segmentTitle} />
-
-                    <Timer 
-                        title = "Time Remaining in Segment"
-                        description = "Total time remaining in the current segment"
-                        timerTxt = {segmentTimer}
-                        panelColor = {panelColor}
-                    />
-
-                    <Tip text = {segmentTip} panelColor = {panelColor}/>
-                </div>
-
-                <UpcomingSegments
-                    segwin1txt={segWin1Txt}
-                    segwin2txt={segWin2Txt}
-                    segwin3txt={segWin3Txt} 
-                    segwin4txt={segWin4Txt} 
-                    segwin5txt={segWin5Txt} 
-                    segwin1intensity={segWin1Intensity}
-                    segwin2intensity={segWin2Intensity}
-                    segwin3intensity={segWin3Intensity} 
-                    segwin4intensity={segWin4Intensity} 
-                    segwin5intensity={segWin5Intensity} 
-                    segwin1window={segWin1Window}
-                    segwin2window={segWin2Window}
-                    segwin3window={segWin3Window} 
-                    segwin4window={segWin4Window} 
-                    segwin5window={segWin5Window} 
-                />
-
-            </div>  
+                    <div className="absolute right-16 top-32 w-42 opacity-80">
+                        <UpcomingSegments
+                            segwin1txt={segWin1Txt}
+                            segwin2txt={segWin2Txt}
+                            segwin3txt={segWin3Txt} 
+                            segwin4txt={segWin4Txt} 
+                            segwin5txt={segWin5Txt} 
+                            segwin1intensity={segWin1Intensity}
+                            segwin2intensity={segWin2Intensity}
+                            segwin3intensity={segWin3Intensity} 
+                            segwin4intensity={segWin4Intensity} 
+                            segwin5intensity={segWin5Intensity} 
+                            segwin1window={segWin1Window}
+                            segwin2window={segWin2Window}
+                            segwin3window={segWin3Window} 
+                            segwin4window={segWin4Window} 
+                            segwin5window={segWin5Window} 
+                        />
+                    </div>
+                    <div className="absolute right-16 bottom-16 w-42 opacity-80">
+                         <Tip text = {segmentTip} panelColor = {panelColor}/>
+                    </div>
+                </div>  
+            </div>
         </div>
     )
 }
@@ -299,11 +317,11 @@ export default function Page() {
    Returns: Tailwind CSS classes to use for panel style
 */
 const getPanelColor = (intensity:number) => {
-    if (intensity < 2) { return "bg-gradient-to-br from-green-900 via-emarald-700 to-teal-900"; } // 1 - dark green   
-    else if (intensity < 3) { return "bg-gradient-to-br from-emerald-600 via-emerald-700 to-green-600"; } // 2 - lime green   
-    else if (intensity < 4) { return "bg-gradient-to-br from-orange-900 via-amber-700 to-yellow-900"; }  // 3 - dark orange
-    else if (intensity < 5) { return "bg-gradient-to-br from-rose-900 via-rose-800 to-pink-900"; }  // 4 - salmon
-    else { return "bg-gradient-to-br from-red-900 via-rose-700 to-red-900"; }  // 5 - firebrick
+    if (intensity < 2) { return "transparent text-green-200"; } // 1 - dark green   
+    else if (intensity < 3) { return "transparent text-lime-200"; } // 2 - lime green   
+    else if (intensity < 4) { return "transparent text-orange-200"; }  // 3 - dark orange
+    else if (intensity < 5) { return "transparent text-rose-200"; }  // 4 - salmon
+    else { return "transparent text-red-200"; }  // 5 - firebrick
 }
 
 /*
@@ -496,7 +514,7 @@ const newWorkout = (ttl:string, dsc:string, tps:string, segs:Segment[], tml:numb
     const warmUp1s5 = newSegment("Warm Up: Easy Spin", 120000, 1, "Finish with " +
     " 2 minute easy spin before starting main content of session.");
 
-    const warmUp1 = [warmUp1s1, warmUp1s2, warmUp1s3, warmUp1s4, warmUp1s5];
+    const warmUp1 = [warmUp1s2, warmUp1s3, warmUp1s4, warmUp1s5];
 
     // ===================================================================== //
 

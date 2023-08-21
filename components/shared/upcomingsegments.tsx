@@ -39,10 +39,10 @@ export default function UpcomingSegments({
   segwin5window: string;
 }) {
   return (
-    <div className = "ml-40">
+    <div>
         <MediumTitle text = "Upcoming Segments" />
-        <div className={`relative col-span-1 overflow-hidden rounded-xl border border-gray-200 bg-stone-900 text-neutral-200 shadow-md`}>
-        <div className="flex flex-col text-2xl pl-5 pr-16 py-4">
+        <div className={`relative col-span-1 overflow-hidden rounded-xl text-neutral-200 shadow-md`}>
+        <div className="flex flex-col text-2xl py-4">
             <SegmentInfo  
                 num={1}
                 intensity={segwin1intensity}

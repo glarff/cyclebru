@@ -8,9 +8,13 @@ module.exports = {
   },
   theme: {
     extend: {
+      backgroundImage: {
+        'cyclists': 'url(https://ichef.bbci.co.uk/images/ic/832xn/p077x4jh.jpg)'
+      },
       fontFamily: {
         display: ["var(--font-sf)", "system-ui", "sans-serif"],
         default: ["var(--font-inter)", "system-ui", "sans-serif"],
+        orbitron: ["var(--font-orbitron)", "system-ui", "sans-serif"],
       },
       animation: {
         // Fade up and down

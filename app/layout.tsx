@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
-import { sfPro, inter } from "./fonts";
+import { sfPro, inter, orbitron } from "./fonts";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
@@ -15,7 +15,7 @@ export const metadata = {
     title: "Precedent - Building blocks for your Next.js project",
     description:
       "CycleBru is the all-in-one online cycling coach. It includes a visual guide for workout sessions, custom workout creation, training planning, and more.",
-    creator: "@steventey",
+    creator: "Glarffo",
   },
   metadataBase: new URL("https://precedent.dev"),
   themeColor: "#FFF",
@@ -28,8 +28,8 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cx(sfPro.variable, inter.variable)}>
-        <div className="fixed h-screen w-full bg-gradient-to-br from-rose-200 via-white to-pink-100" />
+      <body className={cx(sfPro.variable, inter.variable, orbitron.variable)}>
+        <div className="fixed h-screen w-full bg-cyclists bg-cover bg-center bg-no-repeat brightness-50" />
         <Suspense fallback="...">
           {/* @ts-expect-error Server Component */}
           <Nav />

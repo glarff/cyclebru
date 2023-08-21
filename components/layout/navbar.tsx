@@ -31,7 +31,7 @@ export default function NavBar({ session }: { session: Session | null }) {
               className="mr-2 rounded-sm"
               key="cyclebrulogo"
             ></Image>
-            <p>CycleBru</p>
+            <p className="text-fuchsia-200">CycleBru</p>
           </Link>
           <div>
             {session ? (

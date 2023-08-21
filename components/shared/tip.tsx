@@ -12,10 +12,9 @@ export default function Tip({
 }) {
   return (
     <div>
-      <div className={`relative col-span-1 overflow-hidden rounded-xl border border-4 ${panelColor} text-neutral-200 shadow-md mt-6`}>
-        <div className="flex text-2xl items-center justify-center text-center px-16 py-8 max-w-3xl ">{text}</div>
+      <div className={`relative col-span-1 overflow-hidden rounded-xl border border-2 ${panelColor} text-neutral-200 shadow-md mt-6`}>
+        <div className="flex text-3xl items-center justify-center text-center px-16 py-8 max-w-xl font-sf">{text}</div>
       </div>
-      <div className="text-right text-md py-2 uppercase">Segment Tip</div>
     </div>
   );
 }
