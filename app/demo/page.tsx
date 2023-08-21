@@ -493,43 +493,94 @@ const newWorkout = (ttl:string, dsc:string, tps:string, segs:Segment[], tml:numb
 
 // ========================================================================= //
 
-/* ============================== Statc Data =============================== */
+/* ============================== Static Data =============================== */
 
-    // =========================== Wu-Ti warm up =========================== //
+// ======================== Random Tip Generation ========================== //
 
-    const warmUp1s1 = newSegment("Get on the bike", 30000, 1, "Get on the bike " +
-        "and get ready to go.");
+const getRandomElement = (arr: any[]) =>
+  arr[Math.floor(Math.random() * arr.length)]
 
-    const warmUp1s2 = newSegment("Warm Up: Z1", 300000, 1, "Spend the first 5 " +
-    "minutes of your session in Z1. Gradually increase cadence to 90+.");
+const getTipByType = (typ:string) => {
 
-    const warmUp1s3 = newSegment("Warm Up: Z2-Z3", 300000, 2, "Spend the next " +
-    "5 minutes progressing through Z2. End at a low Z3.");
+    let possibilities = [];
 
-    const warmUp1s4 = newSegment("Warm Up: Max Spin / Easy Spin", 120000, 2,
-    "Now increase the cadence to your maximum, hold for 5 seconds, " +
-    "followed by 25 seconds easy spin. Repeat maximum cadence / easy " +
-    "spin 3 more times.");
+    if (typ == "Biking") {
 
-    const warmUp1s5 = newSegment("Warm Up: Easy Spin", 120000, 1, "Finish with " +
-    " 2 minute easy spin before starting main content of session.");
+        possibilities.push("Think about pedaling as if tracing a square.  Push forward along the top, down the frontside, scrape the bottom, then pull back up the backside.");
+        possibilities.push("Avoid side to side movement in the knees by keeping core tight - no Gumby riding.");
+        possibilities.push("Dont let your pelvis slouch. Rotate the hips forward and push the butt back, similar to plank.");
+        possibilities.push("Keep the grip on the bars relaxed.  No white knuckles!  Change grips often if needed.");
+        possibilities.push("Pay attention!  Are all parts of your form good?  Let go of unneeded thoughts and focus on finishing the effort.");
+        possibilities.push("Get on the pedals early - start pushing forward before 12 oclock position.  Feet flat or toes slightly pointed up.");
+        possibilities.push("Keep your head up, relax your elbows, shoulders, and hands slightly.");
 
-    const warmUp1 = [warmUp1s2, warmUp1s3, warmUp1s4, warmUp1s5];
+        return getRandomElement(possibilities);
+    }
 
-    // ===================================================================== //
+    else if (typ == "Productivity") {
 
-    // ========================== Tempo Intervals ========================== //
-     
-    // Segments 
-    const w2s1 = newSegment("HRZ 3", 600000, 3, "Maintain a smooth pedal stroke, especially during the HRZ3 effort.");
+        possibilities.push("Focus on one goal at a time.  You have all this time to do this one task!");
+        possibilities.push("If you get distracted by something, note down to do it later, rather than doing it now.");
+        possibilities.push("Take short breaks if needed to clear your mind and rest, but dont start something else.");
+        possibilities.push("Before starting something new, quickly think about what the most effecient way to execute it is, then go. Dont overthink it.");
+        possibilities.push("Finish your task completely.  If theres time left, take a quick break and relax before the next segment.");
 
-    const w2s2 = newSegment("Easy Spin", 300000, 1, "Don't stomp on the pedals when you get tired.");
- 
-    const w2s3 = newSegment("Easy Spin", 600000, 1, "Place the tempo effors evenly and avoid major fluctuations in heart rate.");
- 
-     // Workout
-     const w1 = newWorkout("Tempo Intervals", "Tempo Intervals Description",
-         "w2 Tip 1\nw2 Tip 2\nw2 Tip 3", warmUp1.concat([w2s1, w2s2, w2s1, w2s2,
-             w2s1, w2s3]), 0, true);
+        return getRandomElement(possibilities);
+    }
 
-    // ===================================================================== //
+    else if (typ == "FoamRoll") {
+
+        possibilities.push("Move up and down the roll for five to ten reps, holding at the end of each move for a few seconds, then switch sides and repeat.");
+        possibilities.push("When you hit a tight spot that is painful or uncomfortable, HOLD on that spot for 30-45 seconds. You should feel the tension release slowly");
+        possibilities.push("Make sure to keep breathing, even when its painful. Holding your breath wont allow the muscles to release and relax.");
+        possibilities.push("RELAX the muscle as best you can. If you are flexing or tensing the muscle group you are trying to roll out, you wont feel the trigger points you need to release");
+
+        return getRandomElement(possibilities);
+    }
+
+}
+
+ // ========================== 20 min warm up =========================== //
+
+const warmUp2s2 = newSegment("90 RPM", 300000, 1, getTipByType("Biking"));
+
+const warmUp2s3 = newSegment("95 RPM", 120000, 1, getTipByType("Biking"));
+
+const warmUp2s4 = newSegment("100 RPM", 120000, 2, getTipByType("Biking"));
+
+const warmUp2s5 = newSegment("105 RPM", 120000, 2, getTipByType("Biking"));
+
+const warmUp2s6 = newSegment("110 RPM", 90000, 3, getTipByType("Biking"));
+
+const warmUp2s7 = newSegment("120-130 RPM", 30000, 4, getTipByType("Biking"));
+
+const warmUp2s8 = newSegment("90 RPM", 120000, 1, getTipByType("Biking"));
+
+const warmUp2s9 = newSegment("MAX", 6000, 5, getTipByType("Biking"));
+
+const warmUp2s10 = newSegment("90 RPM", 60000, 1, getTipByType("Biking"));
+
+const warmUp2s11 = newSegment("90 RPM", 162000, 1, getTipByType("Biking"));
+
+const warmUp2 = [warmUp2s2, warmUp2s3, warmUp2s4, warmUp2s5,
+ warmUp2s6, warmUp2s7, warmUp2s8, warmUp2s9, warmUp2s10, warmUp2s9,
+ warmUp2s10, warmUp2s9, warmUp2s11];
+
+// ===================================================================== //
+
+const PRE1101 = newSegment("Threshold", 1 * 60 * 1000, 4, getTipByType("Biking"));
+const PRE1101b = newSegment("Recovery", 1 * 60 * 1000, 1, getTipByType("Biking"));
+const PRE1102 = newSegment("Threshold", 2 * 60 * 1000, 4, getTipByType("Biking"));
+const PRE1102b = newSegment("Recovery", 2 * 60 * 1000, 1, getTipByType("Biking"));
+const PRE1103 = newSegment("Threshold", 3 * 60 * 1000, 4, getTipByType("Biking"));
+const PRE1103b = newSegment("Recovery", 3 * 60 * 1000, 1, getTipByType("Biking"));
+const PRE1104 = newSegment("Threshold", 4 * 60 * 1000, 4, getTipByType("Biking"));
+const PRE1104b = newSegment("Recovery", 4 * 60 * 1000, 1, getTipByType("Biking"));
+const PRE1105 = newSegment("Threshold", 5 * 60 * 1000, 4, getTipByType("Biking"));
+const PRE1106 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+
+
+const w1 = newWorkout("Pyramid Intervals 1", "Description", "tips",
+    warmUp2.concat([PRE1101, PRE1101b, PRE1102, PRE1102b, PRE1103, PRE1103b, 
+        PRE1104, PRE1104b, PRE1105, PRE1104b, PRE1104, PRE1103b, PRE1103,
+        PRE1102b, PRE1102, PRE1101b, PRE1101, PRE1106]), 0, true);
