@@ -5,15 +5,13 @@ import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
 
 export default function DemoLayout({
-    children, // will be a page or nested layout
-  }: {
-    children: React.ReactNode
-  }) {
-    return (
-      <section className="w-10/12">
-        <main className="flex min-h-screen w-full flex-col">
-          {children}
-        </main>
-      </section>
-    )
-  }
+  children, // will be a page or nested layout
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="w-10/12">
+      <main className="flex min-h-screen w-full flex-col">{children}</main>
+    </section>
+  );
+}

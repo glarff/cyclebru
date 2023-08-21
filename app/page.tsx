@@ -6,7 +6,7 @@ import WebVitals from "@/components/home/web-vitals";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
-import Link from "next/link"
+import Link from "next/link";
 
 export default async function Home() {
   const { stargazers_count: stars } = await fetch(
@@ -40,7 +40,8 @@ export default async function Home() {
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <Balancer>
-            Visual Aids for Trainer Rides, Custom Workout Creation, Training Plan Guidance, and more.
+            Visual Aids for Trainer Rides, Custom Workout Creation, Training
+            Plan Guidance, and more.
           </Balancer>
         </p>
         <div
@@ -75,13 +76,7 @@ export default async function Home() {
             key={title}
             title={title}
             description={description}
-            demo={
-              title === "Plan, Execute, Improve" ? (
-                <ComponentGrid />
-              ) : (
-                demo
-              )
-            }
+            demo={title === "Plan, Execute, Improve" ? <ComponentGrid /> : demo}
             large={large}
           />
         ))}
@@ -103,18 +98,38 @@ const features = [
       "CycleBru's custom workout generation UI allows you to add in your own favorite challenges.",
     demo: (
       <div className="grid grid-flow-col grid-rows-6 gap-x-8 p-10">
-        <span className="font-mono font-semibold text-green-800">5min HRZ1</span>
+        <span className="font-mono font-semibold text-green-800">
+          5min HRZ1
+        </span>
         <span className="font-mono font-semibold text-lime-800">2min HRZ2</span>
-        <span className="font-mono font-semibold text-amber-800">3min HRZ3</span>
-        <span className="font-mono font-semibold text-fuchsia-800">4min HRZ4</span>
-        <span className="font-mono font-semibold text-rose-800">30sec HRZ5</span>
-        <span className="font-mono font-semibold text-green-800">5min HRZ1</span>
+        <span className="font-mono font-semibold text-amber-800">
+          3min HRZ3
+        </span>
+        <span className="font-mono font-semibold text-fuchsia-800">
+          4min HRZ4
+        </span>
+        <span className="font-mono font-semibold text-rose-800">
+          30sec HRZ5
+        </span>
+        <span className="font-mono font-semibold text-green-800">
+          5min HRZ1
+        </span>
         <span className="font-mono font-semibold text-lime-800">2min HRZ2</span>
-        <span className="font-mono font-semibold text-amber-800">3min HRZ3</span>
-        <span className="font-mono font-semibold text-fuchsia-600">4min HRZ4</span>
-        <span className="font-mono font-semibold text-rose-800">30sec HRZ5</span>
-        <span className="font-mono font-semibold text-rose-900">30sec VO2MAX</span>
-        <span className="font-mono font-semibold text-green-800">10min HRZ1</span>
+        <span className="font-mono font-semibold text-amber-800">
+          3min HRZ3
+        </span>
+        <span className="font-mono font-semibold text-fuchsia-600">
+          4min HRZ4
+        </span>
+        <span className="font-mono font-semibold text-rose-800">
+          30sec HRZ5
+        </span>
+        <span className="font-mono font-semibold text-rose-900">
+          30sec VO2MAX
+        </span>
+        <span className="font-mono font-semibold text-green-800">
+          10min HRZ1
+        </span>
       </div>
     ),
   },
@@ -130,8 +145,18 @@ const features = [
       "Got a big event you're training for?  Use our training calendar to schedule your workouts and build up your fitness so you crush it on your big day.",
     demo: (
       <div className="flex items-center justify-center space-x-20">
-        <Image alt="Calendar icon" src="/calendar-icon2.png" width={100} height={100} />
-        <Image alt="Checklist icon" src="/checklist-icon2.png" width={100} height={100} />
+        <Image
+          alt="Calendar icon"
+          src="/calendar-icon2.png"
+          width={100}
+          height={100}
+        />
+        <Image
+          alt="Checklist icon"
+          src="/checklist-icon2.png"
+          width={100}
+          height={100}
+        />
       </div>
     ),
   },
@@ -141,13 +166,13 @@ const features = [
       "Want to share your custom workouts, provide feedback on the app, or contribute to the project? Join us on Discord.",
     demo: (
       <a href="https://discord.gg/4gkrJvny">
-          <Image
-            src="/discord-mark-blue.png"
-            alt="Discord Logo"
-            className="h-20 w-28"
-            width={200}
-            height={100}
-          />
+        <Image
+          src="/discord-mark-blue.png"
+          alt="Discord Logo"
+          className="h-20 w-28"
+          width={200}
+          height={100}
+        />
       </a>
     ),
   },

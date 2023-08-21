@@ -1,4 +1,4 @@
-import SegmentInfo from "@/components/shared/segmentinfo"
+import SegmentInfo from "@/components/shared/segmentinfo";
 import MediumTitle from "@/components/shared/mediumtitle";
 import { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
@@ -40,39 +40,41 @@ export default function UpcomingSegments({
 }) {
   return (
     <div>
-        <MediumTitle text = "Upcoming Segments" />
-        <div className={`relative col-span-1 overflow-hidden rounded-xl text-neutral-200 shadow-md`}>
-        <div className="flex flex-col text-2xl py-4">
-            <SegmentInfo  
-                num={1}
-                intensity={segwin1intensity}
-                text={segwin1txt}
-                window={segwin1window}
-            />
-            <SegmentInfo  
-                num={2}
-                intensity={segwin2intensity}
-                text={segwin2txt}
-                window={segwin2window}
-            />
-            <SegmentInfo
-                num={3}
-                intensity={segwin3intensity}
-                text={segwin3txt}
-                window={segwin3window}
-            />
-            <SegmentInfo
-                num={4}
-                intensity={segwin4intensity}
-                text={segwin4txt}
-                window={segwin4window}
-            />
-            <SegmentInfo
-                num={5}  
-                intensity={segwin5intensity}
-                text={segwin5txt}
-                window={segwin5window}
-            />
+      <MediumTitle text="Upcoming Segments" />
+      <div
+        className={`relative col-span-1 overflow-hidden rounded-xl text-neutral-200 shadow-md`}
+      >
+        <div className="flex flex-col py-4 text-2xl">
+          <SegmentInfo
+            num={1}
+            intensity={segwin1intensity}
+            text={segwin1txt}
+            window={segwin1window}
+          />
+          <SegmentInfo
+            num={2}
+            intensity={segwin2intensity}
+            text={segwin2txt}
+            window={segwin2window}
+          />
+          <SegmentInfo
+            num={3}
+            intensity={segwin3intensity}
+            text={segwin3txt}
+            window={segwin3window}
+          />
+          <SegmentInfo
+            num={4}
+            intensity={segwin4intensity}
+            text={segwin4txt}
+            window={segwin4window}
+          />
+          <SegmentInfo
+            num={5}
+            intensity={segwin5intensity}
+            text={segwin5txt}
+            window={segwin5window}
+          />
         </div>
       </div>
     </div>
