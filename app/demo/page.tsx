@@ -446,7 +446,7 @@ const calculateTotalTime = (wk: Workout) => {
    Inputs: Total time, start time of segment, duration of segment 
    Returns: An object containing the hrs, mins, and secs 
       broken up into properties for the start and end times of the
-      provided segment.
+      provided segment
 */
 const calculateNextSegmentTimes = (ttl: number, strt: number, dur: number) => {
   const strtDivs = getTimeDivisions(ttl - strt);
