@@ -5,8 +5,18 @@ import Timer from "@/components/shared/timer";
 import Tip from "@/components/shared/tip";
 import UpcomingSegments from "@/components/shared/upcomingsegments";
 import { useState, useEffect } from "react";
-
 import { Pause, Play } from "lucide-react";
+import { w1 } from "./workouts/workouts";
+import {
+  getPanelColor,
+  calculateTotalTime,
+  getTimeDivisions,
+  formatForTimer,
+  calculateSegmentWindow,
+} from "./helperfunctions";
+import React from 'react';
+import DropdownMenu from '@/components/shared/dropdown';
+import Select from '@/components/shared/select';
 
 export default function Page() {
   const [workoutTitle, setWorkoutTitle] = useState(w1.title);
@@ -23,6 +33,8 @@ export default function Page() {
   const x2 = formatForTimer(x1.hrs, x1.mins, x1.secs);
   const x3 = getTimeDivisions(w1.segments[0].duration);
   const x4 = formatForTimer(0, x3.mins, x3.secs);
+
+  const emptyoProps = {};
 
   // Main Title
   const [mainTimer, setMainTimer] = useState(x2);
@@ -285,21 +297,31 @@ export default function Page() {
 
   return (
     <div>
-      <div className="h-100vh z-10 w-full px-5 xl:px-0">
+
+
+
         <div>
+
+        <div className="h-100vh z-10 w-full px-5 xl:px-0">
+        
+
+
           <div>
             <div className="absolute">
               <MediumTitle text={segmentTitle} />
               <Timer timerTxt={segmentTimer} panelColor={panelColor} />
+
+              <Select props={emptyoProps}/>
+
             </div>
 
             <div className="absolute bottom-16">
-              <div className="inline-flex items-center flex-nowrap divide-x align-middle">
+              <div className="inline-flex flex-nowrap items-center divide-x align-middle">
                 <div className="max-w-sm">
-                    <MediumTitle text={workoutTitle} />
+                  <MediumTitle text={workoutTitle} />
                 </div>
                 <div className="inline-block align-middle">
-                    <Timer timerTxt={mainTimer} panelColor={panelColor} />
+                  <Timer timerTxt={mainTimer} panelColor={panelColor} />
                 </div>
               </div>
             </div>
@@ -343,165 +365,6 @@ export default function Page() {
   );
 }
 
-/* ============================ UTIL FUNCTIONS ============================= */
-
-/* ========================================================================= */
-
-/* =========================== HELPER FUNCTIONS ============================ */
-
-/*
-   Get Panel Color
-   Inputs: a value (1-5) indicating intensity
-   Returns: Tailwind CSS classes to use for panel style
-*/
-const getPanelColor = (intensity: number) => {
-  if (intensity < 2) {
-    return "transparent text-green-200";
-  } // 1 - dark green
-  else if (intensity < 3) {
-    return "transparent text-lime-200";
-  } // 2 - lime green
-  else if (intensity < 4) {
-    return "transparent text-orange-200";
-  } // 3 - dark orange
-  else if (intensity < 5) {
-    return "transparent text-rose-200";
-  } // 4 - salmon
-  else {
-    return "transparent text-red-400";
-  } // 5 - firebrick
-};
-
-/*
-   Get Time Divisions
-   Inputs: a value in miliseconds
-   Returns: an object with properties containing the hours, minutes,
-      and seconds divisions of the provided value.
-*/
-const getTimeDivisions = (ms: number) => {
-  return {
-    hrs: Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-    mins: Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60)),
-    secs: Math.floor((ms % (1000 * 60)) / 1000),
-  };
-};
-
-/*
-   Add Zero Padding
-   Inputs: a number between 0 and 60
-   Returns: a string with the number and a preding zero if less than 10
-*/
-const addZeroPadding = (num: number) => {
-  if (num < 10) return "0" + num;
-  return num;
-};
-
-/*
-    Format For Timer
-    Inputs: 3 numbers indicating hours, numbers, and minutes of a timer
-    Returns: a string to be displayed on the timer
-*/
-const formatForTimer = (hrs: number, mins: number, secs: number) => {
-  let timerStr = "";
-
-  // Hours
-  if (hrs > 0) {
-    timerStr += hrs;
-    timerStr += ":";
-  }
-
-  // Minutes
-  if (hrs > 0) {
-    timerStr += addZeroPadding(mins);
-  } else {
-    if (mins > 0) {
-      timerStr += mins;
-    }
-  }
-
-  // Seconds
-  timerStr += ":";
-  timerStr += addZeroPadding(secs);
-
-  return timerStr;
-};
-
-/*
-    Calculate Total Time
-    Input: a workout object
-    Returns: a number indicating total time (in ms) of workout
-*/
-const calculateTotalTime = (wk: Workout) => {
-  let ttl = 0;
-
-  for (let i = 0; i < wk.segments.length; i++) {
-    ttl += wk.segments[i].duration;
-  }
-
-  return ttl;
-};
-
-/*
-   Calculate Next Segment Times
-   Inputs: Total time, start time of segment, duration of segment 
-   Returns: An object containing the hrs, mins, and secs 
-      broken up into properties for the start and end times of the
-      provided segment.
-*/
-const calculateNextSegmentTimes = (ttl: number, strt: number, dur: number) => {
-  const strtDivs = getTimeDivisions(ttl - strt);
-  const endDivs = getTimeDivisions(ttl - (strt + dur));
-
-  return {
-    hrs1: strtDivs.hrs,
-    mins1: strtDivs.mins,
-    secs1: strtDivs.secs,
-    hrs2: endDivs.hrs,
-    mins2: endDivs.mins,
-    secs2: endDivs.secs,
-  };
-};
-
-/*
-   Calculate Next Segment Window
-   Inputs: Total time of workout, elapsedDuration, and duration of the segment 
-   Returns: A formatted string showing the timing of the segment window
-*/
-const calculateSegmentWindow = (ttl: number, strt: number, dur: number) => {
-  const win = calculateNextSegmentTimes(ttl, strt, dur);
-  let segWin = "";
-
-  // Window Start Time
-  if (win.hrs1 > 0) {
-    segWin += win.hrs1;
-    segWin += ":";
-    segWin += addZeroPadding(win.mins1);
-  } else {
-    segWin += win.mins1;
-  }
-
-  segWin += ":";
-  segWin += addZeroPadding(win.secs1);
-
-  segWin += " - ";
-
-  // Window End Time
-  if (win.hrs2 > 0) {
-    segWin += win.hrs2;
-    segWin += ":";
-    segWin += addZeroPadding(win.mins2);
-  } else {
-    segWin += win.mins2;
-  }
-
-  segWin += ":";
-  segWin += addZeroPadding(win.secs2);
-
-  return segWin;
-};
-
-/* ========================================================================= */
-
 // ============================== INTERFACES =============================== //
 
 interface Segment {
@@ -518,253 +381,3 @@ interface Workout {
 }
 
 /* ========================================================================= */
-
-// ============================= Constructors ============================== //
-
-const newSegment = (ttl: string, dur: number, int: number, tps: string) => {
-  return { title: ttl, duration: dur, intensity: int, tip: tps };
-};
-
-const newWorkout = (
-  ttl: string,
-  dsc: string,
-  tps: string,
-  segs: Segment[],
-  tml: number,
-  paus: boolean,
-) => {
-  return {
-    title: ttl,
-    description: dsc,
-    tips: tps,
-    segments: segs,
-    timeLeft: tml,
-    paused: paus,
-  };
-};
-
-// ========================================================================= //
-
-/* ============================== Static Data =============================== */
-
-// ======================== Random Tip Generation ========================== //
-
-const getRandomElement = (arr: any[]) =>
-  arr[Math.floor(Math.random() * arr.length)];
-
-const getTipByType = (typ: string) => {
-  let possibilities = [];
-
-  if (typ == "Biking") {
-    possibilities.push(
-      "Think about pedaling as if tracing a square.  Push forward along the top, down the frontside, scrape the bottom, then pull back up the backside.",
-    );
-    possibilities.push(
-      "Avoid side to side movement in the knees by keeping core tight - no Gumby riding.",
-    );
-    possibilities.push(
-      "Dont let your pelvis slouch. Rotate the hips forward and push the butt back, similar to plank.",
-    );
-    possibilities.push(
-      "Keep the grip on the bars relaxed.  No white knuckles!  Change grips often if needed.",
-    );
-    possibilities.push(
-      "Pay attention!  Are all parts of your form good?  Let go of unneeded thoughts and focus on finishing the effort.",
-    );
-    possibilities.push(
-      "Get on the pedals early - start pushing forward before 12 oclock position.  Feet flat or toes slightly pointed up.",
-    );
-    possibilities.push(
-      "Keep your head up, relax your elbows, shoulders, and hands slightly.",
-    );
-
-    return getRandomElement(possibilities);
-  } else if (typ == "Productivity") {
-    possibilities.push(
-      "Focus on one goal at a time.  You have all this time to do this one task!",
-    );
-    possibilities.push(
-      "If you get distracted by something, note down to do it later, rather than doing it now.",
-    );
-    possibilities.push(
-      "Take short breaks if needed to clear your mind and rest, but dont start something else.",
-    );
-    possibilities.push(
-      "Before starting something new, quickly think about what the most effecient way to execute it is, then go. Dont overthink it.",
-    );
-    possibilities.push(
-      "Finish your task completely.  If theres time left, take a quick break and relax before the next segment.",
-    );
-
-    return getRandomElement(possibilities);
-  } else if (typ == "FoamRoll") {
-    possibilities.push(
-      "Move up and down the roll for five to ten reps, holding at the end of each move for a few seconds, then switch sides and repeat.",
-    );
-    possibilities.push(
-      "When you hit a tight spot that is painful or uncomfortable, HOLD on that spot for 30-45 seconds. You should feel the tension release slowly",
-    );
-    possibilities.push(
-      "Make sure to keep breathing, even when its painful. Holding your breath wont allow the muscles to release and relax.",
-    );
-    possibilities.push(
-      "RELAX the muscle as best you can. If you are flexing or tensing the muscle group you are trying to roll out, you wont feel the trigger points you need to release",
-    );
-
-    return getRandomElement(possibilities);
-  }
-};
-
-// ========================== 20 min warm up =========================== //
-
-const warmUp2s2 = newSegment(
-  "90 RPM",
-  300000,
-  1,
-  "Smooth pedaling - clear your " +
-    "mind and mentally prepare for the upcoming session.",
-);
-
-const warmUp2s3 = newSegment("95 RPM", 120000, 1, getTipByType("Biking"));
-
-const warmUp2s4 = newSegment("100 RPM", 120000, 2, getTipByType("Biking"));
-
-const warmUp2s5 = newSegment("105 RPM", 120000, 2, getTipByType("Biking"));
-
-const warmUp2s6 = newSegment("110 RPM", 90000, 3, getTipByType("Biking"));
-
-const warmUp2s7 = newSegment("120-130 RPM", 30000, 4, getTipByType("Biking"));
-
-const warmUp2s8 = newSegment("90 RPM", 120000, 1, getTipByType("Biking"));
-
-const warmUp2s9 = newSegment("MAX", 6000, 5, getTipByType("Biking"));
-
-const warmUp2s10 = newSegment("90 RPM", 60000, 1, getTipByType("Biking"));
-
-const warmUp2s11 = newSegment("90 RPM", 162000, 1, getTipByType("Biking"));
-
-const warmUp2 = [
-  warmUp2s2,
-  warmUp2s3,
-  warmUp2s4,
-  warmUp2s5,
-  warmUp2s6,
-  warmUp2s7,
-  warmUp2s8,
-  warmUp2s9,
-  warmUp2s10,
-  warmUp2s9,
-  warmUp2s10,
-  warmUp2s9,
-  warmUp2s11,
-];
-
-// ===================================================================== //
-
-const PRE1101 = newSegment(
-  "Threshold",
-  1 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1101b = newSegment(
-  "Recovery",
-  1 * 60 * 1000,
-  1,
-  getTipByType("Biking"),
-);
-const PRE1102 = newSegment(
-  "Threshold",
-  2 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1102b = newSegment(
-  "Recovery",
-  2 * 60 * 1000,
-  1,
-  getTipByType("Biking"),
-);
-const PRE1103 = newSegment(
-  "Threshold",
-  3 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1103b = newSegment(
-  "Recovery",
-  3 * 60 * 1000,
-  1,
-  getTipByType("Biking"),
-);
-const PRE1104 = newSegment(
-  "Threshold",
-  4 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1104b = newSegment(
-  "Recovery",
-  4 * 60 * 1000,
-  1,
-  getTipByType("Biking"),
-);
-const PRE1105 = newSegment(
-  "Threshold",
-  5 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1106 = newSegment(
-  "Cool Down",
-  10 * 60 * 1000,
-  1,
-  getTipByType("Productivity"),
-);
-
-const w1 = newWorkout(
-  "Pyramid Intervals 1",
-  "Description",
-  "tips",
-  warmUp2.concat([
-    PRE1101,
-    PRE1101b,
-    PRE1102,
-    PRE1102b,
-    PRE1103,
-    PRE1103b,
-    PRE1104,
-    PRE1104b,
-    PRE1105,
-    PRE1104b,
-    PRE1104,
-    PRE1103b,
-    PRE1103,
-    PRE1102b,
-    PRE1102,
-    PRE1101b,
-    PRE1101,
-    PRE1106,
-  ]),
-  0,
-  true,
-);
-
-const tst1 = newSegment("Easy", 10 * 1000, 1, "testing");
-
-const tst2 = newSegment("Ramp Up", 10 * 1000, 2, getTipByType("Biking"));
-
-const tst3 = newSegment("Tempo", 10 * 1000, 3, getTipByType("Biking"));
-
-const tst4 = newSegment("Threshold", 10 * 1000, 4, getTipByType("Biking"));
-
-const tst5 = newSegment("Full Sprint", 10 * 1000, 5, getTipByType("Biking"));
-
-const tstw1 = newWorkout(
-  "testing",
-  "testing",
-  "testing",
-  [tst1, tst2, tst3, tst4, tst5, tst1, tst2, tst3, tst4, tst5, tst1],
-  0,
-  true,
-);

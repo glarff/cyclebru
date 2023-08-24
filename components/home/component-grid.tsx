@@ -11,13 +11,11 @@ export default function ComponentGrid() {
   const [openPopover, setOpenPopover] = useState(false);
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-      <DemoModal />
-      <button
-        onClick={() => setShowDemoModal(true)}
-        className="w-38 flex items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100"
-      >
-        <p className="text-gray-600">About CycleBru</p>
-      </button>
+      <Tooltip content="CycleBru is an open source web application built using Next.js, React.js, Tailwind CSS and Vercel.">
+        <div className="w-38 flex cursor-default items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100">
+          <p className="text-gray-600">About CycleBru</p>
+        </div>
+      </Tooltip>
       <Tooltip content="To use CycleBru, you need an open area, a cycling trainer or stationary machine bike, and a screen set up somewhere you can view while pedaling.">
         <div className="w-38 flex cursor-default items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100">
           <p className="text-gray-600">What do I need?</p>
