@@ -310,9 +310,6 @@ export default function Page() {
             <div className="absolute">
               <MediumTitle text={segmentTitle} />
               <Timer timerTxt={segmentTimer} panelColor={panelColor} />
-
-              <Select props={emptyoProps}/>
-
             </div>
 
             <div className="absolute bottom-16">
