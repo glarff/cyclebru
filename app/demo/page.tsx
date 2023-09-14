@@ -15,8 +15,7 @@ import {
   calculateSegmentWindow,
 } from "./helperfunctions";
 import React from 'react';
-import DropdownMenu from '@/components/shared/dropdown';
-import Select from '@/components/shared/select';
+import SelectForm from '@/components/shared/selectform';
 
 export default function Page() {
   const [workoutTitle, setWorkoutTitle] = useState(w1.title);
@@ -27,6 +26,8 @@ export default function Page() {
   );
   const [showPlayButton, setShowPlayButton] = useState("block");
   const [showPauseButton, setShowPauseButton] = useState("hidden");
+  const [showMainWorkout, setShowMainWorkout] = useState("visible");
+  const [showSelectForm, setShowSelectForm] = useState("hidden");
   const totalTime = calculateTotalTime(w1);
 
   const x1 = getTimeDivisions(totalTime);
@@ -297,15 +298,15 @@ export default function Page() {
 
   return (
     <div>
-
-
-
-        <div>
-
+      <div className={`${showSelectForm}`}>
+        <div className="h-100vh z-10 w-full px-5 xl:px-0 ">
+          <div className="absolute">
+            <SelectForm />
+          </div>
+        </div>
+      </div>
+      <div className={`${showMainWorkout}`}>
         <div className="h-100vh z-10 w-full px-5 xl:px-0">
-        
-
-
           <div>
             <div className="absolute">
               <MediumTitle text={segmentTitle} />

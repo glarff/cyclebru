@@ -15,6 +15,10 @@ module.exports = {
         display: ["var(--font-sf)", "system-ui", "sans-serif"],
         default: ["var(--font-inter)", "system-ui", "sans-serif"],
         orbitron: ["var(--font-orbitron)", "system-ui", "sans-serif"],
+        roboto: ["var(--font-roboto)", "system-ui", "sans-serif"],
+        montserrat: ["var(--font-montserrat)", "system-ui", "sans-serif"],
+        lato: ["var(--font-lato)", "system-ui", "sans-serif"],
+        lora: ["var(--font-lora)", "system-ui", "sans-serif"],
       },
       animation: {
         // Fade up and down

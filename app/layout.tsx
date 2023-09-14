@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
-import { sfPro, inter, orbitron } from "./fonts";
+import { sfPro, inter, orbitron, roboto, montserrat, lato, lora } from "./fonts";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
@@ -28,7 +28,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cx(sfPro.variable, inter.variable, orbitron.variable)}>
+      <body className={cx(sfPro.variable, inter.variable, orbitron.variable, roboto.variable, montserrat.variable, lato.variable, lora.variable)}>
         <div className="fixed h-screen w-full bg-cyclists bg-cover bg-center bg-no-repeat brightness-50" />
         <Suspense fallback="...">
           {/* @ts-expect-error Server Component */}
