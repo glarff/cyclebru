@@ -1,3 +1,5 @@
+import Balancer from "react-wrap-balancer";
+
 export default function SectionTitle({
     text,
   }: {
@@ -5,7 +7,9 @@ export default function SectionTitle({
   }) {
     return (
         <div>
-            <div className="uppercase font-lora font-bold text-xl underline">{text}</div>
+            <div className="uppercase font-lora font-bold text-xl underline">
+              <Balancer>{text}</Balancer>
+            </div>
         </div>
     );
   }

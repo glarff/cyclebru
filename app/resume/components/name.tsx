@@ -1,3 +1,5 @@
+import Balancer from "react-wrap-balancer";
+
 export default function Name({
     text,
   }: {
@@ -6,7 +8,7 @@ export default function Name({
     return (
       <div>
         <div className="font-montserrat text-4xl">
-            {text}
+            <Balancer>{text}</Balancer>
         </div>
       </div>
     );
