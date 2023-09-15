@@ -32,7 +32,7 @@ export default function WorkExperience({
                         <li>Assisted in implementation of a new "UserSummary" microservice to optimize storage and retrieval of user training data.  Used Kafka to capture events and implemented functions in the microservice to store the data in a new Cassandra database.</li>
                         <li>Assisted in implementation of mobile app cabilties, using Android Studio to extend the existing capabilities of the Talent Management mobile interface.</li>
                         <li>Worked on front end and back end implementation for new "Talent Search" feature.  Used Solr to store and retrieve user data in a Angular.js search interface with filter capabilities.</li>
-                        <li>Trusted resource by management for assisting with customer raised SEG issues, offering support with product defects, data correction scripts, on-premise installation issues, and any other problems related to the Talent Management prodcut as needed.</li>
+                        <li>Trusted resource by management for assisting with customer raised SEG issues, offering support with product defects, data correction scripts, on-premise installation issues, and any other problems related to the Talent Management product as needed.</li>
                     </ol>
                 </li>
                 <li className="my-10 ml-6">            
