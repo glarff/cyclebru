@@ -15,12 +15,12 @@ export default function Resume({
         <div>        
             <div className = "border-dashed border-2 border-sky-200 px-4 py-4 rounded-md divide-y divide-solid">
                 <div className = "flex divide-x">
-                    <div className = "mb-2 pr-56">
-                    <Name text="Michael J. Ross" />
-                    <ContactInfo 
-                        location = "Gainesville, FL" 
-                        email = "michael.ross444@gmail.com"
-                        phone = "954-465-0364"
+                    <div className = "mb-2 mr-4">
+                        <Name text="Michael J. Ross" />
+                        <ContactInfo 
+                            location = "Gainesville, FL" 
+                            email = "michael.ross444@gmail.com"
+                            phone = "954-465-0364"
                         />
                     </div>
                     <div className = "mb-2">

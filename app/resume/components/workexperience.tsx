@@ -23,8 +23,8 @@ export default function WorkExperience({
                         </span>
                     <h3 className="flex items-center text-lg font-semibold px-10">Software Engineer</h3>
                     <h3 className="flex items-center mb-1 text-sm font-normal px-10 italic">SumTotal Systems, LLC - Gainesville, FL</h3>
-                    <time className="block mb-2 text-sm font-normal leading-none text-gray-700 px-10">August 2019 - March 2023</time>
-                    <ol className="list-disc mb-4 text-gray-500 dark:text-gray-700 px-10">
+                    <time className="block mb-2 text-sm font-normal leading-none px-10">August 2019 - March 2023</time>
+                    <ol className="list-disc mb-4 px-10">
                         <li>Developed new front end features in React.js for online "Agile Goals" feature and integrated React components into old HTML/CSS based UI.</li>
                         <li>Implemented back end changes in C# and C++ to support new functions for Talent Management producet.</li>
                         <li>Led design of SQL Server schema for new Talent Management features.</li>
@@ -48,8 +48,8 @@ export default function WorkExperience({
                         </span>
                     <h3 className="flex items-center text-lg font-semibold px-10">Senior Technical Support Engineer</h3>
                     <h3 className="flex items-center mb-1 text-sm font-normal px-10 italic">SumTotal Systems, LLC - Gainesville, FL</h3>
-                    <time className="block mb-2 text-sm font-normal leading-none text-gray-700 px-10">March 2015 - August 2019</time>
-                    <ol className="list-disc mb-4 text-gray-500 dark:text-gray-700 px-10">
+                    <time className="block mb-2 text-sm font-normal leading-none px-10">March 2015 - August 2019</time>
+                    <ol className="list-disc mb-4 px-10">
                         <li>Tier 2 Resource in support for addressing all issues related to Talent Management product.</li>
                         <li>Worked directly with Engineering, Cloud Operations, and customers to address issues with implementations.</li>
                         <li>Acted as Implementation Consultant during 2-year migration effort from old versions of product to new platform, performing setup tasks, leading training with customers, and addressing issues with new features as they came up.</li>
@@ -69,8 +69,8 @@ export default function WorkExperience({
                         </span>
                     <h3 className="flex items-center text-lg font-semibold px-10">Technical Support Engineer II</h3>
                     <h3 className="flex items-center mb-1 text-sm font-normal px-10 italic">SumTotal Systems, LLC - Gainesville, FL</h3>
-                    <time className="block mb-2 text-sm font-normal leading-none text-gray-700 px-10">January 2013 - March 2015</time>
-                    <ol className="list-disc mb-4 text-gray-500 dark:text-gray-700 px-10">
+                    <time className="block mb-2 text-sm font-normal leading-none px-10">January 2013 - March 2015</time>
+                    <ol className="list-disc mb-4 px-10">
                         <li>Handled closure of customer-raised tickets for Talent Management product, focusing on the more technical tickets that came to our team.</li>
                         <li>Used SQL queries to identify issues in customer data and perform data correction scripts when applicable.</li>
                         <li>Utilized tools such as Fiddler and Wireshark to investigate network issues and handle concerns related to site performance.</li>
@@ -91,8 +91,8 @@ export default function WorkExperience({
                         </span>
                     <h3 className="flex items-center text-lg font-semibold px-10">Associate Solutions Architect</h3>
                     <h3 className="flex items-center mb-1 text-sm font-normal px-10 italic">SumTotal Systems, LLC - Gainesville, FL</h3>
-                    <time className="block mb-2 text-sm font-normal leading-none text-gray-700 px-10">May 2011 - January 2013</time>
-                    <ol className="list-disc mb-4 text-gray-500 dark:text-gray-700 px-10">
+                    <time className="block mb-2 text-sm font-normal leading-none px-10">May 2011 - January 2013</time>
+                    <ol className="list-disc mb-4 px-10">
                         <li>Performed product demonstrations to prospective customers for multiple SumTotal products, including Learning and Talent Management offerings.</li>
                         <li>Handled response to technical RFP questions and assisted Sales and Proposal teams for product and technical questions.</li>
                         <li>Attended trade shows and demonstrated new features to attending customers.</li>

@@ -10,7 +10,7 @@ export default function DemoLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="w-7/12">
+    <section className="w-6/12">
       <main className="flex min-h-screen w-full flex-col">{children}</main>
     </section>
   );

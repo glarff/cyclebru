@@ -11,11 +11,11 @@ export default function ContactInfo({
   }) {
     return (
       <div>
-        <div className="font-lato text-md flex py-2">
+        <div className="font-lato text-sm flex py-2">
             <div> 
                 {location}
             </div>
-            <div className="px-6"> 
+            <div className="px-4"> 
                 <Link href={`mailto:${email}`}>{email}</Link>
             </div>
             <div> 
