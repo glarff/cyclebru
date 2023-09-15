@@ -16,9 +16,9 @@ export default function ResumeContainer ({
 
   return (
     <div>
-        <div className = "bg-white relative z-40 h-100vh w-full text-stone-800 px-4 py-4 rounded-lg font-roboto max-w-5xl">
+        <div className = "bg-white relative z-40 h-100vh w-full text-stone-800 px-4 py-4 rounded-lg font-roboto max-w-xl md:max-w-5xl">
           <button
-                className="flex font-lato z-10 px-4 py-4 text-md text-blue-400 transition-colors hover:bg-white hover:text-black"
+                className="md:flex font-lato z-10 px-4 py-4 text-md text-blue-400 transition-colors hover:bg-white hover:text-black"
                 onClick={handlePrint}
           >
               <Printer />

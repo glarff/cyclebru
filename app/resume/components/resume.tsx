@@ -14,7 +14,7 @@ export default function Resume({
     return (
         <div>        
             <div className = "border-dashed border-2 border-sky-200 px-4 py-4 rounded-md divide-y divide-solid">
-                <div className = "flex divide-x">
+                <div className = "md:flex md:divide-x">
                     <div className = "mb-2 mr-16">
                         <Name text="Michael J. Ross" />
                         <ContactInfo 
