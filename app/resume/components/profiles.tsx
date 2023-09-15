@@ -9,7 +9,7 @@ export default function Profiles({
   }) {
     return (
       <div>
-        <div className="font-roboto text-md py-2">
+        <div className="font-montserrat text-sm py-2">
             <div className="px-6"> 
                 LinkedIn: <Link href={`https://www.${linkedinurl}`}>{linkedinurl}</Link>
             </div>

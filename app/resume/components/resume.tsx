@@ -15,7 +15,7 @@ export default function Resume({
         <div>        
             <div className = "border-dashed border-2 border-sky-200 px-4 py-4 rounded-md divide-y divide-solid">
                 <div className = "flex divide-x">
-                    <div className = "mb-2 mr-4">
+                    <div className = "mb-2 mr-16">
                         <Name text="Michael J. Ross" />
                         <ContactInfo 
                             location = "Gainesville, FL" 
@@ -24,7 +24,7 @@ export default function Resume({
                         />
                     </div>
                     <div className = "mb-2">
-                    <Profiles linkedinurl="linkedin.com/in/michaelross444/" githuburl="github.com/glarff"/>
+                    <Profiles linkedinurl="linkedin.com/in/michaelross444" githuburl="github.com/glarff"/>
                     </div>
                 </div>
                 <div className = "py-4">

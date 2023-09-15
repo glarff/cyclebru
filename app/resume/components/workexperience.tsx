@@ -25,6 +25,7 @@ export default function WorkExperience({
                     <h3 className="flex items-center mb-1 text-sm font-normal px-10 italic">SumTotal Systems, LLC - Gainesville, FL</h3>
                     <time className="block mb-2 text-sm font-normal leading-none px-10">August 2019 - March 2023</time>
                     <ol className="list-disc mb-4 px-10">
+                        <li>Hybrid resource for new product development and sustained engineering, working with team of 5 developers and 2 QA engineers following Agile metholodogy.</li>
                         <li>Developed new front end features in React.js for online "Agile Goals" feature and integrated React components into old HTML/CSS based UI.</li>
                         <li>Implemented back end changes in C# and C++ to support new functions for Talent Management producet.</li>
                         <li>Led design of SQL Server schema for new Talent Management features.</li>
@@ -51,9 +52,9 @@ export default function WorkExperience({
                     <time className="block mb-2 text-sm font-normal leading-none px-10">March 2015 - August 2019</time>
                     <ol className="list-disc mb-4 px-10">
                         <li>Tier 2 Resource in support for addressing all issues related to Talent Management product.</li>
-                        <li>Worked directly with Engineering, Cloud Operations, and customers to address issues with implementations.</li>
+                        <li>Worked directly with Engineering, Cloud Operations, and customers to address issues with cloud and on-premise implementations.</li>
                         <li>Acted as Implementation Consultant during 2-year migration effort from old versions of product to new platform, performing setup tasks, leading training with customers, and addressing issues with new features as they came up.</li>
-                        <li>Led training of new hires in customer support and professional services to introduce our product and technologies.</li>
+                        <li>Led training of new hires in Customer Support and Professional Services to introduce our product and technologies.</li>
                     </ol>
                 </li>
                 <li className="my-10 ml-6">            
@@ -74,7 +75,7 @@ export default function WorkExperience({
                         <li>Handled closure of customer-raised tickets for Talent Management product, focusing on the more technical tickets that came to our team.</li>
                         <li>Used SQL queries to identify issues in customer data and perform data correction scripts when applicable.</li>
                         <li>Utilized tools such as Fiddler and Wireshark to investigate network issues and handle concerns related to site performance.</li>
-                        <li>Worked with reports created in native JavaScript and identified fixes when possible.</li>
+                        <li>Assisted customers with issues related to native JavaScript reports and provided fixes when applicable.</li>
                         <li>Regularly maintained high closure rates of tickets and top customer satisfaction scores from post-ticket surveys.</li>
                     </ol>
                 </li>
