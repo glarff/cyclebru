@@ -10,7 +10,7 @@ import Profiles from "./profiles";
 export default function Resume({
   }: {
   }) {
-    const objective = "Highly motivated, knowledgeable, well-organized, and results-driven professional looking to secure a position with your company or organization as a Full-Stack Software Engineer, Front-End Engineer, Back-End Enginner, or other engineering position as applicable, utilizing my extensive skills, training, expertise, education, and experience."
+    const objective = "Highly motivated, knowledgeable, well-organized, and results-driven professional looking to secure a position with your company or organization as a Full-Stack Software Engineer, Front-End Engineer, Back-End Engineer, or other engineering position as applicable, utilizing my extensive skills, training, expertise, education, and experience."
     return (
         <div>        
             <div className = "border-dashed border-2 border-sky-200 px-4 py-4 rounded-md divide-y divide-solid">

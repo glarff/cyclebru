@@ -7,7 +7,7 @@ export default function WorkExperience({
   }) {
     return (
       <div>
-        <SectionTitle text="professional exprience" />
+        <SectionTitle text="professional experience" />
         <div className="px-10 font-lora text-md">
             <ol className="relative border-l border-gray-200">                  
                 <li className="mb-10 mt-4 ml-6">            
@@ -25,13 +25,13 @@ export default function WorkExperience({
                     <h3 className="flex items-center mb-1 text-sm font-normal px-10 italic">SumTotal Systems, LLC - Gainesville, FL</h3>
                     <time className="block mb-2 text-sm font-normal leading-none px-10">August 2019 - March 2023</time>
                     <ol className="list-disc mb-4 px-10">
-                        <li>Hybrid resource for new product development and sustained engineering, working with team of 5 developers and 2 QA engineers following Agile metholodogy.</li>
+                        <li>Hybrid resource for new product development and sustained engineering, working with team of 5 developers and 2 QA engineers following Agile methodology.</li>
                         <li>Developed new front end features in React.js for online "Agile Goals" feature and integrated React components into old HTML/CSS based UI.</li>
-                        <li>Implemented back end changes in C# and C++ to support new functions for Talent Management producet.</li>
+                        <li>Implemented back end changes in C# and C++ to support new functions for Talent Management product.</li>
                         <li>Led design of SQL Server schema for new Talent Management features.</li>
-                        <li>Led design and implementation of reporting capabilities for new "Agile Goals" feature, including defining schemas, setting up replication, bulding ETL packages in Vistual Studio Data Tools, and implementing needed schema files for JasperSoft reporting system.</li>
+                        <li>Led design and implementation of reporting capabilities for new "Agile Goals" feature, including defining schemas, setting up replication, building ETL packages in Visual Studio Data Tools, and implementing needed schema files for JasperSoft reporting system.</li>
                         <li>Assisted in implementation of a new "UserSummary" microservice to optimize storage and retrieval of user training data.  Used Kafka to capture events and implemented functions in the microservice to store the data in a new Cassandra database.</li>
-                        <li>Assisted in implementation of mobile app cabilties, using Android Studio to extend the existing capabilities of the Talent Management mobile interface.</li>
+                        <li>Assisted in implementation of mobile app capabilities, using Android Studio to extend the existing capabilities of the Talent Management mobile interface.</li>
                         <li>Worked on front end and back end implementation for new "Talent Search" feature.  Used Solr to store and retrieve user data in a Angular.js search interface with filter capabilities.</li>
                         <li>Trusted resource by management for assisting with customer raised SEG issues, offering support with product defects, data correction scripts, on-premise installation issues, and any other problems related to the Talent Management product as needed.</li>
                     </ol>
@@ -97,7 +97,7 @@ export default function WorkExperience({
                         <li>Performed product demonstrations to prospective customers for multiple SumTotal products, including Learning and Talent Management offerings.</li>
                         <li>Handled response to technical RFP questions and assisted Sales and Proposal teams for product and technical questions.</li>
                         <li>Attended trade shows and demonstrated new features to attending customers.</li>
-                        <li>Technical resource invloved in many winning opporunities that saw company bring in over 10 new logos over 2 year period.</li>
+                        <li>Technical resource involved in many winning opportunities that saw company bring in over 10 new logos over 2 year period.</li>
                     </ol>
                 </li>
             </ol>
