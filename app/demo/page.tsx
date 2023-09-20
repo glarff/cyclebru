@@ -297,24 +297,25 @@ export default function Page() {
   };
 
   return (
-    <div>
+    <div className ="content-center justify-center align-middle items-center">
       <div className={`${showSelectForm}`}>
-        <div className="h-100vh z-10 w-full px-5 xl:px-0 ">
+        <div className="z-10 w-full px-5 xl:px-0 ">
           <div className="absolute">
             <SelectForm />
           </div>
         </div>
       </div>
-      <div className={`${showMainWorkout}`}>
-        <div className="h-100vh z-10 w-full px-5 xl:px-0">
+      <div className={`${showMainWorkout} relative max-w-7xl`}>
+        
+        <div className="md:flex">
           <div>
-            <div className="absolute">
+            <div className="md:h-96">
               <MediumTitle text={segmentTitle} />
               <Timer timerTxt={segmentTimer} panelColor={panelColor} />
             </div>
 
-            <div className="absolute bottom-16">
-              <div className="inline-flex flex-nowrap items-center divide-x align-middle">
+            <div className="relative mt-24">
+              <div className="md:inline-flex md:flex-nowrap items-center divide-x align-middle">
                 <div className="max-w-sm">
                   <MediumTitle text={workoutTitle} />
                 </div>
@@ -325,39 +326,42 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="flex h-screen items-center justify-center align-middle">
+          <div>
+            <div className="relative opacity-80">
+              <UpcomingSegments
+                segwin1txt={segWin1Txt}
+                segwin2txt={segWin2Txt}
+                segwin3txt={segWin3Txt}
+                segwin4txt={segWin4Txt}
+                segwin5txt={segWin5Txt}
+                segwin1intensity={segWin1Intensity}
+                segwin2intensity={segWin2Intensity}
+                segwin3intensity={segWin3Intensity}
+                segwin4intensity={segWin4Intensity}
+                segwin5intensity={segWin5Intensity}
+                segwin1window={segWin1Window}
+                segwin2window={segWin2Window}
+                segwin3window={segWin3Window}
+                segwin4window={segWin4Window}
+                segwin5window={segWin5Window}
+              />
+            </div>
+            <div className="relative opacity-80">
+              <Tip text={segmentTip} panelColor={panelColor} />
+            </div>
+          </div>
+
+        </div>
+
+        <div className="absolute w-full text-center top-20 md:top-1/3">
             <button
-              className="z-10 mb-52 px-4 py-4 text-4xl text-stone-200 transition-colors hover:bg-white hover:text-black"
+              className="z-10 md:mb-52 px-4 py-4 text-4xl text-stone-200 transition-colors hover:bg-white hover:text-black relative"
               onClick={() => buttonClickAction()}
             >
               <Play className={`${showPlayButton}`} size={96} />
               <Pause className={`${showPauseButton}`} size={96} />
             </button>
           </div>
-
-          <div className="absolute right-16 top-32 opacity-80">
-            <UpcomingSegments
-              segwin1txt={segWin1Txt}
-              segwin2txt={segWin2Txt}
-              segwin3txt={segWin3Txt}
-              segwin4txt={segWin4Txt}
-              segwin5txt={segWin5Txt}
-              segwin1intensity={segWin1Intensity}
-              segwin2intensity={segWin2Intensity}
-              segwin3intensity={segWin3Intensity}
-              segwin4intensity={segWin4Intensity}
-              segwin5intensity={segWin5Intensity}
-              segwin1window={segWin1Window}
-              segwin2window={segWin2Window}
-              segwin3window={segWin3Window}
-              segwin4window={segWin4Window}
-              segwin5window={segWin5Window}
-            />
-          </div>
-          <div className="w-42 absolute bottom-16 right-16 opacity-80">
-            <Tip text={segmentTip} panelColor={panelColor} />
-          </div>
-        </div>
       </div>
     </div>
   );

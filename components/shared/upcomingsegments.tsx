@@ -42,7 +42,7 @@ export default function UpcomingSegments({
     <div>
       <MediumTitle text="Upcoming Segments" />
       <div
-        className={`relative col-span-1 overflow-hidden rounded-xl text-neutral-200 shadow-md`}
+        className={`relative col-span-1 rounded-xl text-neutral-200 shadow-md ml-12`}
       >
         <div className="flex flex-col py-4 text-2xl">
           <SegmentInfo

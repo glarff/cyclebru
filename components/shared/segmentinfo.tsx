@@ -1,8 +1,3 @@
-import { ReactNode } from "react";
-import ReactMarkdown from "react-markdown";
-import Balancer from "react-wrap-balancer";
-import { NumberLiteralType } from "typescript";
-
 export default function SegmentInfo({
   num,
   intensity,
@@ -29,7 +24,7 @@ export default function SegmentInfo({
       </div>
       <div
         id={`upcomingSegment{num}window`}
-        className={`flex-auto border px-3 text-center`}
+        className={`w-56 border px-1 text-center`}
       >
         {window}
       </div>
