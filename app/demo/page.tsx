@@ -297,7 +297,7 @@ export default function Page() {
   };
 
   return (
-    <div className ="content-center justify-center align-middle items-center">
+    <div className ="md:content-center md:justify-center md:align-middle md:items-center">
       <div className={`${showSelectForm}`}>
         <div className="z-10 w-full px-5 xl:px-0 ">
           <div className="absolute">
@@ -327,7 +327,7 @@ export default function Page() {
           </div>
 
           <div>
-            <div className="relative opacity-80">
+            <div className="relative opacity-80 hidden md:block">
               <UpcomingSegments
                 segwin1txt={segWin1Txt}
                 segwin2txt={segWin2Txt}
@@ -353,15 +353,15 @@ export default function Page() {
 
         </div>
 
-        <div className="absolute w-full text-center top-20 md:top-1/3">
-            <button
-              className="z-10 md:mb-52 px-4 py-4 text-4xl text-stone-200 transition-colors hover:bg-white hover:text-black relative"
-              onClick={() => buttonClickAction()}
-            >
-              <Play className={`${showPlayButton}`} size={96} />
-              <Pause className={`${showPauseButton}`} size={96} />
-            </button>
-          </div>
+        <div className="absolute w-full text-center top-16 md:top-1/3">
+          <button
+            className="z-10 md:mb-52 px-4 py-4 text-xl md:text-4xl text-stone-200 transition-colors hover:bg-white hover:text-black relative scale-50 md:scale-100"
+            onClick={() => buttonClickAction()}
+          >
+            <Play className={`${showPlayButton}`} size={96} />
+            <Pause className={`${showPauseButton}`} size={96} />
+          </button>
+        </div>
       </div>
     </div>
   );
