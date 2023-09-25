@@ -308,18 +308,18 @@ export default function Page() {
       <div className={`${showMainWorkout} relative max-w-7xl`}>
         
         <div className="md:flex">
-          <div>
-            <div className="md:h-96">
+          <div> 
+            <div className="md:h-96 md:text-left text-center">
               <MediumTitle text={segmentTitle} />
               <Timer timerTxt={segmentTimer} panelColor={panelColor} />
             </div>
 
-            <div className="relative mt-24">
-              <div className="md:inline-flex md:flex-nowrap items-center divide-x align-middle">
-                <div className="max-w-sm">
+            <div className="md:mt-24 mt-16 mb-20 md:mb-2">
+              <div className="md:inline-flex md:flex-nowrap md:items-center md:divide-x md:align-middle">
+                <div className="md:w-96 md:text-left text-center">
                   <MediumTitle text={workoutTitle} />
                 </div>
-                <div className="inline-block align-middle">
+                <div className="md:inline-block align-middle md:w-96 md:text-left text-center">
                   <Timer timerTxt={mainTimer} panelColor={panelColor} />
                 </div>
               </div>

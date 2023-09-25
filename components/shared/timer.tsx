@@ -8,9 +8,9 @@ export default function Timer({
   return (
     <div>
       <div
-        className={`relative col-span-1 mx-12 overflow-hidden  ${panelColor}`}
+        className={`relative mx-12 ${panelColor}`}
       >
-        <div className="flex font-orbitron text-7xl shadow-md">
+        <div className="font-orbitron text-7xl shadow-md">
           {timerTxt}
         </div>
       </div>
