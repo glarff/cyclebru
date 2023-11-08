@@ -335,3 +335,29 @@ export const w1 = newWorkout(
 );
 
 // ===================================================================== //
+
+    // ========================== 3 x 10 minutes =========================== //
+
+    // Segments 
+    const w4s1 = newSegment("HRZ/PZ 3/4", 600000, 4, "Maintain a smooth pedal " +
+        "stroke. Don't stromp on the pedals when you get tired. Pace your " +
+        "effort evenly and avoid major fluctuations in heart rate.");
+
+    const w4s2 = newSegment("Recovery", 600000, 1, "Maintain a smooth pedal " +
+        "stroke. Reduce resistance and keep your legs turning over.");
+
+    const w4s3 = newSegment("Cool Down", 600000, 1, "Maintain a smooth pedal " +
+        "stroke. Reduce resistance and keep your legs turning over.");
+
+    // Workout
+    export const w4 = newWorkout("3 x 10 minutes", "Cadence 90 rpm+ during the " +
+        "efforts. Sweet-Spot is HRZ/PZ high 3 - low 4. Allow both to drop " +
+        "to easy spinning during recovery.", "Pace the efforts as evenly as " +
+        "possible, don’t go off too hard and maintain a consistent cadence. " +
+        "Try to hold a stable racing position without excessive movement of " +
+        "the upper body. Make sure you have a bottle of water to hand as " +
+        "these are fairly long efforts. As you get stronger and more " +
+        "confident with the session, try to ride predominately in HRZ/PZ 4.",
+        warmUp2.concat([w4s1, w4s2, w4s1, w4s2, w4s1, w4s3]), 0, true);
+
+    // ===================================================================== //

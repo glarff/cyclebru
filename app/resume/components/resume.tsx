@@ -6,14 +6,17 @@ import Education from "./eductation";
 import WorkExperience from "./workexperience";
 import Certifications from "./certifications";
 import Profiles from "./profiles";
+import Background from "./background";
 
 export default function Resume({
   }: {
   }) {
-    const objective = "Highly motivated, knowledgeable, well-organized, and results-driven professional looking to secure a position with your company or organization as a Full-Stack Software Engineer, Front-End Engineer, Back-End Engineer, or other engineering position as applicable, utilizing my extensive skills, training, expertise, education, and experience."
+    const objective = "Highly motivated, knowledgeable, and results-driven professional looking to leverage my 4 years in software engineering and 10+ years cumulatively in the tech industry to find a new role at a company with a strong engineering culture to continue to grow my career.";
+/*     secure a position with your organization as a Data Analyst, Software Engineer, SQL Engineer, or other position in Engineering or IT as applicable, 
+    utilizing my extensive skills, training, expertise, education, and experience." */
     return (
         <div>        
-            <div className = "border-dashed border-2 border-sky-200 px-4 py-4 rounded-md divide-y divide-solid">
+            <div className = "px-4 py-4 rounded-md divide-y divide-solid">
                 <div className = "md:flex md:divide-x">
                     <div className = "mb-2 mr-16">
                         <Name text="Michael J. Ross" />
@@ -27,12 +30,15 @@ export default function Resume({
                     <Profiles linkedinurl="linkedin.com/in/michaelross444" githuburl="github.com/glarff"/>
                     </div>
                 </div>
-                <div className = "py-4">
+                {/* <div className = "py-4">
                     <Objective text={objective} />
-                </div>
-                <div className = "py-4">
+                </div> */}
+                {/* <div className = "py-4">
                     <Summary />
-                </div>
+                </div> */}
+{/*                 <div className = "py-4">
+                    <Background />
+                </div> */}
                 <div className = "py-4">
                     <WorkExperience />
                 </div>

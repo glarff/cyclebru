@@ -6,7 +6,7 @@ import Tip from "@/components/shared/tip";
 import UpcomingSegments from "@/components/shared/upcomingsegments";
 import { useState, useEffect } from "react";
 import { Pause, Play } from "lucide-react";
-import { w1 } from "./workouts/workouts";
+import { w1, w4 } from "./workouts/workouts";
 import {
   getPanelColor,
   calculateTotalTime,
@@ -26,7 +26,7 @@ export default function Page() {
   );
   const [showPlayButton, setShowPlayButton] = useState("block");
   const [showPauseButton, setShowPauseButton] = useState("hidden");
-  const [showMainWorkout, setShowMainWorkout] = useState("visible");
+  const [showMainWorkout, setShowMainWorkout] = useState("block");
   const [showSelectForm, setShowSelectForm] = useState("hidden");
   const totalTime = calculateTotalTime(w1);
 
