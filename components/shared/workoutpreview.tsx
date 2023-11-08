@@ -5,14 +5,16 @@ export type WorkoutPreviewProps = {
   name: string;
   overview: string;
   objective: string;
-  phase: string;
+  training_phase: string;
 };
 
 const WorkoutPreview: React.FC<{ wkp: WorkoutPreviewProps }> = ({ wkp }) => {
   return (
-    <div>
-      <h2>{wkp.name}</h2>
-      <small>{wkp.overview}</small>
+    <div className = "border px-4 py-4">
+      <div className = "text-4xl mb-10">{wkp.name}</div>
+      <div className = "text-lg max-w-md mb-4">{wkp.overview}</div>
+      <div className = "text-lg max-w-md mb-4 flex">Objective: <div className="ml-2"></div>{wkp.objective}</div>
+      <div className = "text-lg max-w-md mb-4 flex">Training Phase: <div className="ml-2"></div>{wkp.training_phase}</div>
     </div>
   );
 };
