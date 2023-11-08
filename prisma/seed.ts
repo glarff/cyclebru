@@ -18,6 +18,12 @@ async function main() {
     await prisma.workout.createMany({
       data: stockWorkouts,
     })
+    await prisma.user.createMany({
+      data: {
+        id: "1",
+        name: "Glarffo"
+      }
+    })
   }
   
   main()

@@ -11,6 +11,11 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+model User {
+  id String @default(cuid()) @id
+  name String
+}
+
 model Workout {
   id String @default(cuid()) @id
   name String
