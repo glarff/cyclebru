@@ -15,7 +15,6 @@ import {
   calculateSegmentWindow,
 } from "./helperfunctions";
 import React from 'react';
-import SelectForm from '@/components/shared/selectform';
 
 export default function Page() {
   const [workoutTitle, setWorkoutTitle] = useState(w1.title);
@@ -298,15 +297,7 @@ export default function Page() {
 
   return (
     <div className ="md:content-center md:justify-center md:align-middle md:items-center">
-      <div className={`${showSelectForm}`}>
-        <div className="z-10 w-full px-5 xl:px-0 ">
-          <div className="absolute">
-            <SelectForm />
-          </div>
-        </div>
-      </div>
       <div className={`${showMainWorkout} relative max-w-7xl`}>
-        
         <div className="md:flex">
           <div> 
             <div className="md:h-96 md:text-left text-center">

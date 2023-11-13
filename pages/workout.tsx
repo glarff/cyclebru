@@ -17,7 +17,7 @@ import type { InferGetStaticPropsType, GetStaticProps } from "next";
 import WorkoutPreview, {
   WorkoutPreviewProps,
 } from "@/components/shared/workoutpreview";
-import MediumTitle from "@/components/shared/mediumtitle";
+import BigTitle from "@/components/shared/bigtitle";
 import WorkoutPreviewCard from "@/components/shared/workoutpreviewcard";
 import { useState, useEffect } from "react";
 
@@ -53,7 +53,7 @@ const Workout: React.FC<Props> = (props) => {
         <main className="flex min-h-screen w-full flex-col content-center items-center">
           <div className="mt-20 rounded bg-white px-10 py-10">
             <div className="w-full text-center text-black">
-              <MediumTitle text="Choose your Workout" />
+              <BigTitle text="Choose your Workout" />
             </div>
             <div className="flex">
               <div className="flex-none">
