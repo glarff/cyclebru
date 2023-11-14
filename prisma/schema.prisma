@@ -17,14 +17,29 @@ model User {
 }
 
 model Workout {
-  id String @default(cuid()) @id
-  name String
-  overview String
-  objective String
-  training_phase String
+  id              Int    @id @default(autoincrement())
+  workout_key     String @unique
+  name            String
+  overview        String
+  objective       String
+  training_phase  String
+  focus           WorkoutFocus[]
+  segments        WorkoutSegment[]
 }
 
 model WorkoutFocus {
-  id String @default(cuid()) @id
-  focus String
+  id          Int     @id @default(autoincrement())
+  workout     Workout @relation(fields: [workoutId], references: [id])
+  workoutId   Int
+  focus_text  String
+}
+
+model WorkoutSegment {
+  id          Int     @id @default(autoincrement())
+  workout     Workout @relation(fields: [workoutId], references: [id])
+  workoutId   Int
+  name        String
+  duration    Int
+  intensity   Int
+  tip         String
 }
