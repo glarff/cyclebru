@@ -17,6 +17,21 @@ import {
 import React from 'react';
 
 export default function Page() {
+
+  // start with empty workout object
+
+  useEffect(() => {
+    const storedWorkout = localStorage.getItem('selectedWorkout');
+    console.log('++++storedWorkout is ' + storedWorkout);
+
+    if(storedWorkout) {
+      let sw1: WorkoutProperties = JSON.parse(storedWorkout);
+
+
+    }
+  }, [])
+  
+  
   const [workoutTitle, setWorkoutTitle] = useState(w1.title);
   const [segmentTitle, setSegmentTitle] = useState(w1.segments[0].title);
   const [segmentTip, setSegmentTip] = useState(w1.segments[0].tip);
@@ -372,5 +387,32 @@ interface Workout {
   timeLeft: number;
   paused: boolean;
 }
+
+interface WorkoutSegment {
+  id: Number;
+  workoutId: Number;
+  name: String;
+  duration: Number;
+  intensity: Number;
+  tip: String;
+}
+
+interface WorkoutFocus {
+  id: Number;
+  workoutId: Number;
+  focus_text: String;
+}
+
+interface WorkoutProperties {
+  id: Number;
+  workout_key: String;
+  name: String;
+  overview: String;
+  objective: String;
+  training_phase: String;
+  focus: WorkoutFocus[];
+  segments: WorkoutSegment[];
+}
+
 
 /* ========================================================================= */

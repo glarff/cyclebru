@@ -1,21 +1,93 @@
 import React from "react";
 import Button from "./button";
 
+import {
+  getTimeDivisions,
+  formatForTimer
+} from "@/app/demo/helperfunctions";
+
+import Router from "next/router";
+
+export type WorkoutFocus = {
+  id: number
+  focus_text: String
+}
+
+export type WorkoutSegment = {
+  id: number
+  name: String
+  duration: number
+  intensity: number
+  tip: String
+}
+
 export type WorkoutPreviewProps = {
-  id: string;
-  name: string;
-  overview: string;
-  objective: string;
-  training_phase: string;
+  id: number
+  name: string
+  overview: string
+  objective: string
+  training_phase: string
+  segments: WorkoutSegment[]
+  focus: WorkoutFocus[]
 };
+
+const formatTimeForDisplay = (ms: number) => {
+  const x1 = getTimeDivisions(ms);
+  return (formatForTimer(x1.hrs, x1.mins, x1.secs));
+}
+
+const calculateTotalTime = (wk: WorkoutSegment[]) => {
+  let ttl = 0;
+  if (wk) {
+    for (let i = 0; i < wk.length; i++) {
+      ttl += wk[i].duration;
+    }
+  }
+  return ttl;
+};
+
+const calculateAverageIntensity = (wk: WorkoutSegment[]) => {
+  let totalTime = 0;
+  let totalWeightedTime = 0;
+  if (wk) {
+    for (let i = 0; i < wk.length; i++) {
+      totalTime += wk[i].duration;
+      totalWeightedTime += wk[i].duration * wk[i].intensity;
+    }
+  }
+  return (totalWeightedTime / totalTime).toPrecision(3);
+};
+
+//const [selectedWorkout, setSelectedWorkout] = (useLocalStorage('selectedWorkout', 'test'));
+//useLocalStorage('darkTheme', true)
+
+const startWorkout = (wkp: WorkoutPreviewProps) => {
+  
+  // Save workout to local cache
+  //setSelectedWorkout(JSON.stringify(wkp));
+  localStorage.setItem('selectedWorkout', JSON.stringify(wkp));
+
+  Router.push('/demo');
+
+  // Navigate to demo
+  //const navigate = useNavigate();
+  //navigate("/demo");
+}
+ 
 
 const WorkoutPreview: React.FC<{ wkp: WorkoutPreviewProps }> = ({ wkp }) => {
   return (
-    <div className="border px-4 py-4">
+    <div className="border px-4 py-4 mb-10">
       <div className="mb-4 font-roboto text-4xl">{wkp.name}</div>
-      <div className="font-lato text-sm italic">Workout Time: 1:02:00</div>
+      <div className="font-lato text-sm italic">
+        Workout Time: {
+          formatTimeForDisplay(calculateTotalTime(wkp.segments)) 
+        }
+      </div>
       <div className="mb-6 font-lato text-sm italic">
-        Average Intensity: 4.2/10
+        Average Intensity: {
+          calculateAverageIntensity(wkp.segments)
+        }
       </div>
       <div className="font-roboto text-sm font-bold uppercase text-red-500">
         overview
@@ -33,7 +105,12 @@ const WorkoutPreview: React.FC<{ wkp: WorkoutPreviewProps }> = ({ wkp }) => {
       </div>
       <div className="relative mb-16 mt-8 max-w-full">
         <div className="absolute right-0">
-          <Button>Start</Button>
+         <button
+          className="relative scale-50 transition-colors hover:bg-white hover:text-black md:scale-100"
+          onClick={() => startWorkout(wkp) }
+         >
+            Start
+         </button>
         </div>
       </div>
     </div>

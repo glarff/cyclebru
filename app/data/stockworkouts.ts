@@ -95,37 +95,41 @@ var warmUp1 = [warmUp1s1, warmUp1s2, warmUp1s3, warmUp1s4];
 
 // ========================== 20 min warm up =========================== //
 
-const warmUp2s1 = newSegment("90 RPM", 300000, 2, "Smooth pedaling - clear your " +
+const warmUp2s1 = newSegment("90 RPM", 5 * 60 * 1000, 2, "Smooth pedaling - clear your " +
     "mind and mentally prepare for the upcoming session.",);
 
-const warmUp2s2 = newSegment("Easy Spin", 300000, 1, getTipByType("Biking"));
+const warmUp2s2 = newSegment("95 RPM", 2 * 60 * 1000, 2, getTipByType("Biking"));
 
-const warmUp2s3 = newSegment("95 RPM", 120000, 2, getTipByType("Biking"));
+const warmUp2s3 = newSegment("100 RPM", 2 * 60 * 1000, 3, getTipByType("Biking"));
 
-const warmUp2s4 = newSegment("100 RPM", 120000, 3, getTipByType("Biking"));
+const warmUp2s4 = newSegment("105 RPM", 2 * 60 * 1000, 3, getTipByType("Biking"));
 
-const warmUp2s5 = newSegment("105 RPM", 120000, 3, getTipByType("Biking"));
+const warmUp2s5 = newSegment("110 RPM", 1.5 * 60 * 1000, 4, getTipByType("Biking"));
 
-const warmUp2s6 = newSegment("110 RPM", 90000, 4, getTipByType("Biking"));
+const warmUp2s6 = newSegment("120-130 RPM", 30 * 1000, 4, getTipByType("Biking"));
 
-const warmUp2s7 = newSegment("120-130 RPM", 30000, 4, getTipByType("Biking"));
+const warmUp2s7 = newSegment("90 RPM", 2 * 60 * 1000, 2, getTipByType("Biking"));
 
-const warmUp2s9 = newSegment("Max Spin!", 6000, 5, getTipByType("Biking"));
+const warmUp2s8 = newSegment("Max Spin!", 6 * 1000, 5, getTipByType("Biking"));
+
+const warmUp2s9 = newSegment("Easy Spin", 60 * 1000, 1, getTipByType("Biking"));
+
+const warmUp2s10 = newSegment("90 RPM", 162 * 1000, 2, getTipByType("Biking"));
 
 const warmUp2 = [
   warmUp2s1,
+  warmUp2s2,
   warmUp2s3,
   warmUp2s4,
   warmUp2s5,
   warmUp2s6,
   warmUp2s7,
-  warmUp2s1,
+  warmUp2s8,
   warmUp2s9,
-  warmUp2s2,
+  warmUp2s8,
   warmUp2s9,
-  warmUp2s2,
-  warmUp2s9,
-  warmUp2s2,
+  warmUp2s8,
+  warmUp2s10,
 ];
 
 // ====================== Tempo Intervals Workout ====================== //
