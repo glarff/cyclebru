@@ -6,7 +6,10 @@ import Tip from "@/components/shared/tip";
 import UpcomingSegments from "@/components/shared/upcomingsegments";
 import { useState, useEffect } from "react";
 import { Pause, Play } from "lucide-react";
-import { w2 } from "./workouts/workouts";
+import { w2 } from "@/app/demo/workouts/workouts"
+
+//./workouts/workouts";
+//import { w2 } from "./workouts/workouts";
 import {
   getPanelColor,
   calculateTotalTime,
