@@ -194,7 +194,7 @@ const w3s4 = newSegment(
 );
 
 // Workout
-export const w1 = newWorkout(
+export const w2 = newWorkout(
   "Sweet-Spot Intervals",
   warmUp2.concat([
     w3s1,
