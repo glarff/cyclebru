@@ -8,7 +8,7 @@ export default function Timer({
   return (
     <div>
       <div
-        className={`relative mx-12 text-${panelColor}`}
+        className={`relative mx-12 ${panelColor}`}
       >
         <div className="font-orbitron text-4xl md:text-7xl shadow-md">
           {timerTxt}

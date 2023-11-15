@@ -7,31 +7,31 @@
 */
 export function getPanelColor(intensity: number) {
   if (intensity < 2) {
-    return "[#c2ffb0]";
+    return "text-[#c2ffb0]";
   } 
   else if (intensity < 3) {
-    return "[#d6ffad]";
+    return "text-[#d6ffad]";
   } 
   else if (intensity < 4) {
-    return "[#f3ffab]";
+    return "text-[#f3ffab]";
   } 
   else if (intensity < 5) {
-    return "[#ffebad]";
+    return "text-[#ffebad]";
   } 
   else if (intensity < 6) {
-    return "[#ffd9b3]";
+    return "text-[#ffd9b3]";
   } 
   else if (intensity < 7) {
-    return "[#ffcfb8]";
+    return "text-[#ffcfb8]";
   } 
   else if (intensity < 8) {
-    return "[#ffcbbd]";
+    return "text-[#ffcbbd]";
   } 
   else if (intensity < 9) {
-    return "[#ffcac2]";
+    return "text-[#ffcac2]";
   } 
   else {
-    return "[#ffcac7]";
+    return "text-[#ffcac7]";
   } 
 }
 

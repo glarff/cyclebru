@@ -14,7 +14,7 @@ export default function SegmentInfo({
   const bgc = getPanelColor(intensity);
 
   return (
-    <div className={`mx-2 my-2 flex bg-black border text-${bgc}`}>
+    <div className={`mx-2 my-2 flex bg-black border ${bgc}`}>
       <div id={`upcomingSegment{num}intensity`} className={`w-10 border px-3`}>
         {intensity}
       </div>
