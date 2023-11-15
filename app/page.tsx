@@ -50,7 +50,7 @@ export default async function Home() {
         >
           <Link
             className="group flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors hover:bg-white hover:text-black"
-            href="/demo"
+            href="/workout"
             target="_blank"
             rel="noopener noreferrer"
           >

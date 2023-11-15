@@ -1,36 +1,35 @@
 // ============================== INTERFACES =============================== //
 
-interface Segment {
+interface WorkoutSegment {
+  id: number;
+  workoutId: number;
+  name: string;
   duration: number;
   intensity: number;
   tip: string;
-  title: string;
 }
 
 interface Workout {
-  segments: Segment[];
+  name: string;
+  segments: WorkoutSegment[];
   timeLeft: number;
   paused: boolean;
 }
 
 /* ========================================================================= */
 
-const newSegment = (ttl: string, dur: number, int: number, tps: string) => {
-  return { title: ttl, duration: dur, intensity: int, tip: tps };
+const newSegment = (id: number, wkid: number, ttl: string, dur: number, int: number, tps: string) => {
+  return { id:id, workoutId: wkid, name: ttl, duration: dur, intensity: int, tip: tps };
 };
 
 const newWorkout = (
   ttl: string,
-  dsc: string,
-  tps: string,
-  segs: Segment[],
+  segs: WorkoutSegment[],
   tml: number,
   paus: boolean,
 ) => {
   return {
-    title: ttl,
-    description: dsc,
-    tips: tps,
+    name: ttl,
     segments: segs,
     timeLeft: tml,
     paused: paus,
@@ -112,6 +111,8 @@ const getTipByType = (typ: string) => {
 // ========================== 20 min warm up =========================== //
 
 const warmUp2s2 = newSegment(
+  9999,
+  999,
   "90 RPM",
   300000,
   1,
@@ -119,23 +120,15 @@ const warmUp2s2 = newSegment(
     "mind and mentally prepare for the upcoming session.",
 );
 
-const warmUp2s3 = newSegment("95 RPM", 120000, 1, getTipByType("Biking"));
-
-const warmUp2s4 = newSegment("100 RPM", 120000, 2, getTipByType("Biking"));
-
-const warmUp2s5 = newSegment("105 RPM", 120000, 2, getTipByType("Biking"));
-
-const warmUp2s6 = newSegment("110 RPM", 90000, 3, getTipByType("Biking"));
-
-const warmUp2s7 = newSegment("120-130 RPM", 30000, 4, getTipByType("Biking"));
-
-const warmUp2s8 = newSegment("90 RPM", 120000, 1, getTipByType("Biking"));
-
-const warmUp2s9 = newSegment("MAX", 6000, 5, getTipByType("Biking"));
-
-const warmUp2s10 = newSegment("90 RPM", 60000, 1, getTipByType("Biking"));
-
-const warmUp2s11 = newSegment("90 RPM", 162000, 1, getTipByType("Biking"));
+const warmUp2s3 = newSegment(9998, 999, "95 RPM", 120000, 1, getTipByType("Biking"));
+const warmUp2s4 = newSegment(9997, 999, "100 RPM", 120000, 2, getTipByType("Biking"));
+const warmUp2s5 = newSegment(9996, 999, "105 RPM", 120000, 2, getTipByType("Biking"));
+const warmUp2s6 = newSegment(9995, 999, "110 RPM", 90000, 3, getTipByType("Biking"));
+const warmUp2s7 = newSegment(9994, 999, "120-130 RPM", 30000, 4, getTipByType("Biking"));
+const warmUp2s8 = newSegment(9993, 999, "90 RPM", 120000, 1, getTipByType("Biking"));
+const warmUp2s9 = newSegment(9992, 999, "MAX", 6000, 5, getTipByType("Biking"));
+const warmUp2s10 = newSegment(9991, 999, "90 RPM", 60000, 1, getTipByType("Biking"));
+const warmUp2s11 = newSegment(9990, 999, "90 RPM", 162000, 1, getTipByType("Biking"));
 
 const warmUp2 = [
   warmUp2s2,
@@ -155,118 +148,12 @@ const warmUp2 = [
 
 // ===================================================================== //
 
-const PRE1101 = newSegment(
-  "Threshold",
-  1 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1101b = newSegment(
-  "Recovery",
-  1 * 60 * 1000,
-  1,
-  getTipByType("Biking"),
-);
-const PRE1102 = newSegment(
-  "Threshold",
-  2 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1102b = newSegment(
-  "Recovery",
-  2 * 60 * 1000,
-  1,
-  getTipByType("Biking"),
-);
-const PRE1103 = newSegment(
-  "Threshold",
-  3 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1103b = newSegment(
-  "Recovery",
-  3 * 60 * 1000,
-  1,
-  getTipByType("Biking"),
-);
-const PRE1104 = newSegment(
-  "Threshold",
-  4 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1104b = newSegment(
-  "Recovery",
-  4 * 60 * 1000,
-  1,
-  getTipByType("Biking"),
-);
-const PRE1105 = newSegment(
-  "Threshold",
-  5 * 60 * 1000,
-  4,
-  getTipByType("Biking"),
-);
-const PRE1106 = newSegment(
-  "Cool Down",
-  10 * 60 * 1000,
-  1,
-  getTipByType("Productivity"),
-);
-
-const xw1 = newWorkout(
-  "Pyramid Intervals 1",
-  "Description",
-  "tips",
-  warmUp2.concat([
-    PRE1101,
-    PRE1101b,
-    PRE1102,
-    PRE1102b,
-    PRE1103,
-    PRE1103b,
-    PRE1104,
-    PRE1104b,
-    PRE1105,
-    PRE1104b,
-    PRE1104,
-    PRE1103b,
-    PRE1103,
-    PRE1102b,
-    PRE1102,
-    PRE1101b,
-    PRE1101,
-    PRE1106,
-  ]),
-  0,
-  true,
-);
-
-const tst1 = newSegment("Easy", 10 * 1000, 1, "testing");
-
-const tst2 = newSegment("Ramp Up", 10 * 1000, 2, getTipByType("Biking"));
-
-const tst3 = newSegment("Tempo", 10 * 1000, 3, getTipByType("Biking"));
-
-const tst4 = newSegment("Threshold", 10 * 1000, 4, getTipByType("Biking"));
-
-const tst5 = newSegment("Full Sprint", 10 * 1000, 5, getTipByType("Biking"));
-
-const tstw1 = newWorkout(
-  "testing",
-  "testing",
-  "testing",
-  [tst1, tst2, tst3, tst4, tst5, tst1, tst2, tst3, tst4, tst5, tst1],
-  0,
-  true,
-);
-
 // ======================= Sweet-Spot Intervals ======================== //
 
 // Segments
 const w3s1 = newSegment(
+  9989, 
+  999, 
   "Sweet-Spot",
   300000,
   4,
@@ -276,6 +163,8 @@ const w3s1 = newSegment(
 );
 
 const w3s2 = newSegment(
+  9988, 
+  999, 
   "Recovery",
   60000,
   1,
@@ -284,6 +173,8 @@ const w3s2 = newSegment(
 );
 
 const w3s3 = newSegment(
+  9987, 
+  999, 
   "Sweet-Spot",
   180000,
   4,
@@ -293,6 +184,8 @@ const w3s3 = newSegment(
 );
 
 const w3s4 = newSegment(
+  9986, 
+  999, 
   "Cool Down",
   600000,
   1,
@@ -303,16 +196,6 @@ const w3s4 = newSegment(
 // Workout
 export const w1 = newWorkout(
   "Sweet-Spot Intervals",
-  "Use a medium " +
-    "resistance/gear that allows you to maintain 90+ rpm during the " +
-    "efforts. Efforts should be in Sweet-Spot HRZ high 3 - low 4 / PZ " +
-    "88-93% FTP. Just spin easy against minimal resistance for the " +
-    "recoveries.",
-  "Pace the efforts evenly aiming to finish each " +
-    "strongly. Start at the lower end of the zone and build through. " +
-    "Maintain an even pedal stroke, don’t stamp on the pedals. " +
-    "Hold your upper body still, don’t rock and keep your grip on your " +
-    "bars relaxed.",
   warmUp2.concat([
     w3s1,
     w3s2,
@@ -335,29 +218,3 @@ export const w1 = newWorkout(
 );
 
 // ===================================================================== //
-
-    // ========================== 3 x 10 minutes =========================== //
-
-    // Segments 
-    const w4s1 = newSegment("HRZ/PZ 3/4", 600000, 4, "Maintain a smooth pedal " +
-        "stroke. Don't stromp on the pedals when you get tired. Pace your " +
-        "effort evenly and avoid major fluctuations in heart rate.");
-
-    const w4s2 = newSegment("Recovery", 600000, 1, "Maintain a smooth pedal " +
-        "stroke. Reduce resistance and keep your legs turning over.");
-
-    const w4s3 = newSegment("Cool Down", 600000, 1, "Maintain a smooth pedal " +
-        "stroke. Reduce resistance and keep your legs turning over.");
-
-    // Workout
-    export const w4 = newWorkout("3 x 10 minutes", "Cadence 90 rpm+ during the " +
-        "efforts. Sweet-Spot is HRZ/PZ high 3 - low 4. Allow both to drop " +
-        "to easy spinning during recovery.", "Pace the efforts as evenly as " +
-        "possible, don’t go off too hard and maintain a consistent cadence. " +
-        "Try to hold a stable racing position without excessive movement of " +
-        "the upper body. Make sure you have a bottle of water to hand as " +
-        "these are fairly long efforts. As you get stronger and more " +
-        "confident with the session, try to ride predominately in HRZ/PZ 4.",
-        warmUp2.concat([w4s1, w4s2, w4s1, w4s2, w4s1, w4s3]), 0, true);
-
-    // ===================================================================== //

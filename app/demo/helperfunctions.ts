@@ -2,25 +2,37 @@
 
 /*
    Get Panel Color
-   Inputs: a value (1-5) indicating intensity
+   Inputs: a value (1-9) indicating intensity
    Returns: Tailwind CSS classes to use for panel style
 */
 export function getPanelColor(intensity: number) {
   if (intensity < 2) {
-    return "transparent text-green-200";
-  } // 1 - dark green
+    return "[#c2ffb0]";
+  } 
   else if (intensity < 3) {
-    return "transparent text-lime-200";
-  } // 2 - lime green
+    return "[#d6ffad]";
+  } 
   else if (intensity < 4) {
-    return "transparent text-orange-200";
-  } // 3 - dark orange
+    return "[#f3ffab]";
+  } 
   else if (intensity < 5) {
-    return "transparent text-rose-200";
-  } // 4 - salmon
+    return "[#ffebad]";
+  } 
+  else if (intensity < 6) {
+    return "[#ffd9b3]";
+  } 
+  else if (intensity < 7) {
+    return "[#ffcfb8]";
+  } 
+  else if (intensity < 8) {
+    return "[#ffcbbd]";
+  } 
+  else if (intensity < 9) {
+    return "[#ffcac2]";
+  } 
   else {
-    return "transparent text-red-400";
-  } // 5 - firebrick
+    return "[#ffcac7]";
+  } 
 }
 
 /*
@@ -159,15 +171,18 @@ export const calculateSegmentWindow = (
 
 // ============================== INTERFACES =============================== //
 
-interface Segment {
+interface WorkoutSegment {
+  id: number;
+  workoutId: number;
+  name: string;
   duration: number;
   intensity: number;
   tip: string;
-  title: string;
 }
 
 interface Workout {
-  segments: Segment[];
+  name: string;
+  segments: WorkoutSegment[];
   timeLeft: number;
   paused: boolean;
 }

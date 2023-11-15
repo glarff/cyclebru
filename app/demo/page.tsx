@@ -6,7 +6,7 @@ import Tip from "@/components/shared/tip";
 import UpcomingSegments from "@/components/shared/upcomingsegments";
 import { useState, useEffect } from "react";
 import { Pause, Play } from "lucide-react";
-import { w1, w4 } from "./workouts/workouts";
+import { w2 } from "./workouts/workouts";
 import {
   getPanelColor,
   calculateTotalTime,
@@ -14,136 +14,158 @@ import {
   formatForTimer,
   calculateSegmentWindow,
 } from "./helperfunctions";
-import React from 'react';
+import React from "react";
+
+let w1: Workout = {
+  name: "",
+  segments: [],
+  timeLeft: 0,
+  paused: true,
+};
+
+let currentSegment = 0;
+let timeRemainingAfterCurrentSegment = 0;
+let totalTime = 0;
 
 export default function Page() {
 
-  // start with empty workout object
-
-  useEffect(() => {
-    const storedWorkout = localStorage.getItem('selectedWorkout');
-    console.log('++++storedWorkout is ' + storedWorkout);
-
-    if(storedWorkout) {
-      let sw1: WorkoutProperties = JSON.parse(storedWorkout);
-
-
-    }
-  }, [])
-  
-  
-  const [workoutTitle, setWorkoutTitle] = useState(w1.title);
-  const [segmentTitle, setSegmentTitle] = useState(w1.segments[0].title);
-  const [segmentTip, setSegmentTip] = useState(w1.segments[0].tip);
-  const [panelColor, setPanelColor] = useState(
-    getPanelColor(w1.segments[0].intensity),
-  );
+  // useState initialization
+  const [workoutTitle, setWorkoutTitle] = useState("");
+  const [segmentTitle, setSegmentTitle] = useState("");
+  const [segmentTip, setSegmentTip] = useState("");
+  const [panelColor, setPanelColor] = useState("");
   const [showPlayButton, setShowPlayButton] = useState("block");
   const [showPauseButton, setShowPauseButton] = useState("hidden");
-  const [showMainWorkout, setShowMainWorkout] = useState("block");
-  const [showSelectForm, setShowSelectForm] = useState("hidden");
-  const totalTime = calculateTotalTime(w1);
+  const [mainTimer, setMainTimer] = useState("");
+  const [segmentTimer, setSegmentTimer] = useState("");
 
-  const x1 = getTimeDivisions(totalTime);
-  const x2 = formatForTimer(x1.hrs, x1.mins, x1.secs);
-  const x3 = getTimeDivisions(w1.segments[0].duration);
-  const x4 = formatForTimer(0, x3.mins, x3.secs);
+  let [segWin1Txt, setWin1Txt] = useState("");
+  let [segWin2Txt, setWin2Txt] = useState("");
+  let [segWin3Txt, setWin3Txt] = useState("");
+  let [segWin4Txt, setWin4Txt] = useState("");
+  let [segWin5Txt, setWin5Txt] = useState("");
+  let [segWin1Intensity, setWin1Intensity] = useState(0);
+  let [segWin2Intensity, setWin2Intensity] = useState(0);
+  let [segWin3Intensity, setWin3Intensity] = useState(0);
+  let [segWin4Intensity, setWin4Intensity] = useState(0);
+  let [segWin5Intensity, setWin5Intensity] = useState(0);
+  let [segWin1Window, setWin1Window] = useState("");
+  let [segWin2Window, setWin2Window] = useState("");
+  let [segWin3Window, setWin3Window] = useState("");
+  let [segWin4Window, setWin4Window] = useState("");
+  let [segWin5Window, setWin5Window] = useState("");
 
-  const emptyoProps = {};
+  // Page onLoad initialization logic
+  useEffect(() => {
+    
+    // Use localStorage to retrieve the cached JSON string
+    const storedWorkout = localStorage.getItem("selectedWorkout");
 
-  // Main Title
-  const [mainTimer, setMainTimer] = useState(x2);
-  const [segmentTimer, setSegmentTimer] = useState(x4);
+    // If cached string was found, initialize segments using the parsed JSON object
+    // If no cached string was found, initialize using the stock demo workout
+    if (storedWorkout) {
+      let sw1: WorkoutProperties = JSON.parse(storedWorkout);
+      w1.name = sw1.name;
+      w1.segments = sw1.segments;
+    } else {
+      w1.name = w2.name;
+      w1.segments = w2.segments;
+    }
 
-  w1.timeLeft = totalTime;
-  let currentSegment = 0;
-  let timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
+    // Call initialization function
+    initializeWorkoutStates();
+  }, []);
 
-  // Segment Window population
-  let [segWin1Txt, setWin1Txt] = useState(w1.segments[1].title);
-  let [segWin2Txt, setWin2Txt] = useState(
-    w1.segments.length > 1 ? w1.segments[2].title : "",
-  );
-  let [segWin3Txt, setWin3Txt] = useState(
-    w1.segments.length > 2 ? w1.segments[3].title : "",
-  );
-  let [segWin4Txt, setWin4Txt] = useState(
-    w1.segments.length > 3 ? w1.segments[4].title : "",
-  );
-  let [segWin5Txt, setWin5Txt] = useState(
-    w1.segments.length > 4 ? w1.segments[5].title : "",
-  );
+  // Handles the initial page state initializtion
+  const initializeWorkoutStates = () => {
+    setWorkoutTitle(w1.name);
+    setSegmentTitle(w1.segments[0].name);
+    setSegmentTip(w1.segments[0].tip);
+    setPanelColor(getPanelColor(w1.segments[0].intensity));
 
-  let [segWin1Intensity, setWin1Intensity] = useState(w1.segments[1].intensity);
-  let [segWin2Intensity, setWin2Intensity] = useState(
-    w1.segments.length > 1 ? w1.segments[2].intensity : 1,
-  );
-  let [segWin3Intensity, setWin3Intensity] = useState(
-    w1.segments.length > 2 ? w1.segments[3].intensity : 1,
-  );
-  let [segWin4Intensity, setWin4Intensity] = useState(
-    w1.segments.length > 3 ? w1.segments[4].intensity : 1,
-  );
-  let [segWin5Intensity, setWin5Intensity] = useState(
-    w1.segments.length > 4 ? w1.segments[5].intensity : 1,
-  );
+    totalTime = calculateTotalTime(w1);
+    w1.timeLeft = totalTime;
 
-  // Initial population of next segments list
-  let elapsedDuration = 0;
+    const x1 = getTimeDivisions(totalTime);
+    const x2 = formatForTimer(x1.hrs, x1.mins, x1.secs);
+    const x3 = getTimeDivisions(w1.segments[0].duration);
+    const x4 = formatForTimer(0, x3.mins, x3.secs);
 
-  // Use 5 if there are more than 5 segments, otherwise use the length
-  let [segWin1Window, setWin1Window] = useState(
-    calculateSegmentWindow(
-      totalTime,
-      w1.segments[0].duration,
-      w1.segments[1].duration,
-    ),
-  );
-  let [segWin2Window, setWin2Window] = useState(
-    w1.segments.length > 1
-      ? calculateSegmentWindow(
-          totalTime,
-          w1.segments[0].duration + w1.segments[1].duration,
-          w1.segments[2].duration,
-        )
-      : "",
-  );
-  let [segWin3Window, setWin3Window] = useState(
-    w1.segments.length > 2
-      ? calculateSegmentWindow(
-          totalTime,
-          w1.segments[0].duration +
-            w1.segments[1].duration +
+    setMainTimer(x2);
+    setSegmentTimer(x4);
+
+    timeRemainingAfterCurrentSegment = totalTime - w1.segments[0].duration;
+
+    // Segment Window population
+    setWin1Txt(w1.segments[1].name);
+    setWin2Txt(w1.segments.length > 1 ? w1.segments[2].name : "");
+    setWin3Txt(w1.segments.length > 2 ? w1.segments[3].name : "");
+    setWin4Txt(w1.segments.length > 3 ? w1.segments[4].name : "");
+    setWin5Txt(w1.segments.length > 4 ? w1.segments[5].name : "");
+
+    setWin1Intensity(w1.segments[1].intensity);
+    setWin2Intensity(w1.segments.length > 1 ? w1.segments[2].intensity : 1);
+    setWin3Intensity(w1.segments.length > 2 ? w1.segments[3].intensity : 1);
+    setWin4Intensity(w1.segments.length > 3 ? w1.segments[4].intensity : 1);
+    setWin5Intensity(w1.segments.length > 4 ? w1.segments[5].intensity : 1);
+
+    setWin1Window(
+      calculateSegmentWindow(
+        totalTime,
+        w1.segments[0].duration,
+        w1.segments[1].duration,
+      ),
+    );
+
+    setWin2Window(
+      w1.segments.length > 1
+        ? calculateSegmentWindow(
+            totalTime,
+            w1.segments[0].duration + w1.segments[1].duration,
             w1.segments[2].duration,
-          w1.segments[3].duration,
-        )
-      : "",
-  );
-  let [segWin4Window, setWin4Window] = useState(
-    w1.segments.length > 3
-      ? calculateSegmentWindow(
-          totalTime,
-          w1.segments[0].duration +
-            w1.segments[1].duration +
-            w1.segments[2].duration +
+          )
+        : "",
+    );
+
+    setWin3Window(
+      w1.segments.length > 2
+        ? calculateSegmentWindow(
+            totalTime,
+            w1.segments[0].duration +
+              w1.segments[1].duration +
+              w1.segments[2].duration,
             w1.segments[3].duration,
-          w1.segments[4].duration,
-        )
-      : "",
-  );
-  let [segWin5Window, setWin5Window] = useState(
-    w1.segments.length > 4
-      ? calculateSegmentWindow(
-          totalTime,
-          w1.segments[0].duration +
-            w1.segments[1].duration +
-            w1.segments[2].duration +
-            w1.segments[3].duration +
+          )
+        : "",
+    );
+
+    setWin4Window(
+      w1.segments.length > 3
+        ? calculateSegmentWindow(
+            totalTime,
+            w1.segments[0].duration +
+              w1.segments[1].duration +
+              w1.segments[2].duration +
+              w1.segments[3].duration,
             w1.segments[4].duration,
-          w1.segments[5].duration,
-        )
-      : "",
-  );
+          )
+        : "",
+    );
+
+    setWin5Window(
+      w1.segments.length > 4
+        ? calculateSegmentWindow(
+            totalTime,
+            w1.segments[0].duration +
+              w1.segments[1].duration +
+              w1.segments[2].duration +
+              w1.segments[3].duration +
+              w1.segments[4].duration,
+            w1.segments[5].duration,
+          )
+        : "",
+    );
+  }
 
   // Click handling for start/pause/resume button
   const buttonClickAction = () => {
@@ -159,6 +181,7 @@ export default function Page() {
     }
   };
 
+  // Handles shifting segments in upcoming segments window
   const shiftUpcomingSegments = () => {
     segWin1Txt = segWin2Txt;
     segWin2Txt = segWin3Txt;
@@ -191,18 +214,14 @@ export default function Page() {
     setWin4Window(segWin4Window);
   };
 
-  /*
-        Update Upcoming Segments
-        Inputs: workout object, current segment
-        Action: updates the upcoming segments graphic
-    */
+  // Handles state updates upon reaching end of segment
   const updateUpcomingSegments = (wk: Workout, ttl: number, seg: number) => {
     // If there's more than 4 segments remaining, shift the elements 2-5 up
     if (wk.segments.length - seg >= 6) {
       shiftUpcomingSegments();
 
       // Calculate 5th segment
-      elapsedDuration = 0;
+      let elapsedDuration = 0;
       for (let i = 0; i < seg + 5; i++) {
         elapsedDuration += wk.segments[i].duration;
       }
@@ -216,7 +235,7 @@ export default function Page() {
 
       segWin5Window = nextSegmentWindow;
       setWin5Window(segWin5Window);
-      segWin5Txt = wk.segments[seg + 5].title;
+      segWin5Txt = wk.segments[seg + 5].name;
       setWin5Txt(segWin5Txt);
       segWin5Intensity = wk.segments[seg + 5].intensity;
       setWin5Intensity(segWin5Intensity);
@@ -234,6 +253,7 @@ export default function Page() {
     }
   };
 
+  // Handles starting the timer
   const startTimer = () => {
     // Calculate total time and time left after semgment 1
     const currentTimeAsMs = Date.now();
@@ -300,7 +320,7 @@ export default function Page() {
         }
 
         // Update the labels on the screen
-        setSegmentTitle(w1.segments[currentSegment].title);
+        setSegmentTitle(w1.segments[currentSegment].name);
         setSegmentTip(w1.segments[currentSegment].tip);
         setPanelColor(getPanelColor(w1.segments[currentSegment].intensity));
 
@@ -311,21 +331,21 @@ export default function Page() {
   };
 
   return (
-    <div className ="md:content-center md:justify-center md:align-middle md:items-center">
-      <div className={`${showMainWorkout} relative max-w-7xl`}>
+    <div className="md:content-center md:items-center md:justify-center md:align-middle">
+      <div className={`relative max-w-7xl`}>
         <div className="md:flex">
-          <div> 
-            <div className="md:h-96 md:text-left text-center">
+          <div>
+            <div className="text-center md:h-96 md:text-left">
               <MediumTitle text={segmentTitle} />
               <Timer timerTxt={segmentTimer} panelColor={panelColor} />
             </div>
 
-            <div className="md:mt-24 mt-16 mb-20 md:mb-2">
+            <div className="mb-20 mt-16 md:mb-2 md:mt-24">
               <div className="md:inline-flex md:flex-nowrap md:items-center md:divide-x md:align-middle">
-                <div className="md:w-96 md:text-left text-center">
+                <div className="text-center md:w-96 md:text-left">
                   <MediumTitle text={workoutTitle} />
                 </div>
-                <div className="md:inline-block align-middle md:w-96 md:text-left text-center">
+                <div className="text-center align-middle md:inline-block md:w-96 md:text-left">
                   <Timer timerTxt={mainTimer} panelColor={panelColor} />
                 </div>
               </div>
@@ -333,7 +353,7 @@ export default function Page() {
           </div>
 
           <div>
-            <div className="relative opacity-80 hidden md:block">
+            <div className="relative hidden opacity-80 md:block">
               <UpcomingSegments
                 segwin1txt={segWin1Txt}
                 segwin2txt={segWin2Txt}
@@ -356,12 +376,11 @@ export default function Page() {
               <Tip text={segmentTip} panelColor={panelColor} />
             </div>
           </div>
-
         </div>
 
-        <div className="absolute w-full text-center top-16 md:top-1/3">
+        <div className="absolute top-16 w-full text-center md:top-1/3">
           <button
-            className="z-10 md:mb-52 px-4 py-4 text-xl md:text-4xl text-stone-200 transition-colors hover:bg-white hover:text-black relative scale-50 md:scale-100"
+            className="relative z-10 scale-50 px-4 py-4 text-xl text-stone-200 transition-colors hover:bg-white hover:text-black md:mb-52 md:scale-100 md:text-4xl"
             onClick={() => buttonClickAction()}
           >
             <Play className={`${showPlayButton}`} size={96} />
@@ -374,45 +393,36 @@ export default function Page() {
 }
 
 // ============================== INTERFACES =============================== //
-
-interface Segment {
-  duration: number;
-  intensity: number;
-  tip: string;
-  title: string;
-}
-
 interface Workout {
-  segments: Segment[];
+  name: string;
+  segments: WorkoutSegment[];
   timeLeft: number;
   paused: boolean;
 }
 
 interface WorkoutSegment {
-  id: Number;
-  workoutId: Number;
-  name: String;
-  duration: Number;
-  intensity: Number;
-  tip: String;
+  id: number;
+  workoutId: number;
+  name: string;
+  duration: number;
+  intensity: number;
+  tip: string;
 }
 
 interface WorkoutFocus {
-  id: Number;
-  workoutId: Number;
-  focus_text: String;
+  id: number;
+  workoutId: number;
+  focus_text: string;
 }
 
 interface WorkoutProperties {
-  id: Number;
-  workout_key: String;
-  name: String;
-  overview: String;
-  objective: String;
-  training_phase: String;
+  id: number;
+  workout_key: string;
+  name: string;
+  overview: string;
+  objective: string;
+  training_phase: string;
   focus: WorkoutFocus[];
   segments: WorkoutSegment[];
 }
-
-
 /* ========================================================================= */
