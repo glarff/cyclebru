@@ -58,20 +58,9 @@ const calculateAverageIntensity = (wk: WorkoutSegment[]) => {
   return (totalWeightedTime / totalTime).toPrecision(3);
 };
 
-//const [selectedWorkout, setSelectedWorkout] = (useLocalStorage('selectedWorkout', 'test'));
-//useLocalStorage('darkTheme', true)
-
 const startWorkout = (wkp: WorkoutPreviewProps) => {
-  
-  // Save workout to local cache
-  //setSelectedWorkout(JSON.stringify(wkp));
   localStorage.setItem('selectedWorkout', JSON.stringify(wkp));
-
   Router.push('/demo');
-
-  // Navigate to demo
-  //const navigate = useNavigate();
-  //navigate("/demo");
 }
  
 

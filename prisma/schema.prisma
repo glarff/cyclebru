@@ -25,6 +25,7 @@ model Workout {
   training_phase  String
   focus           WorkoutFocus[]
   segments        WorkoutSegment[]
+  difficulty      Int
 }
 
 model WorkoutFocus {

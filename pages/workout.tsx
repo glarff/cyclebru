@@ -49,8 +49,6 @@ const getWorkoutById = (wk: WorkoutPreviewProps[], searchId: number) => {
   return 0;
 };
 
-
-
 const Workout: React.FC<Props> = (props) => {
   // Default Workout to Id 1
   const [selectedWorkout, setSelectedWorkout] = useState(0);
@@ -70,12 +68,13 @@ const Workout: React.FC<Props> = (props) => {
       >
         <main className="flex min-h-screen w-full flex-col content-center items-center">
           <div className="mt-20 rounded bg-white px-10">
-            <div className="w-full text-center text-black">
+            <div className="w-full text-center">
               <BigTitle text="Choose your Workout" />
             </div>
             <div className="flex">
-              <div className="flex-none">
-                {props.workouts.map((wkp) => (
+              <div className="mb-10">
+                <div className="font-roboto text-sm font-bold uppercase text-purple-600">Classic Workouts</div>
+                {props.workouts.filter((wkp) => wkp.difficulty === 1).map((wkp) => (
                   <div key={wkp.id} className="post">
                     <button
                       className="relative scale-50 transition-colors hover:bg-white hover:text-black md:scale-100"
@@ -88,8 +87,51 @@ const Workout: React.FC<Props> = (props) => {
                     </button>
                   </div>
                 ))}
+                <div className="font-roboto text-sm font-bold uppercase text-purple-600">Need for Speed</div>
+                {props.workouts.filter((wkp) => wkp.difficulty === 2).map((wkp) => (
+                  <div key={wkp.id} className="post">
+                    <button
+                      className="relative scale-50 transition-colors hover:bg-white hover:text-black md:scale-100"
+                      onClick={() => setSelectedWorkout(getWorkoutById(props.workouts, wkp.id))}
+                    >
+                      <WorkoutPreviewCard
+                        wkp={wkp}
+                        selected={props.workouts[selectedWorkout].id === wkp.id ? true : false}
+                      />
+                    </button>
+                  </div>
+                ))}
+                <div className="font-roboto text-sm font-bold uppercase text-purple-600">Strength and Punch</div>
+                {props.workouts.filter((wkp) => wkp.difficulty === 3).map((wkp) => (
+                  <div key={wkp.id} className="post">
+                    <button
+                      className="relative scale-50 transition-colors hover:bg-white hover:text-black md:scale-100"
+                      onClick={() => setSelectedWorkout(getWorkoutById(props.workouts, wkp.id))}
+                    >
+                      <WorkoutPreviewCard
+                        wkp={wkp}
+                        selected={props.workouts[selectedWorkout].id === wkp.id ? true : false}
+                      />
+                    </button>
+                  </div>
+                ))}
+                <div className="font-roboto text-sm font-bold uppercase text-purple-600">Rest and Recovery</div>
+                {props.workouts.filter((wkp) => wkp.difficulty === 4).map((wkp) => (
+                  <div key={wkp.id} className="post">
+                    <button
+                      className="relative scale-50 transition-colors hover:bg-white hover:text-black md:scale-100"
+                      onClick={() => setSelectedWorkout(getWorkoutById(props.workouts, wkp.id))}
+                    >
+                      <WorkoutPreviewCard
+                        wkp={wkp}
+                        selected={props.workouts[selectedWorkout].id === wkp.id ? true : false}
+                      />
+                    </button>
+                  </div>
+                ))}
+                
               </div>
-              <div className="ml-12 flex-auto">
+              <div className="ml-12">
                 <WorkoutPreview
                   wkp={props.workouts[selectedWorkout]}
                 />

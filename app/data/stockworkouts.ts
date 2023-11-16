@@ -210,6 +210,215 @@ export const w5segs = warmUp2.concat([w6s1, w5s2, w6s1, w5s3]);
 
 // ====================================================================== //
 
+// ============================== 20/40s ================================ //
+
+// Segments
+const w7s1 = newSegment("Sprint 95 RPM+", 20 * 1000, 8, getTipByType("Biking"));
+const w7s2 = newSegment("Recovery", 40 * 1000, 1, getTipByType("Biking"));
+const w7s3 = newSegment("Recovery", 340 * 1000, 1, getTipByType("Biking"));
+const w7s4 = newSegment("Cool Down", 640 * 1000, 1, getTipByType("Productivity"));
+
+// Workout
+let w6x = []; 
+let lastSet = false;
+
+// 5 sets of 20/40s
+for (let i = 0; i < 5; i++) {
+  if (i === 4) {
+    lastSet = true;
+  }
+
+  for (let j = 0; j < 4; j++) {
+    w6x.push(w7s1);
+    w6x.push(w7s2);
+  }
+  
+  w6x.push(w7s1);
+
+  if(!lastSet) {
+    w6x.push(w7s3);
+  }
+}
+
+w6x.push(w7s4);
+
+export const w6segs = warmUp2.concat(w6x);
+
+
+// ====================================================================== //
+
+// ======================= Ramped VO2 intervals ========================= //
+
+// Segments
+const w8s1 = newSegment("VO2 MAX", 5* 60 * 1000, 9, getTipByType("Biking"));
+const w8s2 = newSegment("Recovery", 5 * 60 * 1000, 1, getTipByType("Biking"));
+const w8s3 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+
+// Workout
+let w8x = []; 
+
+// 4 sets of VO2 max / recovery
+for (let i = 0; i < 4; i++) {
+  w8x.push(w8s1);
+  w8x.push(w8s2);
+}
+
+// One last VO2 max then cooldown
+w8x.push(w8s1);
+w8x.push(w8s3);
+
+export const w8segs = warmUp2.concat(w8x);
+
+// ====================================================================== //
+
+// ====================== Under/Over with surges ======================== //
+
+// Segments
+const w9s1 = newSegment("HRZ/PZ3.5", 90 * 1000, 5, getTipByType("Biking"));
+const w9s2 = newSegment("HRZ/PZ5", 20 * 1000, 8, getTipByType("Biking"));
+const w9s3 = newSegment("MAX", 10 * 1000, 9, getTipByType("Biking"));
+const w9s4 = newSegment("Recovery", 5 * 60 * 1000, 1, getTipByType("Biking"));
+const w9s5 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+
+// Workout
+let w9x = []; 
+let w9lastSet = false;
+
+// 3 sets of VO2 max / recovery
+for (let i = 0; i < 3; i++) {
+  w9x.push(w9s1);
+  w9x.push(w9s2);
+  w9x.push(w9s3);
+
+  if (i === 2) {
+    w9lastSet = true;
+  }
+
+  if (!w9lastSet) {
+    w9x.push(w9s4);
+  }
+}
+
+w9x.push(w9s5);
+
+export const w9segs = warmUp2.concat(w9x);
+
+// ====================================================================== //
+
+// ======================= Big gear/low cadence ========================= //
+
+// Segments
+const w10s1 = newSegment("50-60 RPM", 5 * 60 * 1000, 7, getTipByType("Biking"));
+const w10s2 = newSegment("Recovery", 3 * 60 * 1000, 1, getTipByType("Biking"));
+const w10s3 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+
+// Workout
+let w10x = []; 
+let w10lastSet = false;
+
+// 6 sets of Big Gear / Recovery
+// Skip recovery on last set and go to cooldown
+for (let i = 0; i < 6; i++) {
+  w10x.push(w10s1);
+
+  if (i===5) {
+    w10lastSet = true;
+  }
+
+  if (!w10lastSet) {
+    w10x.push(w10s2);
+  }
+}
+
+w10x.push(w10s3);
+
+export const w10segs = warmUp2.concat(w10x);
+
+// ====================================================================== //
+
+// ============================= Leg speed ============================== //
+
+// Segments
+const w11s1 = newSegment("90 RPM", 3 * 60 * 1000, 2, getTipByType("Biking"));
+const w11s2 = newSegment("100 RPM", 2 * 60 * 1000, 3, getTipByType("Biking"));
+const w11s3 = newSegment("110 RPM", 1 * 60 * 1000, 4, getTipByType("Biking"));
+const w11s4 = newSegment("115 RPM", 30 * 1000, 5, getTipByType("Biking"));
+const w11s5 = newSegment("120 RPM", 15 * 1000, 6, getTipByType("Biking"));
+const w11s6 = newSegment("MAX", 15 * 1000, 7, getTipByType("Biking"));
+const w11s7 = newSegment("Recovery", 2 * 60 * 1000, 1, getTipByType("Biking"));
+const w11s8 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+
+// Workout
+let w11x = []; 
+let w11lastSet = false;
+
+//Run through this twice and after the final effort 
+//miss the recovery and go straight into cool-down
+for (let i = 0; i < 2; i++) {
+  w11x.push(w11s1);
+  w11x.push(w11s2);
+  w11x.push(w11s3);
+  w11x.push(w11s4);
+  w11x.push(w11s5);
+  w11x.push(w11s6);
+  w11x.push(w11s7);
+  w11x.push(w11s6);
+  w11x.push(w11s5);
+  w11x.push(w11s4);
+  w11x.push(w11s3);
+  w11x.push(w11s2);
+
+  if (i===1) {
+    w11lastSet = true;
+  }
+
+  if (!w11lastSet) {
+    w11x.push(w11s7);
+  }
+}
+
+w11x.push(w11s8);
+
+export const w11segs = warmUp2.concat(w11x);
+
+// ====================================================================== //
+
+// ============================= Spin out =============================== //
+
+// Segments
+const w12s1 = newSegment("INCREASE TO NEAR MAX", 30 * 1000, 4, getTipByType("Biking"));
+const w12s2 = newSegment("130 RPM+ HOLD AT MAX", 60 * 1000, 6, getTipByType("Biking"));
+const w12s3 = newSegment("Recovery", 2 * 60 * 1000, 1, getTipByType("Biking"));
+const w12s4 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+
+// Workout
+let w12x = []; 
+let w12lastSet = false;
+
+//Repeat set four times. After fourth spin out, don’t 
+//  do the active recovery, go straight into your cool-down.
+for (let i = 0; i < 4; i++) {
+  w12x.push(w12s1);
+  w12x.push(w12s2);
+
+  if (i===1) {
+    w12lastSet = true;
+  }
+
+  if (!w12lastSet) {
+    w12x.push(w12s3);
+  }
+}
+
+w12x.push(w12s4);
+
+export const w12segs = warmUp2.concat(w12x);
+
+// ====================================================================== //
+
+
+
+
 // =========================== Test Workout ============================= //
 
 // Segments
