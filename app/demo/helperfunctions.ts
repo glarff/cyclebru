@@ -5,42 +5,64 @@
    Inputs: a value (1-9) indicating intensity
    Returns: Tailwind CSS classes to use for panel style
 */
-const getThemeColor = (intensity: number) => {
+export const getTextColor = (intensity: number) => {
   if (intensity < 2) {
-    return "emerald-300";
+    return "text-emerald-300";
   } 
   else if (intensity < 3) {
-    return "green-300";
+    return "text-green-300";
   } 
   else if (intensity < 4) {
-    return "lime-200";
+    return "text-lime-200";
   } 
   else if (intensity < 5) {
-    return "yellow-200";
+    return "text-yellow-200";
   } 
   else if (intensity < 6) {
-    return "amber-300";
+    return "text-amber-300";
   } 
   else if (intensity < 7) {
-    return "orange-400";
+    return "text-orange-400";
   } 
   else if (intensity < 8) {
-    return "red-400";
+    return "text-red-400";
   } 
   else if (intensity < 9) {
-    return "rose-400";
+    return "text-rose-400";
   } 
   else {
-    return "rose-500";
+    return "text-rose-500";
   } 
-}
-
-export const getTextColor = (intensity: number) => {
-  return ("text-" + getThemeColor(intensity));
 }
 
 export const getBorderColor = (intensity: number) => {
-  return ("bg-" + getThemeColor(intensity));
+  if (intensity < 2) {
+    return "border-emerald-300";
+  } 
+  else if (intensity < 3) {
+    return "border-green-300";
+  } 
+  else if (intensity < 4) {
+    return "border-lime-200";
+  } 
+  else if (intensity < 5) {
+    return "border-yellow-200";
+  } 
+  else if (intensity < 6) {
+    return "border-amber-300";
+  } 
+  else if (intensity < 7) {
+    return "border-orange-400";
+  } 
+  else if (intensity < 8) {
+    return "border-red-400";
+  } 
+  else if (intensity < 9) {
+    return "border-rose-400";
+  } 
+  else {
+    return "border-rose-500";
+  }
 }
 
 /*

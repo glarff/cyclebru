@@ -10,6 +10,7 @@ import { w2 } from "@/app/demo/workouts/workouts"
 
 import {
   getTextColor,
+  getBorderColor,
   calculateTotalTime,
   getTimeDivisions,
   formatForTimer,
@@ -35,6 +36,7 @@ export default function Page() {
   const [segmentTitle, setSegmentTitle] = useState("");
   const [segmentTip, setSegmentTip] = useState("");
   const [panelColor, setPanelColor] = useState("");
+  const [borderColor, setBorderColor] = useState("");
   const [showPlayButton, setShowPlayButton] = useState("block");
   const [showPauseButton, setShowPauseButton] = useState("hidden");
   const [mainTimer, setMainTimer] = useState("");
@@ -83,6 +85,7 @@ export default function Page() {
     setSegmentTitle(w1.segments[0].name);
     setSegmentTip(w1.segments[0].tip);
     setPanelColor(getTextColor(w1.segments[0].intensity));
+    setBorderColor(getBorderColor(w1.segments[0].intensity));
 
     totalTime = calculateTotalTime(w1);
     w1.timeLeft = totalTime;
@@ -324,6 +327,7 @@ export default function Page() {
         setSegmentTitle(w1.segments[currentSegment].name);
         setSegmentTip(w1.segments[currentSegment].tip);
         setPanelColor(getTextColor(w1.segments[currentSegment].intensity));
+        setBorderColor(getBorderColor(w1.segments[currentSegment].intensity));
 
         // Update the next segments list
         updateUpcomingSegments(w1, totalTime, currentSegment);
@@ -374,7 +378,7 @@ export default function Page() {
               />
             </div>
             <div className="relative opacity-80">
-              <Tip text={segmentTip} panelColor={panelColor} />
+              <Tip text={segmentTip} panelColor={borderColor} />
             </div>
           </div>
         </div>
