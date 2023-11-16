@@ -8,10 +8,8 @@ import { useState, useEffect } from "react";
 import { Pause, Play } from "lucide-react";
 import { w2 } from "@/app/demo/workouts/workouts"
 
-//./workouts/workouts";
-//import { w2 } from "./workouts/workouts";
 import {
-  getPanelColor,
+  getTextColor,
   calculateTotalTime,
   getTimeDivisions,
   formatForTimer,
@@ -84,7 +82,7 @@ export default function Page() {
     setWorkoutTitle(w1.name);
     setSegmentTitle(w1.segments[0].name);
     setSegmentTip(w1.segments[0].tip);
-    setPanelColor(getPanelColor(w1.segments[0].intensity));
+    setPanelColor(getTextColor(w1.segments[0].intensity));
 
     totalTime = calculateTotalTime(w1);
     w1.timeLeft = totalTime;
@@ -325,7 +323,7 @@ export default function Page() {
         // Update the labels on the screen
         setSegmentTitle(w1.segments[currentSegment].name);
         setSegmentTip(w1.segments[currentSegment].tip);
-        setPanelColor(getPanelColor(w1.segments[currentSegment].intensity));
+        setPanelColor(getTextColor(w1.segments[currentSegment].intensity));
 
         // Update the next segments list
         updateUpcomingSegments(w1, totalTime, currentSegment);

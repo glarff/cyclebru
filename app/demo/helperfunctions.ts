@@ -5,34 +5,42 @@
    Inputs: a value (1-9) indicating intensity
    Returns: Tailwind CSS classes to use for panel style
 */
-export function getPanelColor(intensity: number) {
+const getThemeColor = (intensity: number) => {
   if (intensity < 2) {
-    return "text-[#c2ffb0]";
+    return "emerald-300";
   } 
   else if (intensity < 3) {
-    return "text-[#d6ffad]";
+    return "green-300";
   } 
   else if (intensity < 4) {
-    return "text-[#f3ffab]";
+    return "lime-200";
   } 
   else if (intensity < 5) {
-    return "text-[#ffebad]";
+    return "yellow-200";
   } 
   else if (intensity < 6) {
-    return "text-[#ffd9b3]";
+    return "amber-300";
   } 
   else if (intensity < 7) {
-    return "text-[#ffcfb8]";
+    return "orange-400";
   } 
   else if (intensity < 8) {
-    return "text-[#ffcbbd]";
+    return "red-400";
   } 
   else if (intensity < 9) {
-    return "text-[#ffcac2]";
+    return "rose-400";
   } 
   else {
-    return "text-[#ffcac7]";
+    return "rose-500";
   } 
+}
+
+export const getTextColor = (intensity: number) => {
+  return ("text-" + getThemeColor(intensity));
+}
+
+export const getBorderColor = (intensity: number) => {
+  return ("bg-" + getThemeColor(intensity));
 }
 
 /*

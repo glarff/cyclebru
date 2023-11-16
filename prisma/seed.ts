@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { w1segs, w2segs, w3segs, w4segs, w5segs } from "@/app/data/stockworkouts";
+import { tstw1segs, w1segs, w2segs, w3segs, w4segs, w5segs } from "@/app/data/stockworkouts";
 
 const prisma = new PrismaClient();
 
@@ -175,6 +175,40 @@ async function main() {
       },
       segments: {
         create: w5segs,
+      },
+    },
+  });
+
+  const tstw1 = await prisma.workout.upsert({
+    where: { workout_key: "TSTWK01" },
+    update: {},
+    create: {
+      workout_key: "TSTWK01",
+      name: "Test Workout",
+      overview:
+        "Cadence should be 90 rpm + during the efforts but allow to drop during recovery. If aiming for “Sweet-spot”, work in HRZ/PZ high Zone 3 - mid Zone 4. If aiming for threshold, work as close to 100% FTHR/FTP as possible.",
+      objective:
+        "A classic indoor trainer session that is hard to beat for raising threshold and learning to stay focussed and pace long efforts at this key intensity.",
+      training_phase:
+        "Work through the session at “sweet-spot” intensity during the early off-season and then build up to completing it at FTP/FTHR as intensity goes up and volume comes down.",
+      focus: {
+        create: [
+          {
+            focus_text:
+              "Pace the efforts as evenly as possible, don’t go off too hard and maintain a consistent cadence.",
+          },
+          {
+            focus_text:
+              "Try to hold a stable racing position without excessive movement of the upper body. If training for time trials, use your race position.",
+          },
+          {
+            focus_text:
+              "Make sure you have a bottle of water to hand as these are fairly long efforts.",
+          },
+        ],
+      },
+      segments: {
+        create: tstw1segs,
       },
     },
   });

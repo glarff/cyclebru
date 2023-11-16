@@ -210,3 +210,24 @@ export const w5segs = warmUp2.concat([w6s1, w5s2, w6s1, w5s3]);
 
 // ====================================================================== //
 
+// =========================== Test Workout ============================= //
+
+// Segments
+const tstw1s1 = newSegment("Level 1", 10 * 1000, 1, getTipByType("Biking"));
+const tstw1s2 = newSegment("Level 2", 10 * 1000, 2, getTipByType("Biking"));
+const tstw1s3 = newSegment("Level 3", 10 * 1000, 3, getTipByType("Biking"));
+const tstw1s4 = newSegment("Level 4", 10 * 1000, 4, getTipByType("Biking"));
+const tstw1s5 = newSegment("Level 5", 10 * 1000, 5, getTipByType("Biking"));
+const tstw1s6 = newSegment("Level 6", 10 * 1000, 6, getTipByType("Biking"));
+const tstw1s7 = newSegment("Level 7", 10 * 1000, 7, getTipByType("Biking"));
+const tstw1s8 = newSegment("Level 8", 10 * 1000, 8, getTipByType("Biking"));
+const tstw1s9 = newSegment("Level 9", 10 * 1000, 9, getTipByType("Biking"));
+
+// Workout
+export const tstw1segs = [tstw1s1, tstw1s2, tstw1s3, tstw1s4, tstw1s5, tstw1s6, tstw1s7,
+  tstw1s8, tstw1s9, tstw1s1, tstw1s2, tstw1s3, tstw1s4, tstw1s5, tstw1s6, tstw1s7,
+  tstw1s8, tstw1s9, tstw1s1, tstw1s2, tstw1s3, tstw1s4, tstw1s5, tstw1s6, tstw1s7,
+  tstw1s8, tstw1s9, tstw1s1];
+
+// ====================================================================== //
+
