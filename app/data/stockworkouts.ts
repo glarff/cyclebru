@@ -388,7 +388,7 @@ export const w11segs = warmUp2.concat(w11x);
 // Segments
 const w12s1 = newSegment("INCREASE TO NEAR MAX", 30 * 1000, 4, getTipByType("Biking"));
 const w12s2 = newSegment("130 RPM+ HOLD AT MAX", 60 * 1000, 6, getTipByType("Biking"));
-const w12s3 = newSegment("Recovery", 2 * 60 * 1000, 1, getTipByType("Biking"));
+const w12s3 = newSegment("Recovery", 4 * 60 * 1000, 1, getTipByType("Biking"));
 const w12s4 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
 
 // Workout
@@ -412,7 +412,7 @@ for (let i = 0; i < 4; i++) {
 
 w12x.push(w12s4);
 
-export const w12segs = warmUp2.concat(w12x);
+export const w12segs = warmUp1.concat(w12x);
 
 // ====================================================================== //
 

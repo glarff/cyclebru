@@ -29,6 +29,7 @@ export type WorkoutPreviewProps = {
   training_phase: string
   segments: WorkoutSegment[]
   focus: WorkoutFocus[]
+  difficulty: number
 };
 
 const formatTimeForDisplay = (ms: number) => {
@@ -63,7 +64,6 @@ const startWorkout = (wkp: WorkoutPreviewProps) => {
   Router.push('/demo');
 }
  
-
 const WorkoutPreview: React.FC<{ wkp: WorkoutPreviewProps }> = ({ wkp }) => {
   return (
     <div className="border px-4 py-4 mb-10">
