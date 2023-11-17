@@ -72,7 +72,7 @@ const Workout: React.FC<Props> = (props) => {
               <BigTitle text="Choose your Workout" />
             </div>
             <div className="flex">
-              <div className="mb-10">
+              <div className="mb-10 mr-2">
                 <div className="font-roboto text-sm font-bold uppercase text-purple-600">Classic Workouts</div>
                 {props.workouts.filter((wkp) => wkp.difficulty === 1).map((wkp) => (
                   <div key={wkp.id} className="post">
@@ -101,6 +101,8 @@ const Workout: React.FC<Props> = (props) => {
                     </button>
                   </div>
                 ))}
+              </div>
+              <div className = "ml-2">
                 <div className="font-roboto text-sm font-bold uppercase text-purple-600">Strength and Punch</div>
                 {props.workouts.filter((wkp) => wkp.difficulty === 3).map((wkp) => (
                   <div key={wkp.id} className="post">
@@ -128,8 +130,7 @@ const Workout: React.FC<Props> = (props) => {
                       />
                     </button>
                   </div>
-                ))}
-                
+                ))}             
               </div>
               <div className="ml-12">
                 <WorkoutPreview

@@ -1,8 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 import { tstw1segs, w1segs, w2segs, w3segs, w4segs, w5segs, w6segs,
-w8segs, w9segs, w10segs, w11segs, w12segs } from "@/app/data/stockworkouts";
+w8segs, w9segs, w10segs, w11segs, w12segs, w13segs, w14segs, w15segs,
+w16segs 
+} from "@/app/data/stockworkouts";
 
 const prisma = new PrismaClient();
+
+// Seed command: npx prisma db push --force-reset && npx prisma db seed
 
 async function main() {
   const w1 = await prisma.workout.upsert({
@@ -377,6 +381,131 @@ async function main() {
         create: w12segs,
       },
       difficulty: 4,
+    },
+  });
+
+  const w13 = await prisma.workout.upsert({
+    where: { workout_key: "WK13" },
+    update: {},
+    create: {
+      workout_key: "WK13",
+      name: "Pyramid Intervals 2",
+      overview:
+        "Efforts are 100% and cadence should be high at 100 rpm+. Select a gear/resistance that allows this without spinning out. Just keep your legs turning over for the active recoveries.",
+      objective:
+        "Develops sprint speed, speed endurance and your ability to recover from multiple hard efforts.",
+      training_phase:
+        "Going into your race season.",
+        focus: {
+          create: [
+            {
+              focus_text:
+                "Don’t try and pace the efforts, just give them 100%.",
+            },
+            {
+              focus_text:
+                "Try to match your performance going up and down the pyramid.",
+            },
+            {
+              focus_text:
+                "For strength use a bigger gear and higher resistance. For speed, back it off and go for higher cadence.",
+            },
+          ],
+        },
+      segments: {
+        create: w13segs,
+      },
+      difficulty: 2,
+    },
+  });
+
+  const w14 = await prisma.workout.upsert({
+    where: { workout_key: "WK14" },
+    update: {},
+    create: {
+      workout_key: "WK14",
+      name: "Russian Steps",
+      overview:
+        "All of the efforts are maximal, select a gear/resistance that means you don’t spin out. Just turn your legs over during the recoveries.",
+      objective:
+        "A classic workout for building sprint speed and power and tolerance to repeated hard efforts of varying length.",
+      training_phase:
+        "Going into the season or anytime you fancy a hard hour long blast to clear away the cobwebs.",
+        focus: {
+          create: [
+            {
+              focus_text:
+                "Sprinting is about leg speed, so don’t make the gear/resistance too high.",
+            },
+            {
+              focus_text:
+                "Even though the effort is maximal, stay relaxed, don’t fight the bike and keep your upper body stable.",
+            },
+            {
+              focus_text:
+                "The 60-second effort can feel like and awful long time and you may have to pace it slightly. Start the minute just below maximum and ramp it up to finish strong.",
+            },
+          ],
+        },
+      segments: {
+        create: w14segs,
+      },
+      difficulty: 2,
+    },
+  });
+
+  const w15 = await prisma.workout.upsert({
+    where: { workout_key: "WK15" },
+    update: {},
+    create: {
+      workout_key: "WK15",
+      name: "2 x 20-Min Warmup",
+      overview:
+        "The classic 20 min warmup performed twice as a light workout.",
+      objective:
+        "A warm-up for many other sessions but also a great standalone session, that can be down twice through, for recovery days.",
+      training_phase:
+        "Any time as a recovery session.",
+        focus: { },
+      segments: {
+        create: w15segs,
+      },
+      difficulty: 4,
+    },
+  });
+
+  const w16 = await prisma.workout.upsert({
+    where: { workout_key: "WK16" },
+    update: {},
+    create: {
+      workout_key: "WK16",
+      name: "One Minute Intervals",
+      overview:
+        "The efforts should be maximal with a cadence of 95 rpm+ and a focussed acceleration of the first 20 seconds. Drop your gear/ resistance for the recoveries and just spin easy.",
+      objective:
+        "To develop top-end power. The longer recoveries relative to the efforts enable maximal recruitment of muscle.",
+      training_phase:
+        "Towards the end of the off-season.",
+        focus: {
+          create: [
+            {
+              focus_text:
+                "Drive hard on the pedals in the first 20 seconds of the interval.",
+            },
+            {
+              focus_text:
+                "Expect to fade but don’t try to pace the effort.",
+            },
+            {
+              focus_text:
+                "Concentrate on a strong and stable body position.",
+            },
+          ],
+        },
+      segments: {
+        create: w16segs,
+      },
+      difficulty: 3,
     },
   });
 

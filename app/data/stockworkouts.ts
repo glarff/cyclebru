@@ -284,11 +284,12 @@ const w9s5 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivi
 let w9x = []; 
 let w9lastSet = false;
 
-// 3 sets of VO2 max / recovery
 for (let i = 0; i < 3; i++) {
-  w9x.push(w9s1);
-  w9x.push(w9s2);
-  w9x.push(w9s3);
+  for (let j=0; j < 5; j++) {
+    w9x.push(w9s1);
+    w9x.push(w9s2);
+    w9x.push(w9s3);
+  }
 
   if (i === 2) {
     w9lastSet = true;
@@ -401,7 +402,7 @@ for (let i = 0; i < 4; i++) {
   w12x.push(w12s1);
   w12x.push(w12s2);
 
-  if (i===1) {
+  if (i===3) {
     w12lastSet = true;
   }
 
@@ -416,7 +417,146 @@ export const w12segs = warmUp1.concat(w12x);
 
 // ====================================================================== //
 
+// ======================= Pyramid Intervals 2 ========================== //
 
+// Segments
+const w13s1 = newSegment("MAX", 10 * 1000, 8, getTipByType("Biking"));
+const w13s2 = newSegment("Recovery", 10 * 1000, 1, getTipByType("Biking"));
+const w13s3 = newSegment("MAX", 20 * 1000, 8, getTipByType("Biking"));
+const w13s4 = newSegment("Recovery", 20 * 1000, 1, getTipByType("Biking"));
+const w13s5 = newSegment("MAX", 30 * 1000, 8, getTipByType("Biking"));
+const w13s6 = newSegment("Recovery", 30 * 1000, 1, getTipByType("Biking"));
+const w13s7 = newSegment("MAX", 40 * 1000, 8, getTipByType("Biking"));
+const w13s8 = newSegment("Recovery", 40 * 1000, 1, getTipByType("Biking"));
+const w13s9 = newSegment("MAX", 50 * 1000, 8, getTipByType("Biking"));
+const w13s10 = newSegment("Recovery", 50 * 1000, 1, getTipByType("Biking"));
+const w13s11 = newSegment("Easy Spin", 3 * 60 * 1000, 1, getTipByType("Biking"));
+const w13s12 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+
+// Workout
+let w13x = []; 
+let w13lastSet = false;
+
+// Repeat for a total of three repetitions. After your final 10-second 
+//   effort of the third set, don’t do the 3-minute recovery, go 
+//   straight into your cool-down.
+for (let i = 0; i < 3; i++) {
+  w13x.push(w13s1);
+  w13x.push(w13s2);
+  w13x.push(w13s3);
+  w13x.push(w13s4);
+  w13x.push(w13s5);
+  w13x.push(w13s6);
+  w13x.push(w13s7);
+  w13x.push(w13s8);
+  w13x.push(w13s9);
+  w13x.push(w13s10);
+  w13x.push(w13s7);
+  w13x.push(w13s8);
+  w13x.push(w13s5);
+  w13x.push(w13s6);
+  w13x.push(w13s3);
+  w13x.push(w13s4);
+  w13x.push(w13s1);
+  w13x.push(w13s2);
+
+  if (i===2) {
+    w13lastSet = true;
+  }
+
+  if (!w13lastSet) {
+    w13x.push(w13s11);
+  }
+}
+
+w12x.push(w13s12);
+
+export const w13segs = warmUp2.concat(w13x);
+
+// ====================================================================== //
+
+// ========================= Russian steps ============================== //
+
+// Segments
+const w14s1 = newSegment("MAX", 15 * 1000, 8, getTipByType("Biking"));
+const w14s2 = newSegment("Recovery", 45 * 1000, 1, getTipByType("Biking"));
+const w14s3 = newSegment("MAX", 30 * 1000, 8, getTipByType("Biking"));
+const w14s4 = newSegment("Recovery", 30 * 1000, 1, getTipByType("Biking"));
+const w14s5 = newSegment("MAX", 45 * 1000, 8, getTipByType("Biking"));
+const w14s6 = newSegment("Recovery", 15 * 1000, 1, getTipByType("Biking"));
+const w14s7 = newSegment("MAX", 60 * 1000, 8, getTipByType("Biking"));
+const w14s8 = newSegment("Recovery", 60 * 1000, 1, getTipByType("Biking"));
+const w14s9 = newSegment("Recovery", 345 * 1000, 1, getTipByType("Biking"));
+const w14s10 = newSegment("Cool Down", 585 * 1000, 1, getTipByType("Productivity"));
+
+// Workout
+let w14x = []; 
+let w14lastSet = false;
+
+// Repeat sets times three in total. After the final 15-second effort of
+//   the third set, go straight into your cool-down
+for (let i = 0; i < 3; i++) {
+  w14x.push(w14s1);
+  w14x.push(w14s2);
+  w14x.push(w14s3);
+  w14x.push(w14s4);
+  w14x.push(w14s5);
+  w14x.push(w14s6);
+  w14x.push(w14s7);
+  w14x.push(w14s8);
+  w14x.push(w14s5);
+  w14x.push(w14s6);
+  w14x.push(w14s3);
+  w14x.push(w14s4);
+  w14x.push(w14s1);
+
+  if (i===2) {
+    w14lastSet = true;
+  }
+
+  if (!w14lastSet) {
+    w14x.push(w14s9);
+  }
+}
+
+w14x.push(w14s10);
+
+export const w14segs = warmUp2.concat(w14x);
+
+// ====================================================================== //
+
+// ======================= 2 x 20-Min Warmup ============================ //
+export const w15segs = warmUp2.concat(warmUp2);
+// ====================================================================== //
+
+// ====================== One-Minute Intervals ========================== //
+
+// Segments
+const w16s1 = newSegment("Max Effort", 60 * 1000, 8, getTipByType("Biking"));
+const w16s2 = newSegment("Recovery", 3 * 60 * 1000, 1, getTipByType("Biking"));
+const w16s3 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+
+// Workout
+let w16x = []; 
+let w16lastSet = false;
+
+for (let i = 0; i < 8; i++) {
+  w16x.push(w16s1);
+
+  if (i===7) {
+    w16lastSet = true;
+  }
+
+  if (!w16lastSet) {
+    w16x.push(w16s2);
+  }
+}
+
+w16x.push(w16s3);
+
+export const w16segs = warmUp2.concat(w16x);
+
+// ====================================================================== //
 
 
 // =========================== Test Workout ============================= //
