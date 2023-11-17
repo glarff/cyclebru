@@ -1,7 +1,7 @@
 // ========================= Segment Generation ============================ //
 
-const newSegment = (ttl: string, dur: number, int: number, tps: string) => {
-  return { name: ttl, duration: dur, intensity: int, tip: tps };
+const newSegment = (ttl: string, dur: number, int: number) => {
+  return { name: ttl, duration: dur, intensity: int};
 };
 
 // ======================== Random Tip Generation ========================== //
@@ -9,7 +9,7 @@ const newSegment = (ttl: string, dur: number, int: number, tps: string) => {
 const getRandomElement = (arr: any[]) =>
   arr[Math.floor(Math.random() * arr.length)];
 
-const getTipByType = (typ: string) => {
+/* const getTipByType = (typ: string) => { 
   let possibilities = [];
 
   if (typ == "Biking") {
@@ -36,85 +36,34 @@ const getTipByType = (typ: string) => {
     );
 
     return getRandomElement(possibilities);
-  } else if (typ == "Productivity") {
-    possibilities.push(
-      "Focus on one goal at a time.  You have all this time to do this one task!",
-    );
-    possibilities.push(
-      "If you get distracted by something, note down to do it later, rather than doing it now.",
-    );
-    possibilities.push(
-      "Take short breaks if needed to clear your mind and rest, but dont start something else.",
-    );
-    possibilities.push(
-      "Before starting something new, quickly think about what the most effecient way to execute it is, then go. Dont overthink it.",
-    );
-    possibilities.push(
-      "Finish your task completely.  If theres time left, take a quick break and relax before the next segment.",
-    );
-
-    return getRandomElement(possibilities);
-  } else if (typ == "FoamRoll") {
-    possibilities.push(
-      "Move up and down the roll for five to ten reps, holding at the end of each move for a few seconds, then switch sides and repeat.",
-    );
-    possibilities.push(
-      "When you hit a tight spot that is painful or uncomfortable, HOLD on that spot for 30-45 seconds. You should feel the tension release slowly",
-    );
-    possibilities.push(
-      "Make sure to keep breathing, even when its painful. Holding your breath wont allow the muscles to release and relax.",
-    );
-    possibilities.push(
-      "RELAX the muscle as best you can. If you are flexing or tensing the muscle group you are trying to roll out, you wont feel the trigger points you need to release",
-    );
+  } 
 
     return getRandomElement(possibilities);
   }
-};
-   
+}; */
    
 // =========================== Wu-T1 warm up =========================== //
 
-var warmUp1s1 = newSegment("Warm Up: Z1", 300000, 2, "Spend the first 5 " +
-    "minutes of your session in Z1. Gradually increase cadence to 90+.");
-
-var warmUp1s2 = newSegment("Warm Up: Z2-Z3", 300000, 4, "Spend the next " +
-    "5 minutes progressing through Z2. End at a low Z3.");
-
-var warmUp1s3 = newSegment("Warm Up: Max Spin / Easy Spin", 120000, 5,
-    "Now increase the cadence to your maximum, hold for 5 seconds, " +
-    "followed by 25 seconds easy spin. Repeat maximum cadence / easy " +
-    "spin 3 more times.");
-
-var warmUp1s4 = newSegment("Warm Up: Easy Spin", 120000, 2, "Finish with " +
-    " 2 minute easy spin before starting main content of session.");
-
-var warmUp1 = [warmUp1s1, warmUp1s2, warmUp1s3, warmUp1s4];
+const warmUp1s1 = newSegment("Warm Up: Z1", 300000, 2);
+const warmUp1s2 = newSegment("Warm Up: Z2-Z3", 300000, 4);
+const warmUp1s3 = newSegment("Warm Up: Max Spin / Easy Spin", 120000, 5);
+const warmUp1s4 = newSegment("Warm Up: Easy Spin", 120000, 2);
+const warmUp1 = [warmUp1s1, warmUp1s2, warmUp1s3, warmUp1s4];
 
 // ===================================================================== //
 
 // ========================== 20 min warm up =========================== //
 
-const warmUp2s1 = newSegment("90 RPM", 5 * 60 * 1000, 2, "Smooth pedaling - clear your " +
-    "mind and mentally prepare for the upcoming session.",);
-
-const warmUp2s2 = newSegment("95 RPM", 2 * 60 * 1000, 2, getTipByType("Biking"));
-
-const warmUp2s3 = newSegment("100 RPM", 2 * 60 * 1000, 3, getTipByType("Biking"));
-
-const warmUp2s4 = newSegment("105 RPM", 2 * 60 * 1000, 3, getTipByType("Biking"));
-
-const warmUp2s5 = newSegment("110 RPM", 1.5 * 60 * 1000, 4, getTipByType("Biking"));
-
-const warmUp2s6 = newSegment("120-130 RPM", 30 * 1000, 4, getTipByType("Biking"));
-
-const warmUp2s7 = newSegment("90 RPM", 2 * 60 * 1000, 2, getTipByType("Biking"));
-
-const warmUp2s8 = newSegment("Max Spin!", 6 * 1000, 5, getTipByType("Biking"));
-
-const warmUp2s9 = newSegment("Easy Spin", 60 * 1000, 1, getTipByType("Biking"));
-
-const warmUp2s10 = newSegment("90 RPM", 162 * 1000, 2, getTipByType("Biking"));
+const warmUp2s1 = newSegment("90 RPM", 5 * 60 * 1000, 2);
+const warmUp2s2 = newSegment("95 RPM", 2 * 60 * 1000, 2);
+const warmUp2s3 = newSegment("100 RPM", 2 * 60 * 1000, 3);
+const warmUp2s4 = newSegment("105 RPM", 2 * 60 * 1000, 3);
+const warmUp2s5 = newSegment("110 RPM", 1.5 * 60 * 1000, 4);
+const warmUp2s6 = newSegment("120-130 RPM", 30 * 1000, 4);
+const warmUp2s7 = newSegment("90 RPM", 2 * 60 * 1000, 2);
+const warmUp2s8 = newSegment("Max Spin!", 6 * 1000, 5);
+const warmUp2s9 = newSegment("Easy Spin", 60 * 1000, 1);
+const warmUp2s10 = newSegment("90 RPM", 162 * 1000, 2);
 
 const warmUp2 = [
   warmUp2s1,
@@ -132,52 +81,48 @@ const warmUp2 = [
   warmUp2s10,
 ];
 
+// ===================================================================== //
+
 // ====================== Tempo Intervals Workout ====================== //
 
 // Segments 
-const w2s1 = newSegment("HRZ 3", 600000, 5, getTipByType("Biking"));
-const w2s2 = newSegment("Easy Spin", 300000, 2, getTipByType("Biking"));
-const w2s3 = newSegment("Easy Spin", 600000, 2, getTipByType("Biking"));
+const w1s1 = newSegment("HRZ 3", 600000, 5);
+const w1s2 = newSegment("Easy Spin", 300000, 2);
+const w1s3 = newSegment("Easy Spin", 600000, 2);
 
 // Workout
-export const w1segs = (warmUp1.concat([w2s1, w2s2, w2s1, w2s2, w2s1, w2s3]));
+export const w1segs = (warmUp1.concat([w1s1, w1s2, w1s1, w1s2, w1s1, w1s3]));
 
 // ===================================================================== //
 
-// ======================= Sweet-Spot Intervals ======================== //
+// ============================ Zone Build ============================= //
 
 // Segments 
-const w3s1 = newSegment("Sweet-Spot", 300000, 6, getTipByType("Biking"));
-
-const w3s2 = newSegment("Recovery", 60000, 1, "Maintain a smooth pedal " +
-    "stroke. Reduce resistance and keep your legs turning over.");
-
-const w3s3 = newSegment("Sweet-Spot", 180000, 6, "Maintain a smooth pedal " +
-    "stroke. Don't stromp on the pedals when you get tired. Pace your " +
-    "effort evenly and avoid major fluctuations in heart rate.");
-
-const w3s4 = newSegment("Cool Down", 600000, 1, "Maintain a smooth pedal " +
-    "stroke. Reduce resistance and keep your legs turning over.");
+const w2s1 = newSegment("HRZ 1", 10 * 60 * 1000, 2);
+const w2s2 = newSegment("HRZ 2", 20 * 60 * 1000, 3);
+const w2s3 = newSegment("HRZ 3", 5 * 60 * 1000, 5);
+const w2s4 = newSegment("HRZ 1", 5 * 60 * 1000, 2);
+const w2s5 = newSegment("HRZ 2", 5 * 60 * 1000, 3);
+const w2s6 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
-export const w2segs = warmUp2.concat([w3s1, w3s2, w3s1, w3s2, w3s3, w3s2,
-        w3s3, w3s2, w3s3, w3s2, w3s3, w3s2, w3s3, w3s2, w3s4]);
+export const w2segs = [w2s1, w2s2, w2s3, w2s4, w2s5, w2s3, w2s6];
 
 // ===================================================================== //
 
 // ======================== Pyramid Intervals ========================== //
 
 // Segments
-const w4s1 = newSegment("Threshold", 1 * 60 * 1000, 7, getTipByType("Biking"));
-const w4s2 = newSegment("Recovery", 1 * 60 * 1000, 1, getTipByType("Biking"));
-const w4s3 = newSegment("Threshold", 2 * 60 * 1000, 7, getTipByType("Biking"));
-const w4s4 = newSegment("Recovery", 2 * 60 * 1000, 1, getTipByType("Biking"));
-const w4s5 = newSegment("Threshold", 3 * 60 * 1000, 7, getTipByType("Biking"));
-const w4s6 = newSegment("Recovery", 3 * 60 * 1000, 1, getTipByType("Biking"));
-const w4s7 = newSegment("Threshold", 4 * 60 * 1000, 7, getTipByType("Biking"));
-const w4s8 = newSegment("Recovery", 4 * 60 * 1000, 1, getTipByType("Biking"));
-const w4s9 = newSegment("Threshold", 5 * 60 * 1000, 7, getTipByType("Biking"));
-const w4s10 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w4s1 = newSegment("Threshold", 1 * 60 * 1000, 7);
+const w4s2 = newSegment("Recovery", 1 * 60 * 1000, 1);
+const w4s3 = newSegment("Threshold", 2 * 60 * 1000, 7);
+const w4s4 = newSegment("Recovery", 2 * 60 * 1000, 1);
+const w4s5 = newSegment("Threshold", 3 * 60 * 1000, 7);
+const w4s6 = newSegment("Recovery", 3 * 60 * 1000, 1);
+const w4s7 = newSegment("Threshold", 4 * 60 * 1000, 7);
+const w4s8 = newSegment("Recovery", 4 * 60 * 1000, 1);
+const w4s9 = newSegment("Threshold", 5 * 60 * 1000, 7);
+const w4s10 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 export const w3segs = warmUp2.concat([w4s1, w4s2, w4s3, w4s4, w4s5,
@@ -189,9 +134,9 @@ export const w3segs = warmUp2.concat([w4s1, w4s2, w4s3, w4s4, w4s5,
 // =========================== 3x10 Minutes ============================= //
 
 // Segments
-const w5s1 = newSegment("HRZ/PZ 3/4", 10 * 60 * 1000, 6, getTipByType("Biking"));
-const w5s2 = newSegment("Recovery", 10 * 60 * 1000, 2, getTipByType("Biking"));
-const w5s3 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w5s1 = newSegment("HRZ/PZ 3/4", 10 * 60 * 1000, 6);
+const w5s2 = newSegment("Recovery", 10 * 60 * 1000, 2);
+const w5s3 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 export const w4segs = warmUp2.concat([w5s1, w5s2, w5s1, w5s2, w5s1, w5s3]);
@@ -201,9 +146,9 @@ export const w4segs = warmUp2.concat([w5s1, w5s2, w5s1, w5s2, w5s1, w5s3]);
 // =========================== 2x20 Minutes ============================= //
 
 // Segments
-const w6s1 = newSegment("Sweet Sport / Threshold", 20 * 60 * 1000, 6, getTipByType("Biking"));
-const w6s2 = newSegment("Recovery", 10 * 60 * 1000, 2, getTipByType("Biking"));
-const w6s3 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w6s1 = newSegment("Sweet Sport / Threshold", 20 * 60 * 1000, 6);
+const w6s2 = newSegment("Recovery", 10 * 60 * 1000, 2);
+const w6s3 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 export const w5segs = warmUp2.concat([w6s1, w5s2, w6s1, w5s3]);
@@ -213,10 +158,10 @@ export const w5segs = warmUp2.concat([w6s1, w5s2, w6s1, w5s3]);
 // ============================== 20/40s ================================ //
 
 // Segments
-const w7s1 = newSegment("Sprint 95 RPM+", 20 * 1000, 8, getTipByType("Biking"));
-const w7s2 = newSegment("Recovery", 40 * 1000, 1, getTipByType("Biking"));
-const w7s3 = newSegment("Recovery", 340 * 1000, 1, getTipByType("Biking"));
-const w7s4 = newSegment("Cool Down", 640 * 1000, 1, getTipByType("Productivity"));
+const w7s1 = newSegment("Sprint 95 RPM+", 20 * 1000, 8);
+const w7s2 = newSegment("Recovery", 40 * 1000, 1);
+const w7s3 = newSegment("Recovery", 340 * 1000, 1);
+const w7s4 = newSegment("Cool Down", 640 * 1000, 1);
 
 // Workout
 let w6x = []; 
@@ -250,9 +195,9 @@ export const w6segs = warmUp2.concat(w6x);
 // ======================= Ramped VO2 intervals ========================= //
 
 // Segments
-const w8s1 = newSegment("VO2 MAX", 5* 60 * 1000, 9, getTipByType("Biking"));
-const w8s2 = newSegment("Recovery", 5 * 60 * 1000, 1, getTipByType("Biking"));
-const w8s3 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w8s1 = newSegment("VO2 MAX", 5* 60 * 1000, 9);
+const w8s2 = newSegment("Recovery", 5 * 60 * 1000, 1);
+const w8s3 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 let w8x = []; 
@@ -274,11 +219,11 @@ export const w8segs = warmUp2.concat(w8x);
 // ====================== Under/Over with surges ======================== //
 
 // Segments
-const w9s1 = newSegment("HRZ/PZ3.5", 90 * 1000, 5, getTipByType("Biking"));
-const w9s2 = newSegment("HRZ/PZ5", 20 * 1000, 8, getTipByType("Biking"));
-const w9s3 = newSegment("MAX", 10 * 1000, 9, getTipByType("Biking"));
-const w9s4 = newSegment("Recovery", 5 * 60 * 1000, 1, getTipByType("Biking"));
-const w9s5 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w9s1 = newSegment("HRZ/PZ3.5", 90 * 1000, 5);
+const w9s2 = newSegment("HRZ/PZ5", 20 * 1000, 8);
+const w9s3 = newSegment("MAX", 10 * 1000, 9);
+const w9s4 = newSegment("Recovery", 5 * 60 * 1000, 1);
+const w9s5 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 let w9x = []; 
@@ -309,9 +254,9 @@ export const w9segs = warmUp2.concat(w9x);
 // ======================= Big gear/low cadence ========================= //
 
 // Segments
-const w10s1 = newSegment("50-60 RPM", 5 * 60 * 1000, 7, getTipByType("Biking"));
-const w10s2 = newSegment("Recovery", 3 * 60 * 1000, 1, getTipByType("Biking"));
-const w10s3 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w10s1 = newSegment("50-60 RPM", 5 * 60 * 1000, 7);
+const w10s2 = newSegment("Recovery", 3 * 60 * 1000, 1);
+const w10s3 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 let w10x = []; 
@@ -340,14 +285,14 @@ export const w10segs = warmUp2.concat(w10x);
 // ============================= Leg speed ============================== //
 
 // Segments
-const w11s1 = newSegment("90 RPM", 3 * 60 * 1000, 2, getTipByType("Biking"));
-const w11s2 = newSegment("100 RPM", 2 * 60 * 1000, 3, getTipByType("Biking"));
-const w11s3 = newSegment("110 RPM", 1 * 60 * 1000, 4, getTipByType("Biking"));
-const w11s4 = newSegment("115 RPM", 30 * 1000, 5, getTipByType("Biking"));
-const w11s5 = newSegment("120 RPM", 15 * 1000, 6, getTipByType("Biking"));
-const w11s6 = newSegment("MAX", 15 * 1000, 7, getTipByType("Biking"));
-const w11s7 = newSegment("Recovery", 2 * 60 * 1000, 1, getTipByType("Biking"));
-const w11s8 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w11s1 = newSegment("90 RPM", 3 * 60 * 1000, 2);
+const w11s2 = newSegment("100 RPM", 2 * 60 * 1000, 3);
+const w11s3 = newSegment("110 RPM", 1 * 60 * 1000, 4);
+const w11s4 = newSegment("115 RPM", 30 * 1000, 5);
+const w11s5 = newSegment("120 RPM", 15 * 1000, 6);
+const w11s6 = newSegment("MAX", 15 * 1000, 7);
+const w11s7 = newSegment("Recovery", 2 * 60 * 1000, 1);
+const w11s8 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 let w11x = []; 
@@ -387,10 +332,10 @@ export const w11segs = warmUp2.concat(w11x);
 // ============================= Spin out =============================== //
 
 // Segments
-const w12s1 = newSegment("INCREASE TO NEAR MAX", 30 * 1000, 4, getTipByType("Biking"));
-const w12s2 = newSegment("130 RPM+ HOLD AT MAX", 60 * 1000, 6, getTipByType("Biking"));
-const w12s3 = newSegment("Recovery", 4 * 60 * 1000, 1, getTipByType("Biking"));
-const w12s4 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w12s1 = newSegment("INCREASE TO NEAR MAX", 30 * 1000, 4);
+const w12s2 = newSegment("130 RPM+ HOLD AT MAX", 60 * 1000, 6);
+const w12s3 = newSegment("Recovery", 4 * 60 * 1000, 1);
+const w12s4 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 let w12x = []; 
@@ -420,18 +365,18 @@ export const w12segs = warmUp1.concat(w12x);
 // ======================= Pyramid Intervals 2 ========================== //
 
 // Segments
-const w13s1 = newSegment("MAX", 10 * 1000, 8, getTipByType("Biking"));
-const w13s2 = newSegment("Recovery", 10 * 1000, 1, getTipByType("Biking"));
-const w13s3 = newSegment("MAX", 20 * 1000, 8, getTipByType("Biking"));
-const w13s4 = newSegment("Recovery", 20 * 1000, 1, getTipByType("Biking"));
-const w13s5 = newSegment("MAX", 30 * 1000, 8, getTipByType("Biking"));
-const w13s6 = newSegment("Recovery", 30 * 1000, 1, getTipByType("Biking"));
-const w13s7 = newSegment("MAX", 40 * 1000, 8, getTipByType("Biking"));
-const w13s8 = newSegment("Recovery", 40 * 1000, 1, getTipByType("Biking"));
-const w13s9 = newSegment("MAX", 50 * 1000, 8, getTipByType("Biking"));
-const w13s10 = newSegment("Recovery", 50 * 1000, 1, getTipByType("Biking"));
-const w13s11 = newSegment("Easy Spin", 3 * 60 * 1000, 1, getTipByType("Biking"));
-const w13s12 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w13s1 = newSegment("MAX", 10 * 1000, 8);
+const w13s2 = newSegment("Recovery", 10 * 1000, 1);
+const w13s3 = newSegment("MAX", 20 * 1000, 8);
+const w13s4 = newSegment("Recovery", 20 * 1000, 1);
+const w13s5 = newSegment("MAX", 30 * 1000, 8);
+const w13s6 = newSegment("Recovery", 30 * 1000, 1);
+const w13s7 = newSegment("MAX", 40 * 1000, 8);
+const w13s8 = newSegment("Recovery", 40 * 1000, 1);
+const w13s9 = newSegment("MAX", 50 * 1000, 8);
+const w13s10 = newSegment("Recovery", 50 * 1000, 1);
+const w13s11 = newSegment("Easy Spin", 3 * 60 * 1000, 1);
+const w13s12 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 let w13x = []; 
@@ -478,16 +423,16 @@ export const w13segs = warmUp2.concat(w13x);
 // ========================= Russian steps ============================== //
 
 // Segments
-const w14s1 = newSegment("MAX", 15 * 1000, 8, getTipByType("Biking"));
-const w14s2 = newSegment("Recovery", 45 * 1000, 1, getTipByType("Biking"));
-const w14s3 = newSegment("MAX", 30 * 1000, 8, getTipByType("Biking"));
-const w14s4 = newSegment("Recovery", 30 * 1000, 1, getTipByType("Biking"));
-const w14s5 = newSegment("MAX", 45 * 1000, 8, getTipByType("Biking"));
-const w14s6 = newSegment("Recovery", 15 * 1000, 1, getTipByType("Biking"));
-const w14s7 = newSegment("MAX", 60 * 1000, 8, getTipByType("Biking"));
-const w14s8 = newSegment("Recovery", 60 * 1000, 1, getTipByType("Biking"));
-const w14s9 = newSegment("Recovery", 345 * 1000, 1, getTipByType("Biking"));
-const w14s10 = newSegment("Cool Down", 585 * 1000, 1, getTipByType("Productivity"));
+const w14s1 = newSegment("MAX", 15 * 1000, 8);
+const w14s2 = newSegment("Recovery", 45 * 1000, 1);
+const w14s3 = newSegment("MAX", 30 * 1000, 8);
+const w14s4 = newSegment("Recovery", 30 * 1000, 1);
+const w14s5 = newSegment("MAX", 45 * 1000, 8);
+const w14s6 = newSegment("Recovery", 15 * 1000, 1);
+const w14s7 = newSegment("MAX", 60 * 1000, 8);
+const w14s8 = newSegment("Recovery", 60 * 1000, 1);
+const w14s9 = newSegment("Recovery", 345 * 1000, 1);
+const w14s10 = newSegment("Cool Down", 585 * 1000, 1);
 
 // Workout
 let w14x = []; 
@@ -532,9 +477,9 @@ export const w15segs = warmUp2.concat(warmUp2);
 // ====================== One-Minute Intervals ========================== //
 
 // Segments
-const w16s1 = newSegment("Max Effort", 60 * 1000, 8, getTipByType("Biking"));
-const w16s2 = newSegment("Recovery", 3 * 60 * 1000, 1, getTipByType("Biking"));
-const w16s3 = newSegment("Cool Down", 10 * 60 * 1000, 1, getTipByType("Productivity"));
+const w16s1 = newSegment("Max Effort", 60 * 1000, 8);
+const w16s2 = newSegment("Recovery", 3 * 60 * 1000, 1);
+const w16s3 = newSegment("Cool Down", 10 * 60 * 1000, 1);
 
 // Workout
 let w16x = []; 
@@ -558,19 +503,168 @@ export const w16segs = warmUp2.concat(w16x);
 
 // ====================================================================== //
 
+// ============================ Under/Over ============================== //
+
+// Segments
+const w17s1 = newSegment("UNDER", 60 * 1000, 4);
+const w17s2 = newSegment("OVER", 60 * 1000, 6);
+const w17s3 = newSegment("Recovery", 5 * 60 * 1000, 1);
+const w17s4 = newSegment("Cool Down", 10 * 60 * 1000, 1);
+
+// Workout
+let w17x = []; 
+let w17lastSet = false;
+
+// Repeat for a total of 4 sets. After the final set, go straight into your 
+//   cool-down without the 5 minutes of Active Recovery.
+for (let i = 0; i < 4; i++) {
+  
+  for (let j=0; j < 5; j++) {
+    w17x.push(w17s1);
+    w17x.push(w17s2);
+  }
+
+  if (i === 3) {
+    w17lastSet = true;
+  }
+
+  if (!w17lastSet) {
+    w17x.push(w17s3);
+  }
+}
+
+w17x.push(w17s4);
+
+export const w17segs = warmUp2.concat(w17x);
+
+// ====================================================================== //
+
+// ======================= Sweet-Spot Intervals ========================= //
+
+// Segments
+const w18s1 = newSegment("Sweet-Spot", 5 * 60 * 1000, 5);
+const w18s2 = newSegment("Sweet-Spot", 3 * 60 * 1000, 5);
+const w18s3 = newSegment("Recovery", 60 * 1000, 1);
+const w18s4 = newSegment("Cool Down", 10 * 60 * 1000, 1);
+
+// Workout
+let w18x = []; 
+
+for (let i = 0; i < 2; i++) {
+  w18x.push(w18s1);
+  w18x.push(w18s3);
+}
+
+for (let i = 0; i < 5; i++) {
+  w18x.push(w18s2);
+  w18x.push(w18s3);
+}
+
+w18x.push(w18s4);
+
+export const w18segs = warmUp2.concat(w18x);
+
+// ====================================================================== //
+
+// ===================== Improvers VO2 intervals ======================== //
+
+// Segments
+const w19s1 = newSegment("HRZ/PZ 5", 3 * 60 * 1000, 9);
+const w19s2 = newSegment("Recovery", 5 * 60 * 1000, 1);
+const w19s3 = newSegment("Cool Down", 10 * 60 * 1000, 1);
+
+// Workout
+let w19x = []; 
+
+for (let i = 0; i < 4; i++) {
+  w19x.push(w19s1);
+  w19x.push(w19s2);
+}
+
+w19x.push(w19s1);
+w19x.push(w19s3);
+
+export const w19segs = warmUp2.concat(w19x);
+
+// ====================================================================== //
+
+// ========================== Geared Sprint ============================= //
+
+// Segments
+const w20s1 = newSegment("39x21", 30 * 1000, 8);
+const w20s2 = newSegment("39x18", 30 * 1000, 8);
+const w20s3 = newSegment("39x15", 30 * 1000, 8);
+const w20s4 = newSegment("39x12", 30 * 1000, 8);
+const w20s5 = newSegment("Recovery", 3 * 60 * 1000, 1);
+const w20s6 = newSegment("Cool Down", 10 * 60 * 1000, 1);
+
+// Workout
+let w20x = []; 
+let w20y = [];
+let w20z = [];
+
+w20x.push(w20s1, w20s2, w20s1, w20s2, w20s3, w20s4);
+for (let i = 0; i < w20x.length; i++) {
+  w20y.push(w20x[i], w20s5);
+}
+for (let i = 1; i < w20y.length; i++) {
+  w20z.push(w20y[w20y.length-(i+1)]);
+}
+
+const w20g = w20y.concat(w20z);
+w20g.push(w20s6)
+
+export const w20segs = warmUp2.concat(w20g);
+
+// ====================================================================== //
+
+// ========================= Intensity Slide ============================ //
+
+// Segments
+const w21s1 = newSegment("Max", 15 * 1000, 6);
+const w21s2 = newSegment("Recovery", 45 * 1000, 1);
+const w21s3 = newSegment("Recovery", 10 * 60 * 1000, 1);
+const w21s4 = newSegment("HRZ/PZ6", 60 * 1000, 9);
+const w21s5 = newSegment("Recovery", 2 * 60 * 1000, 1);
+const w21s6 = newSegment("HRZ/PZ 4-5", 5 * 60 * 1000, 7);
+const w21s7 = newSegment("Recovery", 6 * 60 * 1000, 1);
+const w21s8 = newSegment("Cool Down", 10 * 60 * 1000, 1);
+
+// Workout
+let w21x = []; 
+
+for (let i = 0; i < 7; i++) {
+  w21x.push(w21s1, w21s2);
+}
+w21x.push(w21s1, w21s3);
+
+for (let i = 0; i < 5; i++) {
+  w21x.push(w21s4, w21s5);
+}
+w21x.push(w21s4, w21s3);
+
+for (let i = 0; i < 2; i++) {
+  w21x.push(w21s6, w21s7);
+}
+w21x.push(w21s6, w21s8);
+
+export const w21segs = warmUp2.concat(w21x);
+
+// ====================================================================== //
+
 
 // =========================== Test Workout ============================= //
 
 // Segments
-const tstw1s1 = newSegment("Level 1", 10 * 1000, 1, getTipByType("Biking"));
-const tstw1s2 = newSegment("Level 2", 10 * 1000, 2, getTipByType("Biking"));
-const tstw1s3 = newSegment("Level 3", 10 * 1000, 3, getTipByType("Biking"));
-const tstw1s4 = newSegment("Level 4", 10 * 1000, 4, getTipByType("Biking"));
-const tstw1s5 = newSegment("Level 5", 10 * 1000, 5, getTipByType("Biking"));
-const tstw1s6 = newSegment("Level 6", 10 * 1000, 6, getTipByType("Biking"));
-const tstw1s7 = newSegment("Level 7", 10 * 1000, 7, getTipByType("Biking"));
-const tstw1s8 = newSegment("Level 8", 10 * 1000, 8, getTipByType("Biking"));
-const tstw1s9 = newSegment("Level 9", 10 * 1000, 9, getTipByType("Biking"));
+const tstw1s1 = newSegment("Level 1", 10 * 1000, 1);
+const tstw1s2 = newSegment("Level 2", 10 * 1000, 2);
+const tstw1s3 = newSegment("Level 3", 10 * 1000, 3);
+const tstw1s4 = newSegment("Level 4", 10 * 1000, 4);
+const tstw1s5 = newSegment("Level 5", 10 * 1000, 5);
+const tstw1s6 = newSegment("Level 6", 10 * 1000, 6);
+const tstw1s7 = newSegment("Level 7", 10 * 1000, 7);
+const tstw1s8 = newSegment("Level 8", 10 * 1000, 8);
+const tstw1s9 = newSegment("Level 9", 10 * 1000, 9);
 
 // Workout
 export const tstw1segs = [tstw1s1, tstw1s2, tstw1s3, tstw1s4, tstw1s5, tstw1s6, tstw1s7,

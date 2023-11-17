@@ -42,5 +42,4 @@ model WorkoutSegment {
   name        String
   duration    Int
   intensity   Int
-  tip         String
 }

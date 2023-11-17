@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { tstw1segs, w1segs, w2segs, w3segs, w4segs, w5segs, w6segs,
 w8segs, w9segs, w10segs, w11segs, w12segs, w13segs, w14segs, w15segs,
-w16segs 
+w16segs, w17segs, w18segs, w19segs, w20segs, w21segs
 } from "@/app/data/stockworkouts";
 
 const prisma = new PrismaClient();
@@ -264,7 +264,7 @@ async function main() {
     update: {},
     create: {
       workout_key: "WK09",
-      name: "Under/Over with surges",
+      name: "Under/Over With Surges",
       overview:
         "Cadences for sweet-spot and zone 5 = 90rpm, sprint = maximal. Zones: Under = HRZ/PZ “sweetspot” mid Z3-mid Z4, over = HRZ/PZ 5.",
       objective:
@@ -299,7 +299,7 @@ async function main() {
     update: {},
     create: {
       workout_key: "WK10",
-      name: "Big gear/low cadence",
+      name: "Big Gear / Low Cadence",
       overview:
         "Don’t ease off too much after the sprints, get straight back into your sweet-spot rhythm. All efforts are seated, select a gear/resistance that just allowsyou to maintain a cadence of 50-60 rpm. You will probably observe HRZ/PZ 4/5 but this isn’t the focus of the session. For recoveries, pedal easy with a light resistance.",
       objective:
@@ -334,7 +334,7 @@ async function main() {
     update: {},
     create: {
       workout_key: "WK11",
-      name: "Leg speed",
+      name: "Leg Speed",
       overview:
         "Keep resistance and gearing low and just focus on the cadence targets.",
       objective:
@@ -354,7 +354,7 @@ async function main() {
     update: {},
     create: {
       workout_key: "WK12",
-      name: "Spin out",
+      name: "Spin Out",
       overview:
         "Keep resistance and gearing low throughout the entire workout, you should be hitting 130 rpm+ on the spin outs.",
       objective:
@@ -504,6 +504,181 @@ async function main() {
         },
       segments: {
         create: w16segs,
+      },
+      difficulty: 3,
+    },
+  });
+
+  const w17 = await prisma.workout.upsert({
+    where: { workout_key: "WK17" },
+    update: {},
+    create: {
+      workout_key: "WK17",
+      name: "Under/Over",
+      overview:
+        "Cadences for both efforts should be above 90 rpm. Under efforts should be 90% of FTP/FTHR, over efforts should be 110% FTP/FTHR.",
+      objective:
+        "Four ten-minute blocks working above and below threshold provide an excellent stimulus for raising this key attribute to cycling performance.",
+      training_phase:
+        "Late off-season and pre-season once you have a decent amount of work at threshold under your belt.",
+        focus: {
+          create: [
+            {
+              focus_text:
+                "Make sure you’ve tested for FTP/FTHR recently and have accurate training zones.",
+            },
+            {
+              focus_text:
+                "The shift in intensity is fairly subtle, maybe just a gear shift, don’t jump or slow up abruptly.",
+            },
+            {
+              focus_text:
+                "Keep your pedal stroke smooth and even.",
+            },
+          ],
+        },
+      segments: {
+        create: w17segs,
+      },
+      difficulty: 3,
+    },
+  });
+
+  const w18 = await prisma.workout.upsert({
+    where: { workout_key: "WK18" },
+    update: {},
+    create: {
+      workout_key: "WK18",
+      name: "Sweet-Spot Intervals",
+      overview:
+        "Use a medium resistance/gear that allows you to maintain 90+ rpm during the efforts. Efforts should be in Sweet-Spot HRZ high 3 - low 4 / PZ 88-93% FTP. Just spin easy against minimal resistance for the recoveries.",
+      objective:
+        "An ideal session for less experienced riders who find the idea of a 2X20 minute session too daunting. The 25 minutes of work in the Sweet-Spot zone will provide a good training stimulus and the two longest efforts are completed early on when fresh.",
+      training_phase:
+        "Early off-season as a complement to base training and to develop your confidence and fitness for more demanding interval sessions.",
+        focus: {
+          create: [
+            {
+              focus_text:
+                "Pace the efforts evenly aiming to finish each strongly. Start at the lower end of the zone and build through.",
+            },
+            {
+              focus_text:
+                "Maintain an even pedal stroke, don’t stamp on the pedals.",
+            },
+            {
+              focus_text:
+                "Hold your upper body still, don’t rock and keep your grip on your bars relaxed.",
+            },
+          ],
+        },
+      segments: {
+        create: w18segs,
+      },
+      difficulty: 1,
+    },
+  });
+
+  const w19 = await prisma.workout.upsert({
+    where: { workout_key: "WK19" },
+    update: {},
+    create: {
+      workout_key: "WK19",
+      name: "VO2 Intervals",
+      overview:
+        "Hold a cadence of 95 rpm + for the efforts. The active recoveries should be easy spinning with very low resistance.  You are aiming for HRZ 5 but don’t try and push it up too fast. Build progressively through HRZ 3 and HRZ 4 during the first minute and then edge into HRZ 5 and hold it.",
+      objective:
+        "The sustained higher intensity efforts build your focus, are applicable to steep climbs and will boost your threshold.",
+      training_phase:
+        "As a progression on from tempo, sweet-spot and threshold efforts.",
+        focus: {
+          create: [
+            {
+              focus_text:
+                "Concentrate on a strong but even pedal stroke, don’t let your technique slip when you get tired.",
+            },
+            {
+              focus_text:
+                "You will get a better feel for the effort required to hit HRZ 5, when you do, try to hit it a bit earlier.",
+            },
+            {
+              focus_text:
+                "If you struggle with the penultimate effort, go straight into the cool down.",
+            },
+          ],
+        },
+      segments: {
+        create: w19segs,
+      },
+      difficulty: 3,
+    },
+  });
+
+  const w20 = await prisma.workout.upsert({
+    where: { workout_key: "WK20" },
+    update: {},
+    create: {
+      workout_key: "WK20",
+      name: "Geared Sprint",
+      overview:
+        "Repeat the (53X12) sprint and then work back down through the gears finishing with (39X21). Jump out of the saddle, sprint until you are on top of the gear and then sit down and maintain the speed so that the entire sprint effort lasts 30 seconds. Gearings are suggested, so adjust them accordingly to suit your ability and the bike’s set-up.",
+      objective:
+        "An excellent workout, that is especially suited to rollers, for developing sprint power, strength and leg speed. Sprinting is all about getting your legs turning over quickly so beginning and ending a sprint session working in a comparatively low gear will ensure you start and finish strong and fast.",
+      training_phase:
+        "This is a session for delivering that final bit of top end zip as you go into your racing season.",
+        focus: {
+          create: [
+            {
+              focus_text:
+                "Get on top of the gear as quickly as possible and, especially in the lower gears, keep accelerating when seated.",
+            },
+            {
+              focus_text:
+                "Avoid bobbing in the saddle and excessive movement of the upper body.",
+            },
+            {
+              focus_text:
+                "End each rep when you are unable to sustain your maximal cadence. It’s about quality, not quantity.",
+            },
+          ],
+        },
+      segments: {
+        create: w20segs,
+      },
+      difficulty: 2,
+    },
+  });
+
+  const w21 = await prisma.workout.upsert({
+    where: { workout_key: "WK21" },
+    update: {},
+    create: {
+      workout_key: "WK21",
+      name: "Geared Sprint",
+      overview:
+        "Adjust cadence and gearing relative to the length of efforts. Don’t spin out on the shorter ones and try to maintain a consistent 90 rpm+ on the longer ones.",
+      objective:
+        "A session that tests and develops a range of intensities. With the sprints and minute efforts in your legs, the three 5-minute efforts are superb for developing pacing when fatigued.",
+      training_phase:
+        "In the second half of the off-season and into the pre-season when you want to introduce some more intensity but still maintain volume.",
+        focus: {
+          create: [
+            {
+              focus_text:
+                "Don’t hold back on the 15-second sprints, these should be flat out.",
+            },
+            {
+              focus_text:
+                "The first time you do this workout, pace the longer efforts fairly conservatively, note down distance covered, speed or average power and try to beat it the next time.",
+            },
+            {
+              focus_text:
+                "This is a tough session. Make sure you schedule in recovery time.",
+            },
+          ],
+        },
+      segments: {
+        create: w21segs,
       },
       difficulty: 3,
     },

@@ -15,6 +15,7 @@ import {
   getTimeDivisions,
   formatForTimer,
   calculateSegmentWindow,
+  getCyclingTip,
 } from "./helperfunctions";
 import React from "react";
 
@@ -23,6 +24,7 @@ let w1: Workout = {
   segments: [],
   timeLeft: 0,
   paused: true,
+  focus: []
 };
 
 let currentSegment = 0;
@@ -70,6 +72,7 @@ export default function Page() {
       let sw1: WorkoutProperties = JSON.parse(storedWorkout);
       w1.name = sw1.name;
       w1.segments = sw1.segments;
+      w1.focus = sw1.focus;
     } else {
       w1.name = w2.name;
       w1.segments = w2.segments;
@@ -83,7 +86,7 @@ export default function Page() {
   const initializeWorkoutStates = () => {
     setWorkoutTitle(w1.name);
     setSegmentTitle(w1.segments[0].name);
-    setSegmentTip(w1.segments[0].tip);
+    setSegmentTip(generateSegementTip(w1, 0));
     setPanelColor(getTextColor(w1.segments[0].intensity));
     setBorderColor(getBorderColor(w1.segments[0].intensity));
 
@@ -218,6 +221,18 @@ export default function Page() {
     setWin4Window(segWin4Window);
   };
 
+  // Handles generation of segment tip
+  const generateSegementTip = (wk: Workout, seg: number) => {
+    // Display that Workout Focus tips on the first segments
+    if (seg < wk.focus.length) {
+      return wk.focus[seg].focus_text;
+    }
+    else {
+      // Use a generic cycling tip after focus tips have been displayed
+      return getCyclingTip();
+    }
+  }
+
   // Handles state updates upon reaching end of segment
   const updateUpcomingSegments = (wk: Workout, ttl: number, seg: number) => {
     // If there's more than 4 segments remaining, shift the elements 2-5 up
@@ -325,7 +340,7 @@ export default function Page() {
 
         // Update the labels on the screen
         setSegmentTitle(w1.segments[currentSegment].name);
-        setSegmentTip(w1.segments[currentSegment].tip);
+        setSegmentTip(generateSegementTip(w1, currentSegment));
         setPanelColor(getTextColor(w1.segments[currentSegment].intensity));
         setBorderColor(getBorderColor(w1.segments[currentSegment].intensity));
 
@@ -403,6 +418,7 @@ interface Workout {
   segments: WorkoutSegment[];
   timeLeft: number;
   paused: boolean;
+  focus: WorkoutFocus[];
 }
 
 interface WorkoutSegment {
@@ -411,7 +427,6 @@ interface WorkoutSegment {
   name: string;
   duration: number;
   intensity: number;
-  tip: string;
 }
 
 interface WorkoutFocus {

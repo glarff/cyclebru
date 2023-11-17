@@ -18,7 +18,6 @@ export type WorkoutSegment = {
   name: String
   duration: number
   intensity: number
-  tip: String
 }
 
 export type WorkoutPreviewProps = {
