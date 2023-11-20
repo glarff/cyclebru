@@ -12,8 +12,8 @@ const WorkoutPreviewCard: React.FC<{
         selected ? "border-2 border-purple-500 bg-yellow-100" : ""
       }`}
     >
-      <Image alt="CycleBru Logo" src="/logo2.png" width={30} height={30} />
-      <div className="relative ml-2 text-md font-semibold  mt-1">{wkp.name}</div>
+      <Image alt="CycleBru Logo" src="/logo2.png" width={25} height={25} />
+      <div className="relative ml-2 text-sm font-semibold  mt-1">{wkp.name}</div>
     </div>
   );
 };

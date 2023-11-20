@@ -94,7 +94,7 @@ const WorkoutPreview: React.FC<{ wkp: WorkoutPreviewProps }> = ({ wkp }) => {
       <div className="relative mb-16 mt-8 max-w-full">
         <div className="absolute right-0">
          <button
-          className="relative scale-50 transition-colors hover:bg-white hover:text-black md:scale-100"
+          className="relative text-purple-800 font-semibold px-1 py-1 border border-purple-800 rounded-md"
           onClick={() => startWorkout(wkp) }
          >
             Start

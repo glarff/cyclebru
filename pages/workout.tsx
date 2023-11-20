@@ -20,6 +20,7 @@ import WorkoutPreview, {
 import BigTitle from "@/components/shared/bigtitle";
 import WorkoutPreviewCard from "@/components/shared/workoutpreviewcard";
 import { useState, useEffect } from "react";
+import SmallTitle from "@/components/shared/smalltitle";
 
 export const getStaticProps: GetStaticProps = async () => {
   const workouts = await prisma.workout.findMany({
@@ -68,12 +69,12 @@ const Workout: React.FC<Props> = (props) => {
       >
         <main className="flex min-h-screen w-full flex-col content-center items-center">
           <div className="mt-20 rounded bg-white px-10">
-            <div className="w-full text-center">
+            <div className="w-full text-center mb-4">
               <BigTitle text="Choose your Workout" />
             </div>
             <div className="flex">
               <div className="mb-10 mr-2">
-                <div className="font-roboto text-sm font-bold uppercase text-purple-600">Classic Workouts</div>
+                <SmallTitle text = "Classic Workouts" />
                 {props.workouts.filter((wkp) => wkp.difficulty === 1).map((wkp) => (
                   <div key={wkp.id} className="post">
                     <button
@@ -87,7 +88,7 @@ const Workout: React.FC<Props> = (props) => {
                     </button>
                   </div>
                 ))}
-                <div className="font-roboto text-sm font-bold uppercase text-purple-600">Need for Speed</div>
+                <SmallTitle text = "Need for Speed" />
                 {props.workouts.filter((wkp) => wkp.difficulty === 2).map((wkp) => (
                   <div key={wkp.id} className="post">
                     <button
@@ -103,7 +104,7 @@ const Workout: React.FC<Props> = (props) => {
                 ))}
               </div>
               <div className = "ml-2">
-                <div className="font-roboto text-sm font-bold uppercase text-purple-600">Strength and Punch</div>
+              <SmallTitle text = "Strength and Punch" />
                 {props.workouts.filter((wkp) => wkp.difficulty === 3).map((wkp) => (
                   <div key={wkp.id} className="post">
                     <button
@@ -117,7 +118,7 @@ const Workout: React.FC<Props> = (props) => {
                     </button>
                   </div>
                 ))}
-                <div className="font-roboto text-sm font-bold uppercase text-purple-600">Rest and Recovery</div>
+                <SmallTitle text = "Rest and Recovery" />
                 {props.workouts.filter((wkp) => wkp.difficulty === 4).map((wkp) => (
                   <div key={wkp.id} className="post">
                     <button
