@@ -19,7 +19,7 @@ import {
 } from "./helperfunctions";
 import React from "react";
 
-let w1: Workout = {
+const w1: Workout = {
   name: "",
   segments: [],
   timeLeft: 0,

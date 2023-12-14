@@ -1,9 +1,5 @@
 import SegmentInfo from "@/components/shared/segmentinfo";
 import MediumTitle from "@/components/shared/mediumtitle";
-import { ReactNode } from "react";
-import ReactMarkdown from "react-markdown";
-import Balancer from "react-wrap-balancer";
-import { NumberLiteralType } from "typescript";
 
 export default function UpcomingSegments({
   segwin1txt,

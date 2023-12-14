@@ -197,49 +197,16 @@ export const calculateSegmentWindow = (
   return segWin;
 };
 
-
-const getRandomElement = (arr: any[]) =>
+const getRandomElement = (arr: string[]) =>
   arr[Math.floor(Math.random() * arr.length)];
 
-/* const getTipByType = (typ: string) => { 
-  let possibilities = [];
-
-  if (typ == "Biking") {
-    possibilities.push(
-      "Think about pedaling as if tracing a square.  Push forward along the top, down the frontside, scrape the bottom, then pull back up the backside.",
-    );
-    possibilities.push(
-      "Avoid side to side movement in the knees by keeping core tight - no Gumby riding.",
-    );
-    possibilities.push(
-      "Dont let your pelvis slouch. Rotate the hips forward and push the butt back, similar to plank.",
-    );
-    possibilities.push(
-      "Keep the grip on the bars relaxed.  No white knuckles!  Change grips often if needed.",
-    );
-    possibilities.push(
-      "Pay attention!  Are all parts of your form good?  Let go of unneeded thoughts and focus on finishing the effort.",
-    );
-    possibilities.push(
-      "Get on the pedals early - start pushing forward before 12 oclock position.  Feet flat or toes slightly pointed up.",
-    );
-    possibilities.push(
-      "Keep your head up, relax your elbows, shoulders, and hands slightly.",
-    );
-
-    return getRandomElement(possibilities);
-  } 
-
-    return getRandomElement(possibilities);
-  }
-}; */
 /*
   Get Cycling Tip
   Inputs: nothing 
   Returns: a generic cycling form tip
 */
 export const getCyclingTip = () => {
-  let possibilities = [];
+  const possibilities = [];
   possibilities.push(
     "Think about pedaling as if tracing a square.  Push forward along the top, down the frontside, scrape the bottom, then pull back up the backside.",
   );

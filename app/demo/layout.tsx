@@ -1,8 +1,4 @@
-import { Analytics } from "@vercel/analytics/react";
-import cx from "classnames";
-import Nav from "@/components/layout/nav";
-import Footer from "@/components/layout/footer";
-import { Suspense } from "react";
+import React  from 'react';
 
 export default function DemoLayout({
   children, // will be a page or nested layout
